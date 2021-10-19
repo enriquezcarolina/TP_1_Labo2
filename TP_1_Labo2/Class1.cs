@@ -22,7 +22,7 @@ namespace TP_1_Labo2
     public class Pieza
     {
         public int[] Pos = new int[2];
-        public virtual void Atacar(tablero tablero)
+        public virtual int Atacar(tablero tablero)
         {
 
         }
@@ -30,7 +30,7 @@ namespace TP_1_Labo2
    
     public class Torre : Pieza
     {
-        public override void Atacar(tablero tablero)
+        public override Tablero Atacar(Tablero tablero)
         {
             for (int i = 0; i < constantes.TAM; i++) //ataca toda la fila
             {
@@ -42,12 +42,13 @@ namespace TP_1_Labo2
                 if (j != Pos[1]) //que no ataque su posicion
                     tablero.atacadas[Pos[0], j] = constantes.ATACADA;
             }
+            return tablero;
         }
     }
 
     public class Caballo : Pieza
     {
-        public override void Atacar (tablero tablero)
+        public override int Atacar (Tablero tablero)
         {
             //no se como hacerlo con un for entonces puse que casilleros ataca uno por uno
             tablero.atacadas[Pos[0] + 2, Pos[1] + 1] = constantes.ATACADA;
@@ -58,13 +59,14 @@ namespace TP_1_Labo2
             tablero.atacadas[Pos[0] - 1, Pos[1] + 2] = constantes.ATACADA;
             tablero.atacadas[Pos[0] + 1, Pos[1] - 2] = constantes.ATACADA;
             tablero.atacadas[Pos[0] - 1, Pos[1] - 2] = constantes.ATACADA;
+            return tablero;
         }
     }
 
     public class Alfil : Pieza
     {
 
-        public override void Atacar(tablero tablero)
+        public override void Atacar(Tablero tablero)
         {
             for(int i = 1; i < constantes.TAM; i++)//desde 1 porque con 0 atacaria su posicion
             { 
@@ -89,7 +91,7 @@ namespace TP_1_Labo2
     public class Rey : Pieza
     {
 
-        public override void Atacar(tablero tablero)
+        public override void Atacar(Tablero tablero)
         {
             for(int i=-1; i<2; i++)
             {
@@ -107,7 +109,7 @@ namespace TP_1_Labo2
     public class Reina : Pieza
     {
 
-        public override void Atacar(tablero tablero)
+        public override void Atacar(Tablero tablero)
         {
             //ataque alfil + ataque torre
 
@@ -144,7 +146,7 @@ namespace TP_1_Labo2
         }
     }
 
-    public class tablero
+    public class Tablero
     {
         
         public bool[,] colores = new bool[8, 8];
@@ -152,7 +154,7 @@ namespace TP_1_Labo2
         public bool[,] tipo_ataque = new bool[8, 8];
         public Pieza[] posiciones = new Pieza[8];
 
-        public tablero()
+        public Tablero()
         {
             for (int n = 0; n < constantes.TAM; n++)
             {
@@ -174,7 +176,6 @@ namespace TP_1_Labo2
                 }
             }
 
-
         }
 
         public bool atacadas_todas() //verifica si todas las posiciones estan siendo atacadas
@@ -193,15 +194,12 @@ namespace TP_1_Labo2
         public int[] mover(Pieza pieza_mover) 
         {    //devuelve una nueva pos random a donde se podria mover la pieza
             // despues en el main hay que chequear si se atacan mas espacios que en la posicion anterior
-        
-
 
           /*  torres primero enfrentadas en diagonal en las puntas. una se posiciona de forma aleatoria en una punta y la otra se pone en diagonal.
            reina aleatoriamente en una de las cuatro casillas del medio
           caballo aleatoriamente en el centro 4x4 (que no esté en las puntas)
             alfiles al azar en todo el tablero respetando que estén uno en blanco y otro en negro
             rey en posición aleatoria menos el borde 6x6
-
             */
 
             int[] new_pos = new int[2];
@@ -290,6 +288,13 @@ namespace TP_1_Labo2
         public bool color_pos(int x, int y)
         {
             return colores[x, y]; //devuelve el color de la posicion
+        }
+
+        public int cant_atacadas(Pieza pieza_, int[2] pos)
+        { //devuelve la cantidad de posiciones que atacaria en una nueva posicion
+        
+
+
         }
        
      }
