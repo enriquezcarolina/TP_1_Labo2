@@ -17,6 +17,7 @@ namespace TP_1_Labo2
         public const bool NO_ATACADA = false; 
         
     }
+    // prueba
 
     public class Pieza
     {
