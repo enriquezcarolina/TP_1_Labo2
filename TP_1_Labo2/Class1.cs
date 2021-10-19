@@ -21,7 +21,7 @@ namespace TP_1_Labo2
     public class Pieza
     {
         public int[] Pos = new int[2];
-        public virtual void Atacar(Tablero tablero)
+        public virtual void Atacar(tablero tablero)
         {
 
         }
@@ -29,7 +29,7 @@ namespace TP_1_Labo2
    
     public class Torre : Pieza
     {
-        public override void Atacar(Tablero tablero)
+        public override void Atacar(tablero tablero)
         {
             for (int i = 0; i < constantes.TAM; i++) //ataca toda la fila
             {
@@ -46,7 +46,7 @@ namespace TP_1_Labo2
 
     public class Caballo : Pieza
     {
-        public override void Atacar (Tablero tablero)
+        public override void Atacar (tablero tablero)
         {
             //no se como hacerlo con un for entonces puse que casilleros ataca uno por uno
             tablero.atacadas[Pos[0] + 2, Pos[1] + 1] = constantes.ATACADA;
@@ -63,7 +63,7 @@ namespace TP_1_Labo2
     public class Alfil : Pieza
     {
 
-        public override void Atacar(Tablero tablero)
+        public override void Atacar(tablero tablero)
         {
             for(int i = 1; i < constantes.TAM; i++)//desde 1 porque con 0 atacaria su posicion
             { 
@@ -88,7 +88,7 @@ namespace TP_1_Labo2
     public class Rey : Pieza
     {
 
-        public override void Atacar(Tablero tablero)
+        public override void Atacar(tablero tablero)
         {
             for(int i=-1; i<2; i++)
             {
@@ -106,7 +106,7 @@ namespace TP_1_Labo2
     public class Reina : Pieza
     {
 
-        public override void Atacar(Tablero tablero)
+        public override void Atacar(tablero tablero)
         {
             //ataque alfil + ataque torre
 
@@ -149,7 +149,7 @@ namespace TP_1_Labo2
         public bool[,] colores = new bool[8, 8];
         public bool[,] atacadas = new bool[8, 8];
         public bool[,] tipo_ataque = new bool[8, 8];
-        public pieza[,] posiciones = new pieza[8, 8];
+        public Pieza[,] posiciones = new Pieza[8, 8];
 
         public tablero()
         {
