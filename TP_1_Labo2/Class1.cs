@@ -22,15 +22,20 @@ namespace TP_1_Labo2
     public class Pieza
     {
         public int[] Pos = new int[2];
-        public virtual int Atacar(tablero tablero)
+        public virtual void Atacar(Tablero tablero)
         {
 
+        }
+        public void set_pos(int[] xy)
+        {
+            Pos[0] = xy[0];
+            Pos[1] = xy[1];
         }
     }
    
     public class Torre : Pieza
     {
-        public override Tablero Atacar(Tablero tablero)
+        public override void Atacar(Tablero tablero)
         {
             for (int i = 0; i < constantes.TAM; i++) //ataca toda la fila
             {
@@ -42,13 +47,13 @@ namespace TP_1_Labo2
                 if (j != Pos[1]) //que no ataque su posicion
                     tablero.atacadas[Pos[0], j] = constantes.ATACADA;
             }
-            return tablero;
+            //return tablero;
         }
     }
 
     public class Caballo : Pieza
     {
-        public override int Atacar (Tablero tablero)
+        public override void Atacar (Tablero tablero)
         {
             //no se como hacerlo con un for entonces puse que casilleros ataca uno por uno
             tablero.atacadas[Pos[0] + 2, Pos[1] + 1] = constantes.ATACADA;
@@ -59,7 +64,7 @@ namespace TP_1_Labo2
             tablero.atacadas[Pos[0] - 1, Pos[1] + 2] = constantes.ATACADA;
             tablero.atacadas[Pos[0] + 1, Pos[1] - 2] = constantes.ATACADA;
             tablero.atacadas[Pos[0] - 1, Pos[1] - 2] = constantes.ATACADA;
-            return tablero;
+           // return tablero;
         }
     }
 
@@ -154,6 +159,10 @@ namespace TP_1_Labo2
         public bool[,] tipo_ataque = new bool[8, 8];
         public Pieza[] posiciones = new Pieza[8];
 
+        public bool[,] get_atacadas()
+        {
+            return atacadas;
+        }
         public Tablero()
         {
             for (int n = 0; n < constantes.TAM; n++)
@@ -168,10 +177,10 @@ namespace TP_1_Labo2
             }
             for (int n = 0; n < constantes.TAM; n++)
             {
+                posiciones[n] = null;
                 for (int m = 0; m < constantes.TAM; m++)
                 {
                     atacadas[n, m] = constantes.NO_ATACADA;
-                    posiciones[n,  m] = null;
                     tipo_ataque[n,  m]  = false;
                 }
             }
@@ -274,12 +283,12 @@ namespace TP_1_Labo2
                 
                 return new_pos;
             }
-
+            return  null;
         }
         
         public bool pos_ocupada(int x, int y)
         {
-            if(posiciones[x,y] == null)
+            if(posiciones[y] == null && posiciones[x]==null)
                 return false;//no esta ocupada
 
             else return true;//esta ocupada
@@ -290,14 +299,37 @@ namespace TP_1_Labo2
             return colores[x, y]; //devuelve el color de la posicion
         }
 
-        public int cant_atacadas(Pieza pieza_, int[2] pos)
-        { //devuelve la cantidad de posiciones que atacaria en una nueva posicion
         
-
-
-        }
        
      }
 
+    public class Test
+    {
+        public int cant_atacadas(Pieza pieza_prueba, int[] xy)
+        { //devuelve la cantidad de posiciones que atacaria en una nueva posicion
+          // podriamos probar con un nuevo tablero donde me pasen por parametro en que posicion estaria la ficha que quiero testear
+          // contamos cuantas fichas esta atacndo y retornamos ese valor 
+            int cont = 0;
+            bool[,] atacadas=null;
+            Tablero Tablero_Prueba = new Tablero();
+            pieza_prueba.set_pos(xy); // pongo la pieza en la posicion deseada
+            pieza_prueba.Atacar(Tablero_Prueba); // ataco el tablero de prueba
 
+            for(int i=0; i< constantes.TAM; i++)
+            {
+                for(int k=0; k< constantes.TAM; k++)
+                {
+
+                    atacadas = Tablero_Prueba.get_atacadas();
+                    if (atacadas[i,k]==true)
+                        cont++; // aumento el contador cada vez que encuentro una casilla atacada 
+                }
+            }
+           
+
+            return cont;
+        }
+    }
 }
+
+
