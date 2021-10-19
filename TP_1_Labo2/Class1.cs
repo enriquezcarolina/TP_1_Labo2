@@ -15,9 +15,9 @@ namespace TP_1_Labo2
         public const int TAM = 8;
         public const bool ATACADA = true;
         public const bool NO_ATACADA = false; 
-        
+        public const int CANT_PIEZAS = 8;
+
     }
-    // prueba
 
     public class Pieza
     {
@@ -150,7 +150,7 @@ namespace TP_1_Labo2
         public bool[,] colores = new bool[8, 8];
         public bool[,] atacadas = new bool[8, 8];
         public bool[,] tipo_ataque = new bool[8, 8];
-        public Pieza[,] posiciones = new Pieza[8, 8];
+        public Pieza[] posiciones = new Pieza[8];
 
         public tablero()
         {
@@ -176,6 +176,122 @@ namespace TP_1_Labo2
 
 
         }
+
+        public bool atacadas_todas() //verifica si todas las posiciones estan siendo atacadas
+        {
+            for(int i = 0; i < constantes.TAM; i++)
+            {
+                for(int j=0; j < constantes.TAM; j++)
+                {
+                    if (atacadas[i,j]==false)
+                        return false;
+                }
+            }
+            return true;
+        }
+           
+        public int[] mover(Pieza pieza_mover) 
+        {    //devuelve una nueva pos random a donde se podria mover la pieza
+            // despues en el main hay que chequear si se atacan mas espacios que en la posicion anterior
+        
+
+
+          /*  torres primero enfrentadas en diagonal en las puntas. una se posiciona de forma aleatoria en una punta y la otra se pone en diagonal.
+           reina aleatoriamente en una de las cuatro casillas del medio
+          caballo aleatoriamente en el centro 4x4 (que no esté en las puntas)
+            alfiles al azar en todo el tablero respetando que estén uno en blanco y otro en negro
+            rey en posición aleatoria menos el borde 6x6
+
+            */
+
+            int[] new_pos = new int[2];
+            Random rand = new Random();
+            int pos1 = -1;
+            int pos2 = -1;
+
+            if(pieza_mover is Torre)
+            {
+                return pieza_mover.Pos;
+            }
+            
+            else if(pieza_mover is Reina)
+            {
+                do
+                {
+                    pos1=rand.Next(3,4);//solo en el centro
+                    pos2=rand.Next(3,4);
+
+                }while(pos_ocupada(pos1, pos2)==true); // que siga probanbdo hasta una pos libre
+
+                new_pos[0] = pos1;
+                new_pos[1] = pos2;
+                
+                return new_pos;
+            }
+            else if(pieza_mover is Caballo)
+            {
+                do
+                {
+                    pos1=rand.Next(2,5);//solo en el centro 4x4
+                    pos2=rand.Next(2,5);
+
+                }while(pos_ocupada(pos1, pos2)==true); // que siga probanbdo hasta una pos libre
+
+                new_pos[0]=pos1;
+                new_pos[1] = pos2;
+                
+                return new_pos;
+
+            }
+
+            else if(pieza_mover is Alfil)
+            {
+                bool color = color_pos(pieza_mover.Pos[0], pieza_mover.Pos[1]);
+                do
+                {
+                    pos1=rand.Next(0,7);//en cualquier lugar 
+                    pos2=rand.Next(0,7);
+
+                }while(pos_ocupada(pos1, pos2)==true && color != color_pos(pos1, pos2));
+                // que siga probanbdo hasta una pos libre y se respete el color donde tiene que estar el alfil
+
+                new_pos[0]=pos1;
+                new_pos[1] = pos2;
+                
+                return new_pos;
+            }
+
+            else if(pieza_mover is Rey)
+            {
+                do
+                {
+                    pos1=rand.Next(1,6); //en cualquier lugar menos el borde
+                    pos2=rand.Next(1,6);
+
+                }while(pos_ocupada(pos1, pos2)==true);
+                // que siga probanbdo hasta una pos libre
+
+                new_pos[0] = pos1;
+                new_pos[1] = pos2;
+                
+                return new_pos;
+            }
+
+        }
+        
+        public bool pos_ocupada(int x, int y)
+        {
+            if(posiciones[x,y] == null)
+                return false;//no esta ocupada
+
+            else return true;//esta ocupada
+        }
+        
+        public bool color_pos(int x, int y)
+        {
+            return colores[x, y]; //devuelve el color de la posicion
+        }
+       
      }
 
 
