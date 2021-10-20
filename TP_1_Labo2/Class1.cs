@@ -157,7 +157,7 @@ namespace TP_1_Labo2
         public bool[,] colores = new bool[8, 8];
         public bool[,] atacadas = new bool[8, 8];
         public bool[,] tipo_ataque = new bool[8, 8];
-        public Pieza[] posiciones = new Pieza[8];
+        public Pieza[] piezas = new Pieza[8];
 
         public bool[,] get_atacadas()
         {
@@ -177,15 +177,31 @@ namespace TP_1_Labo2
             }
             for (int n = 0; n < constantes.TAM; n++)
             {
-                posiciones[n] = null;
+                
                 for (int m = 0; m < constantes.TAM; m++)
                 {
                     atacadas[n, m] = constantes.NO_ATACADA;
-                    tipo_ataque[n,  m]  = false;
+                    tipo_ataque[n, m] = false;
                 }
             }
 
+            Pieza[] piezas = new Pieza[8];
+
+            piezas[0] = new Torre();
+            piezas[1] = new Torre();
+            piezas[2] = new Reina();
+            //TERMINAR
+
+
         }
+
+        public void setear_piezas()
+        {
+            //acomodar las piezas inicialmente con random
+
+
+        }
+
 
         public bool atacadas_todas() //verifica si todas las posiciones estan siendo atacadas
         {

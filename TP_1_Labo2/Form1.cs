@@ -16,10 +16,25 @@ namespace TP_1_Labo2
         {
             InitializeComponent();
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
+            Program.Correr();
+
+
         }
 
+
+
+
+
+
+
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
