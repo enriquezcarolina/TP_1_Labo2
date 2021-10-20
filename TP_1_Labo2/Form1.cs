@@ -25,13 +25,7 @@ namespace TP_1_Labo2
 
         }
 
-
-
-
-
-
-
-
+        //NO USAR
         private void button1_Click_1(object sender, EventArgs e)
         {
 
