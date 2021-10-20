@@ -57,7 +57,6 @@ namespace TP_1_Labo2
  
         }
 
-
         //Calcula la cantidad de posiciones que ataca una pieza, que no estan siendo atacadas por otras
         public int cant_atacadas(Tablero tablero, Pieza pieza, int[] pos)
         {
@@ -69,7 +68,7 @@ namespace TP_1_Labo2
             pieza_temp.Pos=pos;
             Tablero tab_sinPieza = tablero.sacar(pieza); //creo un tablero como el anterior pero sin esa pieza
             Tablero tab_nuevaPos = tab_sinPieza; //tablero con la pieza en la nueva posicion
-            tab_nuevapos.setear_pieza(pieza_temp);
+            tab_nuevaPos.setear_pieza(pieza_temp);
 
             for(int i=0; i< constantes.TAM; i++)
             {
