@@ -42,8 +42,8 @@ namespace TP_1_Labo2
         public static void buscar_solucion(Tablero tablero)
         {
             Pieza pieza_mover;
-            int[] nueva_pos = new int(2);
-            do
+            int[] nueva_pos = new int[2];
+            
             {
                 pieza_mover = tablero.pieza_rnd(); //elijo una pieza aleatoria
                 nueva_pos = tablero.posible_mover(pieza_mover); //devuelve una pos random donde podria moverse la pieza
@@ -58,7 +58,7 @@ namespace TP_1_Labo2
         }
 
         //Calcula la cantidad de posiciones que ataca una pieza, que no estan siendo atacadas por otras
-        public int cant_atacadas(Tablero tablero, Pieza pieza, int[] pos)
+        public static int cant_atacadas(Tablero tablero, Pieza pieza, int[] pos)
         {
             //necesitamos un tablero con todas las piezas menos esta.
             int cont_sin = 0; //contador si la pieza no estuviera

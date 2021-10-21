@@ -22,6 +22,8 @@ namespace TP_1_Labo2
     public class Pieza
     {
         public int[] Pos = new int[2];
+
+   
         public virtual void Atacar(Tablero tablero)
         {
 
@@ -31,11 +33,17 @@ namespace TP_1_Labo2
             Pos[0] = xy[0];
             Pos[1] = xy[1];
         }
+
+        public int[] get_pos()
+        {
+            return Pos;
+        }
     }
    
     public class Torre : Pieza
     {
-        public override void Atacar(Tablero tablero)
+   
+            public override void Atacar(Tablero tablero)
         {
             for (int i = 0; i < constantes.TAM; i++) //ataca toda la fila
             {
@@ -157,6 +165,7 @@ namespace TP_1_Labo2
         public bool[,] colores = new bool[8, 8];
         public bool[,] atacadas = new bool[8, 8];
         public bool[,] tipo_ataque = new bool[8, 8];
+        public bool[,] Ubicacion_Piezas = new bool[8, 8];
         List<Pieza> piezas = new List<Pieza>(8);
 
         //constructor que solo crea el tablero pero no setea las piezas
@@ -218,11 +227,18 @@ namespace TP_1_Labo2
 
         }
 
+        public void setear_pieza_(Pieza p, int[] pos)
+        {
+            p.set_pos(pos); // cambia la posicion donde se encotraba la pieza 
+            //piezas.Add(p);  // la agrega ¿es necesario sacar la pieza  podemos solo cambiarle la posicion en la q estaba?
+            p.Atacar(this);
+        }
         public void setear_pieza(Pieza p)
         {
             piezas.Add(p);
-            p.Atacar();
+            p.Atacar(this);
         }
+
 
         //verifica si todas las posiciones estan siendo atacadas
         public bool atacadas_todas() 
@@ -241,7 +257,9 @@ namespace TP_1_Labo2
         //devuelve un tablero nuevo sin esa pieza
         public Tablero sacar(Pieza p) 
         {
-           int indx = piezas.FindIndex(p); //indice de la pieza que no quiero que este
+            int indx = piezas.IndexOf(p); //indice de la pieza que no quiero que este
+      
+
            Tablero nuevo = new Tablero(); //tablero sin la pieza
            for(int i =0; i< constantes.CANT_PIEZAS; i++)
            {
@@ -251,10 +269,11 @@ namespace TP_1_Labo2
             return nuevo;
         }
         
-        public int cant_atacadas(Pieza p)
+        public void cant_atacadas(Pieza p)
         {
             Tablero temp = this;
             temp.sacar(p);
+           
         }
          
         //devuelve una nueva pos random a donde se podria mover la pieza
@@ -327,7 +346,7 @@ namespace TP_1_Labo2
         
         public bool pos_ocupada(int[] pos)
         {
-            for(int i = 0; i < constantes.CANT_PIEZAS; i++{
+            for(int i = 0; i < constantes.CANT_PIEZAS; i++){
                 if (piezas[i].Pos==pos)
                     return true; //esta ocupada
             }
@@ -348,10 +367,13 @@ namespace TP_1_Labo2
         }
 
         public void mover(Pieza pieza, int[] pos)
-        {
+        {  // #OPCION 1
             this=this.sacar(pieza); //devuelve un tablero nuevo sin esa pieza
             pieza.Pos=pos; //cambio la posicion de la pieza
-            this.setear_pieza(pieza); //la agrego al tablero con la nueva posicion
+            this.setear_pieza(pieza); //la agrego al tablero con la nueva posicion*/
+           // #OPCION 2
+            this.setear_pieza_(pieza,pos); //la agrego al tablero con la nueva posicion
+
 
         }
        
