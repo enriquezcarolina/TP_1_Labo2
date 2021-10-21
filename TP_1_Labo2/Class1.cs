@@ -16,7 +16,7 @@ namespace TP_1_Labo2
         public const bool ATACADA = true;
         public const bool NO_ATACADA = false; 
         public const int CANT_PIEZAS = 8;
-
+       
     }
 
     public class Pieza
@@ -38,6 +38,8 @@ namespace TP_1_Labo2
         {
             return Pos;
         }
+
+
     }
    
     public class Torre : Pieza
@@ -226,11 +228,13 @@ namespace TP_1_Labo2
             piezas[7] = new Caballo();
 
         }
-
+         
+        
         public void setear_pieza_(Pieza p, int[] pos)
         {
+            
             p.set_pos(pos); // cambia la posicion donde se encotraba la pieza 
-            //piezas.Add(p);  // la agrega ¿es necesario sacar la pieza  podemos solo cambiarle la posicion en la q estaba?
+            piezas.Add(p);  // la agrega 
             p.Atacar(this);
         }
         public void setear_pieza(Pieza p)
@@ -367,17 +371,33 @@ namespace TP_1_Labo2
         }
 
         public void mover(Pieza pieza, int[] pos)
-        {  // #OPCION 1
+        { /* // #OPCION 1
             this=this.sacar(pieza); //devuelve un tablero nuevo sin esa pieza
             pieza.Pos=pos; //cambio la posicion de la pieza
             this.setear_pieza(pieza); //la agrego al tablero con la nueva posicion*/
            // #OPCION 2
-            this.setear_pieza_(pieza,pos); //la agrego al tablero con la nueva posicion
+           
+            Program.desatacar(pieza, this); // borra las casillas que atacaba anteriormente 
+            piezas.Remove(pieza);
+
+
+            int cantidad;
+            cantidad= piezas.Count();
+
+            for (int i=0;i<cantidad;i++)
+            {
+
+                piezas.ElementAt(i).Atacar(this);
+            }
+
+            this.setear_pieza_(pieza, pos); //la agrego al tablero con la nueva posicion
+
 
 
         }
-       
-     }
+        
+    }
+  
 
 }
 

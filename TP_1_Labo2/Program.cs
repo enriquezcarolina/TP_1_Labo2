@@ -83,28 +83,43 @@ namespace TP_1_Labo2
 
             return cont_sin-cont_con;
         }
+        public static void desatacar(Pieza p, Tablero t)
+        {
+            Tablero tablero_prueba = new Tablero();
+            tablero_prueba = t;
+            p.Atacar(tablero_prueba);
 
-       /* public int cant_atacadas(Pieza pieza_prueba, int[] xy)
-        { //devuelve la cantidad de posiciones que atacaria en una nueva posicion
-          // podriamos probar con un nuevo tablero donde me pasen por parametro en que posicion estaria la ficha que quiero testear
-          // contamos cuantas fichas esta atacndo y retornamos ese valor 
-            int cont = 0;
-            Tablero Tablero_Prueba = new Tablero();
-            pieza_prueba.set_pos(xy); // pongo la pieza en la posicion deseada
-            pieza_prueba.Atacar(Tablero_Prueba); // ataco el tablero de prueba
-
-            for(int i=0; i< constantes.TAM; i++)
+            for (int i = 0; i < constantes.TAM; i++)
             {
-                for(int k=0; k< constantes.TAM; k++)
+                for (int j = 0; j < constantes.TAM; j++)
                 {
-                    if (Tablero_Prueba.atacadas[i,k]==true)
-                        cont++; // aumento el contador cada vez que encuentro una casilla atacada 
+                    if (tablero_prueba.atacadas[i, j] == true)
+                        t.atacadas[i, j] = false;
+
                 }
             }
-           
+        }
+        /* public int cant_atacadas(Pieza pieza_prueba, int[] xy)
+         { //devuelve la cantidad de posiciones que atacaria en una nueva posicion
+           // podriamos probar con un nuevo tablero donde me pasen por parametro en que posicion estaria la ficha que quiero testear
+           // contamos cuantas fichas esta atacndo y retornamos ese valor 
+             int cont = 0;
+             Tablero Tablero_Prueba = new Tablero();
+             pieza_prueba.set_pos(xy); // pongo la pieza en la posicion deseada
+             pieza_prueba.Atacar(Tablero_Prueba); // ataco el tablero de prueba
 
-            return cont;
-        }*/
+             for(int i=0; i< constantes.TAM; i++)
+             {
+                 for(int k=0; k< constantes.TAM; k++)
+                 {
+                     if (Tablero_Prueba.atacadas[i,k]==true)
+                         cont++; // aumento el contador cada vez que encuentro una casilla atacada 
+                 }
+             }
+
+
+             return cont;
+         }*/
 
 
     }
