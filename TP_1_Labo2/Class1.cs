@@ -23,6 +23,11 @@ namespace TP_1_Labo2
     {
         public int[] Pos = new int[2];
 
+        public Pieza(int[] pos)
+        {
+            Pos[0]= pos[0];
+            Pos[1]=pos[1];
+        }
    
         public virtual void Atacar(Tablero tablero)
         {
@@ -44,6 +49,12 @@ namespace TP_1_Labo2
    
     public class Torre : Pieza
     {
+        public string nombre = 'Torre';
+        public Torre(int[] pos)
+        {
+            Pos[0] = pos[0];
+            Pos[1] = pos[1];
+        }
    
             public override void Atacar(Tablero tablero)
         {
@@ -63,6 +74,7 @@ namespace TP_1_Labo2
 
     public class Caballo : Pieza
     {
+        public string nombre = 'Caballo';
         public override void Atacar (Tablero tablero)
         {
             //no se como hacerlo con un for entonces puse que casilleros ataca uno por uno
@@ -80,6 +92,7 @@ namespace TP_1_Labo2
 
     public class Alfil : Pieza
     {
+        public string nombre = 'Alfil';
 
         public override void Atacar(Tablero tablero)
         {
@@ -164,11 +177,10 @@ namespace TP_1_Labo2
     public class Tablero
     {
         
-        public bool[,] colores = new bool[8, 8];
-        public bool[,] atacadas = new bool[8, 8];
-        public bool[,] tipo_ataque = new bool[8, 8];
-        public bool[,] Ubicacion_Piezas = new bool[8, 8];
-        List<Pieza> piezas = new List<Pieza>(8);
+        public bool[,] colores = new bool[8, 8]; //color de los casilleros
+        public bool[,] atacadas = new bool[8, 8]; //que casilleros estan siendo atacados
+        public bool[,] tipo_ataque = new bool[8, 8]; //ataque fuerte o leve
+        List<Pieza> piezas = new List<Pieza>(8); //listado de piezas
 
         //constructor que solo crea el tablero pero no setea las piezas
         public Tablero()
@@ -194,7 +206,6 @@ namespace TP_1_Labo2
             }
         }
 
-
         //constructor que setea las piezas de forma inicial random
         public Tablero(bool setear)
         {
@@ -218,31 +229,60 @@ namespace TP_1_Labo2
                 }
             }
 
-            piezas[0] = new Torre();
-            piezas[1] = new Torre();
-            piezas[2] = new Reina();
+            Random rand= new Random();
+            int[] pos = new int[2];
+
+            pos[0] = rand.Next(0,1)*7; //o 0 o 7, que este en una de las puntas
+            pos[1] = rand.Next(0,1)*7;
+            piezas[0] = new Torre(pos);
+
+           // la otra torre tiene que estar en la punta opuesta
+            if(pos[0]==7)
+                pos[0]=0;
+            else pos[0]=7;            
+            if(pos[1]==7)
+                pos[1]=0;
+            else pos[1]=7;
+            piezas[1] = new Torre(pos);
+
+            pos[0]=rand.Next(3,4);//solo en el centro
+            pos[1]=rand.Next(3,4);
+            piezas[2] = new Reina(pos);
+
+           do
+           {
+              pos[0]=rand.Next(1,6); //en cualquier lugar menos el borde
+              pos[1]=rand.Next(1,6);
+           }while(pos_ocupada(pos));//que pruebe hasta una posicion libre
             piezas[3] = new Rey();
+
+            do { 
+               pos[0]=rand.Next(0,7);//en cualquier lugar 
+               pos[1]=rand.Next(0,7);
+            }while(pos_ocupada(pos))
             piezas[4] = new Alfil();
+
+            do { 
+               pos[0]=rand.Next(0,7);//en cualquier lugar 
+               pos[1]=rand.Next(0,7);
+
+            }while(pos_ocupada(pos) && this.color_pos(piezas[4].get_pos()) != this.color_pos(pos)) 
+            //que los alfiles esten en casilleros de distinto color
             piezas[5] = new Alfil();
+           
+            do { 
+            new_pos[0]=rand.Next(2,5);//solo en el centro 4x4
+            new_pos[1]=rand.Next(2,5);
+            }while(pos_ocupada(pos))
             piezas[6] = new Caballo();
+
+            do { 
+            new_pos[0]=rand.Next(2,5);//solo en el centro 4x4
+            new_pos[1]=rand.Next(2,5);
+            }while(pos_ocupada(pos))
             piezas[7] = new Caballo();
 
         }
-         
-        
-        public void setear_pieza_(Pieza p, int[] pos)
-        {
-            
-            p.set_pos(pos); // cambia la posicion donde se encotraba la pieza 
-            piezas.Add(p);  // la agrega 
-            p.Atacar(this);
-        }
-        public void setear_pieza(Pieza p)
-        {
-            piezas.Add(p);
-            p.Atacar(this);
-        }
-
 
         //verifica si todas las posiciones estan siendo atacadas
         public bool atacadas_todas() 
@@ -258,28 +298,37 @@ namespace TP_1_Labo2
             return true;
         }
 
-        //devuelve un tablero nuevo sin esa pieza
-        public Tablero sacar(Pieza p) 
+        // ver si la posicion esta ocupada
+        public bool pos_ocupada(int[] pos) 
         {
-            int indx = piezas.IndexOf(p); //indice de la pieza que no quiero que este
-      
+            for(int i = 0; i < constantes.CANT_PIEZAS; i++){
+                if (piezas[i].Pos==pos)
+                    return true; //esta ocupada
+            }
 
-           Tablero nuevo = new Tablero(); //tablero sin la pieza
-           for(int i =0; i< constantes.CANT_PIEZAS; i++)
-           {
-                if(i!= indx) //agrega todas las piezas que estaban en la lista de piezas del tablero original menos la que recibe
-                    nuevo.setear_pieza(piezas[i]);
-           }
-            return nuevo;
+            return false; //no esta ocupada
         }
-        
-        public void cant_atacadas(Pieza p)
+
+        //devuelve el color del casillero
+        public bool color_pos(int[] pos)
         {
-            Tablero temp = this;
-            temp.sacar(p);
-           
+            return colores[pos[0], pos[1]]; 
         }
-         
+
+        public Pieza pieza_rnd()
+       {
+            Random rand = new Random();
+
+            return piezas[rand.Next(0,constantes.CANT_PIEZAS-1)]; //pieza random de la lista, posicion entre 0 y 7
+       }
+
+        //agrega la pieza a la lista y ataca al tablero
+        public void setear_pieza(Pieza p)
+        {
+            piezas.Add(p); //agrego la pieza a la lista
+            p.Atacar(this); //ataca
+        }
+
         //devuelve una nueva pos random a donde se podria mover la pieza
         public int[] posible_mover(Pieza pieza_mover) 
         {    
@@ -348,56 +397,44 @@ namespace TP_1_Labo2
             return  null;
         }
         
-        public bool pos_ocupada(int[] pos)
-        {
-            for(int i = 0; i < constantes.CANT_PIEZAS; i++){
-                if (piezas[i].Pos==pos)
-                    return true; //esta ocupada
-            }
-
-            return false; //no esta ocupada
-        }
-        
-        public bool color_pos(int[] pos)
-        {
-            return colores[pos[0], pos[1]]; //devuelve el color de la posicion
-        }
-
-        public Pieza pieza_rnd()
-        {
-            Random rand = new Random();
-
-            return piezas[rand.Next(0,constantes.CANT_PIEZAS-1)]; //pieza random de la lista, posicion entre 0 y 7
-        }
-
         public void mover(Pieza pieza, int[] pos)
-        { /* // #OPCION 1
-            this=this.sacar(pieza); //devuelve un tablero nuevo sin esa pieza
-            pieza.Pos=pos; //cambio la posicion de la pieza
-            this.setear_pieza(pieza); //la agrego al tablero con la nueva posicion*/
-           // #OPCION 2
-           
-            Program.desatacar(pieza, this); // borra las casillas que atacaba anteriormente 
-            piezas.Remove(pieza);
+        { 
+            sacar(pieza); //saca la pieza del tablero y deja de atacar las posiciones que atacaba antes
 
-
-            int cantidad;
-            cantidad= piezas.Count();
-
-            for (int i=0;i<cantidad;i++)
+            for (int i=0;i<piezas.Count();i++)
             {
 
-                piezas.ElementAt(i).Atacar(this);
+                piezas.ElementAt(i).Atacar(this); // volver a atacar por si alguna otra pieza atacaba una posicion que dejamos de atacar
             }
 
-            this.setear_pieza_(pieza, pos); //la agrego al tablero con la nueva posicion
+            pieza.set_pos(pos); //cambio la posicion de la pieza
+            setear_pieza(pieza); //la agrego al tablero con la nueva posicion
+        }
+        
+        //saca la pieza del tablero 
+        public void sacar(Pieza p) 
+        {
+            Tablero tablero_prueba = new Tablero();
+            tablero_prueba.setear_pieza(p);
+           
+            for (int i = 0; i < constantes.TAM; i++)
+            {
+                for (int j = 0; j < constantes.TAM; j++)
+                {
+                    if (tablero_prueba.atacadas[i, j] == true)
+                        this.atacadas[i, j] = false;
 
+                }
+            }
+            
+            piezas.Remove(p);
 
-
+            return;
         }
         
     }
   
+    
 
 }
 

@@ -27,7 +27,7 @@ namespace TP_1_Labo2
 
             do
             {
-                Tablero solucion = new Tablero();
+                Tablero solucion = new Tablero(true);
                 buscar_solucion(solucion); // la funcion que recibe el tablero y hace todo el random para encontrar una solucion
 
                 if (! soluciones.Contains(solucion))
@@ -35,7 +35,14 @@ namespace TP_1_Labo2
                     soluciones.Add(solucion);
                 }
 
-            } while (soluciones.Count < 10);
+            } while (soluciones.Count() < 10);
+
+            for(int i=0; i<soluciones.Count(); i++)
+            {
+                Console.Write("Tablero: ");
+                Console.WriteLine(i);
+                for()
+            }
 
         }
 
@@ -49,7 +56,7 @@ namespace TP_1_Labo2
                 nueva_pos = tablero.posible_mover(pieza_mover); //devuelve una pos random donde podria moverse la pieza
 
                 if (cant_atacadas(tablero, pieza_mover, pieza_mover.Pos) < cant_atacadas(tablero, pieza_mover, nueva_pos))
-                { //si en la nueva posicion ataca mas casillas cambio la posicion
+                { //si en la nueva posicion quedan menos casillas sin atacar cambio la posicion
                     tablero.mover(pieza_mover, nueva_pos);
                 }
 
@@ -65,10 +72,11 @@ namespace TP_1_Labo2
             int cont_con = 0; //contador con la pieza
 
             Pieza pieza_temp = pieza;
-            pieza_temp.Pos=pos;
-            Tablero tab_sinPieza = tablero.sacar(pieza); //creo un tablero como el anterior pero sin esa pieza
-            Tablero tab_nuevaPos = tab_sinPieza; //tablero con la pieza en la nueva posicion
-            tab_nuevaPos.setear_pieza(pieza_temp);
+            pieza_temp.Pos=pos; //pieza_temp esta en la nueva posicion posible
+            Tablero tab_sinPieza=tablero;
+            tab_sinPieza.sacar(pieza); //creo un tablero como el anterior pero sin esa pieza
+            Tablero tab_nuevaPos = tab_sinPieza;
+            tab_nuevaPos.setear_pieza(pieza_temp); //tablero con la pieza en la nueva posicion
 
             for(int i=0; i< constantes.TAM; i++)
             {
@@ -83,44 +91,6 @@ namespace TP_1_Labo2
 
             return cont_sin-cont_con;
         }
-        public static void desatacar(Pieza p, Tablero t)
-        {
-            Tablero tablero_prueba = new Tablero();
-            tablero_prueba = t;
-            p.Atacar(tablero_prueba);
-
-            for (int i = 0; i < constantes.TAM; i++)
-            {
-                for (int j = 0; j < constantes.TAM; j++)
-                {
-                    if (tablero_prueba.atacadas[i, j] == true)
-                        t.atacadas[i, j] = false;
-
-                }
-            }
-        }
-        /* public int cant_atacadas(Pieza pieza_prueba, int[] xy)
-         { //devuelve la cantidad de posiciones que atacaria en una nueva posicion
-           // podriamos probar con un nuevo tablero donde me pasen por parametro en que posicion estaria la ficha que quiero testear
-           // contamos cuantas fichas esta atacndo y retornamos ese valor 
-             int cont = 0;
-             Tablero Tablero_Prueba = new Tablero();
-             pieza_prueba.set_pos(xy); // pongo la pieza en la posicion deseada
-             pieza_prueba.Atacar(Tablero_Prueba); // ataco el tablero de prueba
-
-             for(int i=0; i< constantes.TAM; i++)
-             {
-                 for(int k=0; k< constantes.TAM; k++)
-                 {
-                     if (Tablero_Prueba.atacadas[i,k]==true)
-                         cont++; // aumento el contador cada vez que encuentro una casilla atacada 
-                 }
-             }
-
-
-             return cont;
-         }*/
-
 
     }
 
