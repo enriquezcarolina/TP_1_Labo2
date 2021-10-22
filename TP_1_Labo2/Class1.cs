@@ -33,6 +33,17 @@ namespace TP_1_Labo2
             Pos[1] = xy[1];
         }
 
+        List<int[]> Posiciones_Ya_Probadas = new List<int[]>(); // lista con las posiciones que tuvo esta ficha, ya probe y no me funcionaron
+
+        public void set_pos_ya_probada(int[] Pos)
+        {
+            Posiciones_Ya_Probadas.Add(Pos); // agrega la posicion ya probada a la lista
+        }
+        public bool bool_pos_ya_probada(int[] Pos) // retorna true o false si ya se probo esa posicion 
+        {
+            return Posiciones_Ya_Probadas.Contains(Pos); // retorna true si la contiene en la lista y false si no esta
+        }
+
         public int[] get_pos()
         {
             return Pos;
@@ -249,8 +260,8 @@ namespace TP_1_Labo2
 
             pos[0] = rand.Next(0,1)*7; //o 0 o 7, que este en una de las puntas
             pos[1] = rand.Next(0,1)*7;
-            piezas[0] = new Torre(pos);
-
+           Pieza Torre = new Torre(pos);
+            piezas.Add(Torre);
            // la otra torre tiene que estar en la punta opuesta
             if(pos[0]==7)
                 pos[0]=0;
@@ -258,24 +269,27 @@ namespace TP_1_Labo2
             if(pos[1]==7)
                 pos[1]=0;
             else pos[1]=7;
-            piezas[1] = new Torre(pos);
+            Pieza Torre2 = new Torre(pos);
+            piezas.Add(Torre2);
 
             pos[0]=rand.Next(3,4);//solo en el centro
             pos[1]=rand.Next(3,4);
-            piezas[2] = new Reina(pos);
-
+            Pieza Reina = new Reina(pos);
+            piezas.Add(Reina);
            do
            {
               pos[0]=rand.Next(1,6); //en cualquier lugar menos el borde
               pos[1]=rand.Next(1,6);
            }while(pos_ocupada(pos));//que pruebe hasta una posicion libre
-            piezas[3] = new Rey(pos);
+            Pieza Rey= new Rey(pos);
+            piezas.Add(Rey);
 
             do {
                 pos[0] = rand.Next(0, 7);//en cualquier lugar 
                 pos[1] = rand.Next(0, 7);
             } while (pos_ocupada(pos));
-            piezas[4] = new Alfil(pos);
+            Pieza Alfil = new Alfil(pos);
+            piezas.Add(Alfil);
 
             do {
                 pos[0] = rand.Next(0, 7);//en cualquier lugar 
@@ -283,21 +297,24 @@ namespace TP_1_Labo2
 
             } while (pos_ocupada(pos) && this.color_pos(piezas[4].get_pos()) != this.color_pos(pos));
             //que los alfiles esten en casilleros de distinto color
-            piezas[5] = new Alfil(pos);
+            Pieza Alfil2 = new Alfil(pos);
+            piezas.Add(Alfil2);
 
             do {
                 pos[0] = rand.Next(2, 5);//solo en el centro 4x4
                 pos[1] = rand.Next(2, 5);
             } while (pos_ocupada(pos));
-            piezas[6] = new Caballo(pos);
+            Pieza caballo = new Caballo(pos);
+            piezas.Add(caballo);
 
             do
             {
                 pos[0] = rand.Next(2, 5);//solo en el centro 4x4
                 pos[1] = rand.Next(2, 5);
             } while (pos_ocupada(pos));
-            piezas[7] = new Caballo(pos);
-
+           
+            Pieza caballo2 = new Caballo(pos);
+            piezas.Add(caballo2);
         }
 
         //verifica si todas las posiciones estan siendo atacadas
@@ -317,8 +334,8 @@ namespace TP_1_Labo2
         // ver si la posicion esta ocupada
         public bool pos_ocupada(int[] pos) 
         {
-            for(int i = 0; i < constantes.CANT_PIEZAS; i++){
-                if (piezas[i].Pos==pos)
+            for(int i = 0; i < piezas.Count; i++){
+                if (piezas.ElementAt(i).Pos==pos)
                     return true; //esta ocupada
             }
 

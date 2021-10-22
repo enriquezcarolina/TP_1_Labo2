@@ -10,19 +10,11 @@ using System.Windows.Forms;
 
 namespace TP_1_Labo2
 {
-    public partial class Form1 : Form
+    public partial class form_datagrid : Form
     {
-        public Form1()
+        public form_datagrid()
         {
             InitializeComponent();
-        }
-
-    
-
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            Program.Correr();
         }
     }
 }

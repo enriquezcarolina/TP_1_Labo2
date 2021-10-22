@@ -21,6 +21,10 @@ namespace TP_1_Labo2
             
         }
 
+        // criterios de poda que utilizamos 
+        // las piezas las ubicamos en los lugares que mas posiciones atacan
+        // cuando genero una posicion random chequea si esa pieza no habia probado estar ahi antes para que no se repita
+        // todo el programa con la misma posicion
         public static void Correr()
         {
             List<Tablero> soluciones = new List<Tablero>();
@@ -39,6 +43,8 @@ namespace TP_1_Labo2
 
             for(int i=0; i<soluciones.Count(); i++)
             {
+                Form form_datagrid = new Form();
+                form_datagrid.Show();
                 Console.Write("Tablero: ");
                 Console.WriteLine(i);
                 
@@ -53,11 +59,21 @@ namespace TP_1_Labo2
             
             {
                 pieza_mover = tablero.pieza_rnd(); //elijo una pieza aleatoria
-                nueva_pos = tablero.posible_mover(pieza_mover); //devuelve una pos random donde podria moverse la pieza
 
+                do
+                {
+                    nueva_pos = tablero.posible_mover(pieza_mover); //devuelve una pos random donde podria moverse la pieza
+
+                } while (pieza_mover.bool_pos_ya_probada(nueva_pos) == true); // que siga buscando randoms si esta en la lista de ya probada
+                
+                
                 if (cant_atacadas(tablero, pieza_mover, pieza_mover.Pos) < cant_atacadas(tablero, pieza_mover, nueva_pos))
                 { //si en la nueva posicion quedan menos casillas sin atacar cambio la posicion
                     tablero.mover(pieza_mover, nueva_pos);
+                }
+                else
+                {
+                    pieza_mover.set_pos_ya_probada(nueva_pos);
                 }
 
             } while (!tablero.atacadas_todas());
