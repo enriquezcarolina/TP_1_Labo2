@@ -41,7 +41,7 @@ namespace TP_1_Labo2
             {
                 Console.Write("Tablero: ");
                 Console.WriteLine(i);
-                for()
+                
             }
 
         }

@@ -22,12 +22,6 @@ namespace TP_1_Labo2
     public class Pieza
     {
         public int[] Pos = new int[2];
-
-        public Pieza(int[] pos)
-        {
-            Pos[0]= pos[0];
-            Pos[1]=pos[1];
-        }
    
         public virtual void Atacar(Tablero tablero)
         {
@@ -46,24 +40,25 @@ namespace TP_1_Labo2
 
 
     }
-   
+
     public class Torre : Pieza
     {
-        public string nombre = 'Torre';
+        public string nombre = "Torre";
         public Torre(int[] pos)
         {
             Pos[0] = pos[0];
             Pos[1] = pos[1];
         }
-   
-            public override void Atacar(Tablero tablero)
+
+        public override void Atacar(Tablero tablero)
         {
             for (int i = 0; i < constantes.TAM; i++) //ataca toda la fila
             {
-                if(i!=Pos[0]) //que no ataque su posicion
+                if (i != Pos[0]) //que no ataque su posicion
                     tablero.atacadas[i, Pos[1]] = constantes.ATACADA;
             }
-            for(int j=0; j<constantes.TAM; j++) //ataca toda la columna
+
+            for (int j = 0; j < constantes.TAM; j++) //ataca toda la columna
             {
                 if (j != Pos[1]) //que no ataque su posicion
                     tablero.atacadas[Pos[0], j] = constantes.ATACADA;
@@ -74,7 +69,13 @@ namespace TP_1_Labo2
 
     public class Caballo : Pieza
     {
-        public string nombre = 'Caballo';
+        public string nombre = "Caballo";
+
+        public Caballo(int[] pos)
+        {
+            Pos[0] = pos[0];
+            Pos[1] = pos[1];
+        }
         public override void Atacar (Tablero tablero)
         {
             //no se como hacerlo con un for entonces puse que casilleros ataca uno por uno
@@ -92,8 +93,12 @@ namespace TP_1_Labo2
 
     public class Alfil : Pieza
     {
-        public string nombre = 'Alfil';
-
+        public string nombre = "Alfil";
+        public Alfil(int[] pos)
+        {
+            Pos[0] = pos[0];
+            Pos[1] = pos[1];
+        }
         public override void Atacar(Tablero tablero)
         {
             for(int i = 1; i < constantes.TAM; i++)//desde 1 porque con 0 atacaria su posicion
@@ -118,7 +123,12 @@ namespace TP_1_Labo2
 
     public class Rey : Pieza
     {
-
+        public string nombre = "Rey";
+        public Rey(int[] pos)
+        {
+            Pos[0] = pos[0];
+            Pos[1] = pos[1];
+        }
         public override void Atacar(Tablero tablero)
         {
             for(int i=-1; i<2; i++)
@@ -136,7 +146,12 @@ namespace TP_1_Labo2
 
     public class Reina : Pieza
     {
-
+        public string nombre = "Reina";
+        public Reina(int[] pos)
+        {
+            Pos[0] = pos[0];
+            Pos[1] = pos[1];
+        }
         public override void Atacar(Tablero tablero)
         {
             //ataque alfil + ataque torre
@@ -254,33 +269,34 @@ namespace TP_1_Labo2
               pos[0]=rand.Next(1,6); //en cualquier lugar menos el borde
               pos[1]=rand.Next(1,6);
            }while(pos_ocupada(pos));//que pruebe hasta una posicion libre
-            piezas[3] = new Rey();
+            piezas[3] = new Rey(pos);
 
-            do { 
-               pos[0]=rand.Next(0,7);//en cualquier lugar 
-               pos[1]=rand.Next(0,7);
-            }while(pos_ocupada(pos))
-            piezas[4] = new Alfil();
+            do {
+                pos[0] = rand.Next(0, 7);//en cualquier lugar 
+                pos[1] = rand.Next(0, 7);
+            } while (pos_ocupada(pos));
+            piezas[4] = new Alfil(pos);
 
-            do { 
-               pos[0]=rand.Next(0,7);//en cualquier lugar 
-               pos[1]=rand.Next(0,7);
+            do {
+                pos[0] = rand.Next(0, 7);//en cualquier lugar 
+                pos[1] = rand.Next(0, 7);
 
-            }while(pos_ocupada(pos) && this.color_pos(piezas[4].get_pos()) != this.color_pos(pos)) 
+            } while (pos_ocupada(pos) && this.color_pos(piezas[4].get_pos()) != this.color_pos(pos));
             //que los alfiles esten en casilleros de distinto color
-            piezas[5] = new Alfil();
-           
-            do { 
-            new_pos[0]=rand.Next(2,5);//solo en el centro 4x4
-            new_pos[1]=rand.Next(2,5);
-            }while(pos_ocupada(pos))
-            piezas[6] = new Caballo();
+            piezas[5] = new Alfil(pos);
 
-            do { 
-            new_pos[0]=rand.Next(2,5);//solo en el centro 4x4
-            new_pos[1]=rand.Next(2,5);
-            }while(pos_ocupada(pos))
-            piezas[7] = new Caballo();
+            do {
+                pos[0] = rand.Next(2, 5);//solo en el centro 4x4
+                pos[1] = rand.Next(2, 5);
+            } while (pos_ocupada(pos));
+            piezas[6] = new Caballo(pos);
+
+            do
+            {
+                pos[0] = rand.Next(2, 5);//solo en el centro 4x4
+                pos[1] = rand.Next(2, 5);
+            } while (pos_ocupada(pos));
+            piezas[7] = new Caballo(pos);
 
         }
 
