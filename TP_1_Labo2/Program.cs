@@ -56,7 +56,7 @@ namespace TP_1_Labo2
         {
             Pieza pieza_mover;
             int[] nueva_pos = new int[2];
-            
+            do
             {
                 pieza_mover = tablero.pieza_rnd(); //elijo una pieza aleatoria
 
