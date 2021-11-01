@@ -19,7 +19,7 @@ namespace TP_1_Labo2
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Correr();
+             Correr();
         }
         
         // criterios de poda que utilizamos 
@@ -27,8 +27,9 @@ namespace TP_1_Labo2
         // cuando genero una posicion random chequea si esa pieza no habia probado estar ahi antes para que no se repita
         // todo el programa con la misma posicion
       
-        public static void Correr()
+        public void Correr()
         {
+            
             List<Tablero> soluciones = new List<Tablero>();
 
             do
@@ -41,7 +42,7 @@ namespace TP_1_Labo2
                     soluciones.Add(solucion);
                 }
 
-            } while (soluciones.Count() < 10);
+            } while (soluciones.Count() < cant_solucionesUpDown.Value);
 
             for(int i=0; i<soluciones.Count(); i++)
             {
@@ -54,7 +55,7 @@ namespace TP_1_Labo2
 
         }
 
-        public static void buscar_solucion(Tablero tablero)
+        public void buscar_solucion(Tablero tablero)
         {
             Pieza pieza_mover;
             int[] nueva_pos = new int[2];
