@@ -40,7 +40,7 @@ namespace TP_1_Labo2
               
                 
                
-                if (! soluciones.Contains(solucion))//chequear que no este ya en la lista para que no se repitan
+                if (! soluciones.Contains(solucion)&& Solucion_Ya_Creada(soluciones,solucion)== false)//chequear que no este ya en la lista para que no se repitan
                 {
                   
                     soluciones.Add(solucion);
@@ -120,6 +120,70 @@ namespace TP_1_Labo2
             }
 
             return cont_sin-cont_con;
+        }
+        public bool Solucion_Ya_Creada(List<Tablero> soluciones, Tablero solucion) // prueba si la solucion que encontro ya estaba creada pero con torres y alfiles distintos
+        {
+            Tablero solucion_Alfiles_cambiados;
+            Tablero solucion_Torres_Cambiadas;
+            
+            int torre1 = -1;
+            int torre2 =-1;
+            int alfil1 = -1;
+            int alfil2 = -1;
+            int[] pos;
+            for (int j = 0; j < solucion.piezas.Count; j++)
+            {
+                if (solucion.piezas.ElementAt(j) is Torre)
+                    torre1 = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
+
+                if (solucion.piezas.ElementAt(j) is Torre && torre1 != j)
+                    torre2 = j; // guardamos la segunda torre
+                if (solucion.piezas.ElementAt(j) is Alfil)
+                    alfil1 = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
+
+                if (solucion.piezas.ElementAt(j) is Alfil && alfil1 != j)
+                    alfil2 = j; // guardamos el segundo alfil que se encuentra en otra posicion
+
+            }
+            // las voy a invertir para chequear con la lista de soluciones que no haya sido creada previamente
+            solucion_Alfiles_cambiados = solucion; //que no sea la misma solucion cambiando solo las torres 
+            solucion_Torres_Cambiadas= solucion; // que no sea la misma solucion cambiando solo alfiles
+
+
+            // primero cambio en la solucion ambos alfiles y ambas torres
+            pos = solucion.piezas.ElementAt(torre1).Pos; // guardo posicion de torre1 
+            solucion.mover(solucion.piezas.ElementAt(torre1), solucion.piezas.ElementAt(torre2).Pos);
+            solucion.mover(solucion.piezas.ElementAt(torre2), pos); // pongo la torre2 donde estaba la 1
+
+            pos = solucion.piezas.ElementAt(alfil1).Pos; // guardo posicion de torre1 
+            solucion.mover(solucion.piezas.ElementAt(alfil1), solucion.piezas.ElementAt(alfil2).Pos);
+            solucion.mover(solucion.piezas.ElementAt(alfil2), pos); // pongo la alfil2 donde estaba la 1
+            if (soluciones.Contains(solucion) == true)
+                return true; // si la soluccion esta contenida retorna true 
+
+
+
+            // cambio solo las torres 
+            pos = solucion_Torres_Cambiadas.piezas.ElementAt(torre1).Pos; // guardo posicion de torre1 
+            solucion_Torres_Cambiadas.mover(solucion_Torres_Cambiadas.piezas.ElementAt(torre1), solucion_Torres_Cambiadas.piezas.ElementAt(torre2).Pos);
+            solucion_Torres_Cambiadas.mover(solucion_Torres_Cambiadas.piezas.ElementAt(torre2), pos);
+            
+            if (soluciones.Contains(solucion_Torres_Cambiadas) == true)
+                return true; // si la soluccion esta contenida retorna true 
+
+
+            // cambio solo alfiles
+            pos = solucion_Alfiles_cambiados.piezas.ElementAt(alfil1).Pos; // guardo posicion de torre1 
+            solucion_Alfiles_cambiados.mover(solucion_Alfiles_cambiados.piezas.ElementAt(alfil1), solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).Pos);
+            solucion_Alfiles_cambiados.mover(solucion_Alfiles_cambiados.piezas.ElementAt(alfil2), pos);
+
+               if (soluciones.Contains(solucion_Alfiles_cambiados) == true)
+                return true; // si la soluccion esta contenida retorna true 
+
+
+            // no me interesa que la solucion original quede cambiada porque es lo mismo solamente invertimos las tores y alfiles 
+
+            return false; // No esta contenida la solucion
         }
     }
 }

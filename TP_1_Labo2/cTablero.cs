@@ -14,7 +14,7 @@ namespace TP_1_Labo2
         public bool[,] colores = new bool[8, 8]; //color de los casilleros
         public bool[,] atacadas = new bool[8, 8]; //que casilleros estan siendo atacados
         public bool[,] tipo_ataque = new bool[8, 8]; //ataque fuerte o leve
-        List<Pieza> piezas = new List<Pieza>(8); //listado de piezas
+        public List<Pieza> piezas = new List<Pieza>(8); //listado de piezas
 
         //constructor que solo crea el tablero pero no setea las piezas
         public Tablero()
@@ -327,4 +327,5 @@ namespace TP_1_Labo2
 
         }
     }
+    
 }
