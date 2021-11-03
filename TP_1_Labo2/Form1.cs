@@ -152,32 +152,43 @@ namespace TP_1_Labo2
 
             // primero cambio en la solucion ambos alfiles y ambas torres
             pos = solucion.piezas.ElementAt(torre1).Pos; // guardo posicion de torre1 
-            solucion.mover(solucion.piezas.ElementAt(torre1), solucion.piezas.ElementAt(torre2).Pos);
-            solucion.mover(solucion.piezas.ElementAt(torre2), pos); // pongo la torre2 donde estaba la 1
+            solucion.piezas.ElementAt(torre1).set_pos(solucion.piezas.ElementAt(torre2).Pos);
+            solucion.piezas.ElementAt(torre2).set_pos(pos);
+
+            // el ataque no se modifica pq es la misma pieza solo se modifica la posicion
 
             pos = solucion.piezas.ElementAt(alfil1).Pos; // guardo posicion de torre1 
-            solucion.mover(solucion.piezas.ElementAt(alfil1), solucion.piezas.ElementAt(alfil2).Pos);
-            solucion.mover(solucion.piezas.ElementAt(alfil2), pos); // pongo la alfil2 donde estaba la 1
+            solucion.piezas.ElementAt(alfil1).set_pos(solucion.piezas.ElementAt(alfil2).Pos);
+            solucion.piezas.ElementAt(alfil2).set_pos(pos);
+
+
             if (soluciones.Contains(solucion) == true)
                 return true; // si la soluccion esta contenida retorna true 
 
 
 
             // cambio solo las torres 
+          
+
+
             pos = solucion_Torres_Cambiadas.piezas.ElementAt(torre1).Pos; // guardo posicion de torre1 
-            solucion_Torres_Cambiadas.mover(solucion_Torres_Cambiadas.piezas.ElementAt(torre1), solucion_Torres_Cambiadas.piezas.ElementAt(torre2).Pos);
-            solucion_Torres_Cambiadas.mover(solucion_Torres_Cambiadas.piezas.ElementAt(torre2), pos);
+            solucion_Torres_Cambiadas.piezas.ElementAt(torre1).set_pos(solucion_Torres_Cambiadas.piezas.ElementAt(torre2).Pos);
+            solucion_Torres_Cambiadas.piezas.ElementAt(torre2).set_pos(pos);
+
+
             
+
             if (soluciones.Contains(solucion_Torres_Cambiadas) == true)
                 return true; // si la soluccion esta contenida retorna true 
 
 
             // cambio solo alfiles
+         
             pos = solucion_Alfiles_cambiados.piezas.ElementAt(alfil1).Pos; // guardo posicion de torre1 
-            solucion_Alfiles_cambiados.mover(solucion_Alfiles_cambiados.piezas.ElementAt(alfil1), solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).Pos);
-            solucion_Alfiles_cambiados.mover(solucion_Alfiles_cambiados.piezas.ElementAt(alfil2), pos);
+            solucion_Alfiles_cambiados.piezas.ElementAt(alfil1).set_pos(solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).Pos);
+            solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).set_pos(pos);
 
-               if (soluciones.Contains(solucion_Alfiles_cambiados) == true)
+            if (soluciones.Contains(solucion_Alfiles_cambiados) == true)
                 return true; // si la soluccion esta contenida retorna true 
 
 
