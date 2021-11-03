@@ -43,13 +43,13 @@ namespace TP_1_Labo2
                     soluciones.Add(solucion);                   
                 }
 
-                /*Tablero prueba1 = solucion; // dos tableros de prueba pq quiero probar cambiando el alfil y el caballo con la reina pero no quiero alterar cuando hago cada cosa
+                Tablero prueba1 = solucion; // dos tableros de prueba pq quiero probar cambiando el alfil y el caballo con la reina pero no quiero alterar cuando hago cada cosa
                 Tablero prueba2 = solucion;
                 if (prueba1.Intercambio("Alfil") == true && !soluciones.Contains(prueba1))
                     soluciones.Add(prueba1);
                 if (prueba2.Intercambio("Caballo") == true && !soluciones.Contains(prueba2))
                     soluciones.Add(prueba2);
-                */
+                
             } while (soluciones.Count() < cant_solucionesUpDown.Value);
 
 
@@ -116,7 +116,7 @@ namespace TP_1_Labo2
         }
         public bool Solucion_Ya_Creada(List<Tablero> soluciones, Tablero solucion) // prueba si la solucion que encontro ya estaba creada pero con torres y alfiles distintos
         {
-            /* Tablero solucion_Alfiles_cambiados;
+             Tablero solucion_Alfiles_cambiados;
              Tablero solucion_Torres_Cambiadas;
 
              int torre1 = -1;
@@ -184,7 +184,7 @@ namespace TP_1_Labo2
              // no me interesa que la solucion original quede cambiada porque es lo mismo solamente invertimos las tores y alfiles 
 
              return false; // No esta contenida la solucion
-            */
+            
             return false;
         }
     }
