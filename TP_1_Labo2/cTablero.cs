@@ -51,7 +51,6 @@ namespace TP_1_Labo2
             return null;
         }
 
-
         //constructor que setea las piezas de forma inicial random
         public Tablero(bool setear)
         {
@@ -159,7 +158,6 @@ namespace TP_1_Labo2
         {
             for (int i = 0; i < piezas.Count; i++)
             {
-
                 if (piezas.ElementAt(i).Pos == pos)
                     return true; //esta ocupada
             }
@@ -225,8 +223,10 @@ namespace TP_1_Labo2
                 {
                     new_pos[0] = rand.Next(2, 5);//solo en el centro 4x4
                     new_pos[1] = rand.Next(2, 5);
+                    if (pos_ocupada(new_pos) == false || Pieza_en_pos(new_pos) is Rey)
+                        break;
 
-                } while (pos_ocupada(new_pos) == true && !(Pieza_en_pos(new_pos) is Rey)); // que siga probanbdo hasta una pos libre
+                } while (true);// que siga probanbdo hasta una pos libre o que la pieza que hay sea un rey
 
                 return new_pos;
             }
@@ -251,8 +251,9 @@ namespace TP_1_Labo2
                 {
                     new_pos[0] = rand.Next(1, 6); //en cualquier lugar menos el borde
                     new_pos[1] = rand.Next(1, 6);
-
-                } while (pos_ocupada(new_pos) == true && !(Pieza_en_pos(new_pos) is Caballo));
+                    if (pos_ocupada(new_pos) == false || Pieza_en_pos(new_pos) is Caballo)
+                        break;
+                } while (true);
                 // que siga probanbdo hasta una pos libre
 
                 return new_pos;
@@ -266,11 +267,10 @@ namespace TP_1_Labo2
 
             for (int i = 0; i < piezas.Count(); i++)
             {
-
                 piezas.ElementAt(i).Atacar(this); // volver a atacar por si alguna otra pieza atacaba una posicion que dejamos de atacar
             }
 
-            pieza.set_pos(pos); //cambio la posicion de la pieza
+            pieza.Pos=pos; //cambio la posicion de la pieza
             setear_pieza(pieza); //la agrego al tablero con la nueva posicion
         }
 

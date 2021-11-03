@@ -90,7 +90,7 @@ namespace TP_1_Labo2
             tablero.atacadas[Pos[0] - 1, Pos[1] + 2] = constantes.ATACADA;
             tablero.atacadas[Pos[0] + 1, Pos[1] - 2] = constantes.ATACADA;
             tablero.atacadas[Pos[0] - 1, Pos[1] - 2] = constantes.ATACADA;
-           // return tablero;
+           
         }
     }
 
@@ -113,7 +113,6 @@ namespace TP_1_Labo2
                
                 if (Pos[0] - i >=0 && Pos[1] + i < constantes.TAM) 
                     tablero.atacadas[Pos[0] - i, Pos[1] + i] = constantes.ATACADA;
-               
                
                 if(Pos[0] + i < constantes.TAM && Pos[1] + i < constantes.TAM)
                     tablero.atacadas[Pos[0] + i, Pos[1] + i] = constantes.ATACADA;

@@ -37,29 +37,24 @@ namespace TP_1_Labo2
             {
                 Tablero solucion = new Tablero(true);
                 buscar_solucion(solucion); // la funcion que recibe el tablero y hace todo el random para encontrar una solucion
-              
-                
                
-                if (! soluciones.Contains(solucion)&& Solucion_Ya_Creada(soluciones,solucion)== false)//chequear que no este ya en la lista para que no se repitan
-                {
-                  
-                    soluciones.Add(solucion);
-                    
+                if (! soluciones.Contains(solucion)&& Solucion_Ya_Creada(soluciones, solucion)== false)//chequear que no este ya en la lista para que no se repitan
+                {                
+                    soluciones.Add(solucion);                   
                 }
-                Tablero prueba1 = solucion; // dos tableros de prueba pq quiero probar cambiando el alfil y el caballo con la reina pero no quiero alterar cuando hago cada cosa
+
+                /*Tablero prueba1 = solucion; // dos tableros de prueba pq quiero probar cambiando el alfil y el caballo con la reina pero no quiero alterar cuando hago cada cosa
                 Tablero prueba2 = solucion;
                 if (prueba1.Intercambio("Alfil") == true && !soluciones.Contains(prueba1))
                     soluciones.Add(prueba1);
                 if (prueba2.Intercambio("Caballo") == true && !soluciones.Contains(prueba2))
                     soluciones.Add(prueba2);
-
+                */
             } while (soluciones.Count() < cant_solucionesUpDown.Value);
 
 
              Form form_datagrid = new form_datagrid(soluciones);
-             form_datagrid.Show();
-               
-              
+             form_datagrid.Show();                            
             
         }
 
@@ -121,7 +116,7 @@ namespace TP_1_Labo2
         }
         public bool Solucion_Ya_Creada(List<Tablero> soluciones, Tablero solucion) // prueba si la solucion que encontro ya estaba creada pero con torres y alfiles distintos
         {
-             Tablero solucion_Alfiles_cambiados;
+            /* Tablero solucion_Alfiles_cambiados;
              Tablero solucion_Torres_Cambiadas;
 
              int torre1 = -1;
@@ -189,7 +184,7 @@ namespace TP_1_Labo2
              // no me interesa que la solucion original quede cambiada porque es lo mismo solamente invertimos las tores y alfiles 
 
              return false; // No esta contenida la solucion
-            
+            */
             return false;
         }
     }
