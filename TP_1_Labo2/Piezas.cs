@@ -11,6 +11,7 @@ namespace TP_1_Labo2
 
     public class Pieza
     {
+        public string nombre;
         public int[] Pos = new int[2];
    
         public virtual void Atacar(Tablero tablero)
@@ -44,9 +45,10 @@ namespace TP_1_Labo2
 
     public class Torre : Pieza
     {
-        public string nombre = "Torre";
+      
         public Torre(int[] pos)
         {
+            nombre = "Torre";
             Pos[0] = pos[0];
             Pos[1] = pos[1];
         }
@@ -70,10 +72,10 @@ namespace TP_1_Labo2
 
     public class Caballo : Pieza
     {
-        public string nombre = "Caballo";
 
         public Caballo(int[] pos)
         {
+            nombre = "Caballo";
             Pos[0] = pos[0];
             Pos[1] = pos[1];
         }
@@ -94,9 +96,9 @@ namespace TP_1_Labo2
 
     public class Alfil : Pieza
     {
-        public string nombre = "Alfil";
         public Alfil(int[] pos)
         {
+            nombre = "Alfil";
             Pos[0] = pos[0];
             Pos[1] = pos[1];
         }
@@ -124,9 +126,9 @@ namespace TP_1_Labo2
 
     public class Rey : Pieza
     {
-        public string nombre = "Rey";
         public Rey(int[] pos)
         {
+            nombre = "Rey";
             Pos[0] = pos[0];
             Pos[1] = pos[1];
         }
@@ -147,9 +149,9 @@ namespace TP_1_Labo2
 
     public class Reina : Pieza
     {
-        public string nombre = "Reina";
         public Reina(int[] pos)
         {
+            nombre = "Reina";
             Pos[0] = pos[0];
             Pos[1] = pos[1];
         }

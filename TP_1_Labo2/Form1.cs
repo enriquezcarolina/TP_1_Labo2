@@ -55,14 +55,12 @@ namespace TP_1_Labo2
 
             } while (soluciones.Count() < cant_solucionesUpDown.Value);
 
-            for(int i=0; i<soluciones.Count(); i++)
-            {
-                Form form_datagrid = new Form();
-                form_datagrid.Show();
-         
-                
-            }
 
+             Form form_datagrid = new form_datagrid(soluciones);
+             form_datagrid.Show();
+               
+              
+            
         }
 
         public void buscar_solucion(Tablero tablero)
@@ -123,78 +121,76 @@ namespace TP_1_Labo2
         }
         public bool Solucion_Ya_Creada(List<Tablero> soluciones, Tablero solucion) // prueba si la solucion que encontro ya estaba creada pero con torres y alfiles distintos
         {
-            Tablero solucion_Alfiles_cambiados;
-            Tablero solucion_Torres_Cambiadas;
+             Tablero solucion_Alfiles_cambiados;
+             Tablero solucion_Torres_Cambiadas;
+
+             int torre1 = -1;
+             int torre2 = -1;
+             int alfil1 = -1;
+             int alfil2 = -1;
+             int[] pos;
+             for (int j = 0; j < solucion.piezas.Count; j++)
+             {
+                 if (solucion.piezas.ElementAt(j) is Torre)
+                     torre1 = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
+
+                 if (solucion.piezas.ElementAt(j) is Torre && torre1 != j)
+                     torre2 = j; // guardamos la segunda torre
+
+                 if (solucion.piezas.ElementAt(j) is Alfil)
+                     alfil1 = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
+
+                 if (solucion.piezas.ElementAt(j) is Alfil && alfil1 != j)
+                     alfil2 = j; // guardamos el segundo alfil que se encuentra en otra posicion
+
+             }
+             // las voy a invertir para chequear con la lista de soluciones que no haya sido creada previamente
+             solucion_Alfiles_cambiados = solucion; //que no sea la misma solucion cambiando solo las torres 
+             solucion_Torres_Cambiadas = solucion; // que no sea la misma solucion cambiando solo alfiles
+
+             // primero cambio en la solucion ambos alfiles y ambas torres
+             pos = solucion.piezas.ElementAt(torre1).Pos; // guardo posicion de torre1 
+             solucion.piezas.ElementAt(torre1).set_pos(solucion.piezas.ElementAt(torre2).Pos);
+             solucion.piezas.ElementAt(torre2).set_pos(pos);
+
+             if (soluciones.Contains(solucion) == true)
+                 return true; // si la soluccion esta contenida retorna true 
+
+             // el ataque no se modifica pq es la misma pieza solo se modifica la posicion
+
+             pos = solucion.piezas.ElementAt(alfil1).Pos; // guardo posicion de torre1 
+             solucion.piezas.ElementAt(alfil1).set_pos(solucion.piezas.ElementAt(alfil2).Pos);
+             solucion.piezas.ElementAt(alfil2).set_pos(pos);
+
+
+             if (soluciones.Contains(solucion) == true)
+                 return true; // si la soluccion esta contenida retorna true 
+
+
+
+             // cambio solo las torres 
+             pos = solucion_Torres_Cambiadas.piezas.ElementAt(torre1).Pos; // guardo posicion de torre1 
+             solucion_Torres_Cambiadas.piezas.ElementAt(torre1).set_pos(solucion_Torres_Cambiadas.piezas.ElementAt(torre2).Pos);
+             solucion_Torres_Cambiadas.piezas.ElementAt(torre2).set_pos(pos); 
+
+             if (soluciones.Contains(solucion_Torres_Cambiadas) == true)
+                 return true; // si la soluccion esta contenida retorna true 
+
+
+             // cambio solo alfiles
+             pos = solucion_Alfiles_cambiados.piezas.ElementAt(alfil1).Pos; // guardo posicion de torre1 
+             solucion_Alfiles_cambiados.piezas.ElementAt(alfil1).set_pos(solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).Pos);
+             solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).set_pos(pos);
+
+             if (soluciones.Contains(solucion_Alfiles_cambiados) == true)
+                 return true; // si la soluccion esta contenida retorna true 
+
+
+             // no me interesa que la solucion original quede cambiada porque es lo mismo solamente invertimos las tores y alfiles 
+
+             return false; // No esta contenida la solucion
             
-            int torre1 = -1;
-            int torre2 =-1;
-            int alfil1 = -1;
-            int alfil2 = -1;
-            int[] pos;
-            for (int j = 0; j < solucion.piezas.Count; j++)
-            {
-                if (solucion.piezas.ElementAt(j) is Torre)
-                    torre1 = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
-
-                if (solucion.piezas.ElementAt(j) is Torre && torre1 != j)
-                    torre2 = j; // guardamos la segunda torre
-                if (solucion.piezas.ElementAt(j) is Alfil)
-                    alfil1 = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
-
-                if (solucion.piezas.ElementAt(j) is Alfil && alfil1 != j)
-                    alfil2 = j; // guardamos el segundo alfil que se encuentra en otra posicion
-
-            }
-            // las voy a invertir para chequear con la lista de soluciones que no haya sido creada previamente
-            solucion_Alfiles_cambiados = solucion; //que no sea la misma solucion cambiando solo las torres 
-            solucion_Torres_Cambiadas= solucion; // que no sea la misma solucion cambiando solo alfiles
-
-
-            // primero cambio en la solucion ambos alfiles y ambas torres
-            pos = solucion.piezas.ElementAt(torre1).Pos; // guardo posicion de torre1 
-            solucion.piezas.ElementAt(torre1).set_pos(solucion.piezas.ElementAt(torre2).Pos);
-            solucion.piezas.ElementAt(torre2).set_pos(pos);
-
-            // el ataque no se modifica pq es la misma pieza solo se modifica la posicion
-
-            pos = solucion.piezas.ElementAt(alfil1).Pos; // guardo posicion de torre1 
-            solucion.piezas.ElementAt(alfil1).set_pos(solucion.piezas.ElementAt(alfil2).Pos);
-            solucion.piezas.ElementAt(alfil2).set_pos(pos);
-
-
-            if (soluciones.Contains(solucion) == true)
-                return true; // si la soluccion esta contenida retorna true 
-
-
-
-            // cambio solo las torres 
-          
-
-
-            pos = solucion_Torres_Cambiadas.piezas.ElementAt(torre1).Pos; // guardo posicion de torre1 
-            solucion_Torres_Cambiadas.piezas.ElementAt(torre1).set_pos(solucion_Torres_Cambiadas.piezas.ElementAt(torre2).Pos);
-            solucion_Torres_Cambiadas.piezas.ElementAt(torre2).set_pos(pos);
-
-
-            
-
-            if (soluciones.Contains(solucion_Torres_Cambiadas) == true)
-                return true; // si la soluccion esta contenida retorna true 
-
-
-            // cambio solo alfiles
-         
-            pos = solucion_Alfiles_cambiados.piezas.ElementAt(alfil1).Pos; // guardo posicion de torre1 
-            solucion_Alfiles_cambiados.piezas.ElementAt(alfil1).set_pos(solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).Pos);
-            solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).set_pos(pos);
-
-            if (soluciones.Contains(solucion_Alfiles_cambiados) == true)
-                return true; // si la soluccion esta contenida retorna true 
-
-
-            // no me interesa que la solucion original quede cambiada porque es lo mismo solamente invertimos las tores y alfiles 
-
-            return false; // No esta contenida la solucion
+            return false;
         }
     }
 }
