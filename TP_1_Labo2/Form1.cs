@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace TP_1_Labo2
 {
     public partial class Form1 : Form
@@ -19,28 +20,38 @@ namespace TP_1_Labo2
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-             Correr();
+            Correr();
         }
-        
+
         // criterios de poda que utilizamos 
         // las piezas las ubicamos en los lugares que mas posiciones atacan
         // cuando genero una posicion random chequea si esa pieza no habia probado estar ahi antes para que no se repita
         // todo el programa con la misma posicion
-      
+
         public void Correr()
         {
             
             List<Tablero> soluciones = new List<Tablero>();
-
+            
             do
             {
                 Tablero solucion = new Tablero(true);
                 buscar_solucion(solucion); // la funcion que recibe el tablero y hace todo el random para encontrar una solucion
-
+              
+                
+               
                 if (! soluciones.Contains(solucion))//chequear que no este ya en la lista para que no se repitan
                 {
+                  
                     soluciones.Add(solucion);
+                    
                 }
+                Tablero prueba1 = solucion; // dos tableros de prueba pq quiero probar cambiando el alfil y el caballo con la reina pero no quiero alterar cuando hago cada cosa
+                Tablero prueba2 = solucion;
+                if (prueba1.Intercambio("Alfil") == true && !soluciones.Contains(prueba1))
+                    soluciones.Add(prueba1);
+                if (prueba2.Intercambio("Caballo") == true && !soluciones.Contains(prueba2))
+                    soluciones.Add(prueba2);
 
             } while (soluciones.Count() < cant_solucionesUpDown.Value);
 
@@ -48,8 +59,7 @@ namespace TP_1_Labo2
             {
                 Form form_datagrid = new Form();
                 form_datagrid.Show();
-                Console.Write("Tablero: ");
-                Console.WriteLine(i);
+         
                 
             }
 
@@ -111,7 +121,6 @@ namespace TP_1_Labo2
 
             return cont_sin-cont_con;
         }
-
     }
 }
 

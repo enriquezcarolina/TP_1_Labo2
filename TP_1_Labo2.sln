@@ -5,6 +5,16 @@ VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TP_1_Labo2", "TP_1_Labo2\TP_1_Labo2.csproj", "{A8C989C2-AA43-42AA-9612-E1216CABFDBE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{286E303B-CAFC-47EA-A7B9-6B17E683F431}"
+	ProjectSection(SolutionItems) = preProject
+		TP_1_Labo2\Form1.cs = TP_1_Labo2\Form1.cs
+		TP_1_Labo2\Form1.Designer.cs = TP_1_Labo2\Form1.Designer.cs
+		TP_1_Labo2\form_datagrid.cs = TP_1_Labo2\form_datagrid.cs
+		TP_1_Labo2\form_datagrid.Designer.cs = TP_1_Labo2\form_datagrid.Designer.cs
+		TP_1_Labo2\Piezas.cs = TP_1_Labo2\Piezas.cs
+		TP_1_Labo2\Program.cs = TP_1_Labo2\Program.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

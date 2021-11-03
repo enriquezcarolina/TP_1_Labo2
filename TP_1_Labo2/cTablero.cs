@@ -1,12 +1,15 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 /// <summary>
 /// Summary description for Class1
 /// </summary>
 namespace TP_1_Labo2
 {
-	public class Tablero
-	{
+    public class Tablero
+    {
 
         public bool[,] colores = new bool[8, 8]; //color de los casilleros
         public bool[,] atacadas = new bool[8, 8]; //que casilleros estan siendo atacados
@@ -36,6 +39,18 @@ namespace TP_1_Labo2
                 }
             }
         }
+        public Pieza Pieza_en_pos(int[] pos)
+        {
+
+            for (int i = 0; i < piezas.Count; i++)
+            {
+                if (piezas.ElementAt(i).Pos == pos)
+                    return piezas.ElementAt(i);
+
+            }
+            return null;
+        }
+
 
         //constructor que setea las piezas de forma inicial random
         public Tablero(bool setear)
@@ -144,6 +159,7 @@ namespace TP_1_Labo2
         {
             for (int i = 0; i < piezas.Count; i++)
             {
+
                 if (piezas.ElementAt(i).Pos == pos)
                     return true; //esta ocupada
             }
@@ -159,9 +175,19 @@ namespace TP_1_Labo2
 
         public Pieza pieza_rnd()
         {
-            Random rand = new Random();
 
-            return piezas[rand.Next(0, constantes.CANT_PIEZAS - 1)]; //pieza random de la lista, posicion entre 0 y 7
+            Random rand = new Random();
+            int num;
+            do
+            {
+                num = rand.Next(0, constantes.CANT_PIEZAS - 1);
+                //pieza random de la lista, posicion entre 0 y 7
+            } while (piezas.ElementAt(num) is Torre);
+
+
+
+            return piezas.ElementAt(num);
+
         }
 
         //agrega la pieza a la lista y ataca al tablero
@@ -181,12 +207,7 @@ namespace TP_1_Labo2
             new_pos[1] = -1;
             Random rand = new Random();
 
-            if (pieza_mover is Torre)
-            {
-                return pieza_mover.Pos; //queda en el mismo lugar
-            }
-
-            else if (pieza_mover is Reina)
+            if (pieza_mover is Reina)
             {
                 do
                 {
@@ -205,7 +226,7 @@ namespace TP_1_Labo2
                     new_pos[0] = rand.Next(2, 5);//solo en el centro 4x4
                     new_pos[1] = rand.Next(2, 5);
 
-                } while (pos_ocupada(new_pos) == true); // que siga probanbdo hasta una pos libre
+                } while (pos_ocupada(new_pos) == true && !(Pieza_en_pos(new_pos) is Rey)); // que siga probanbdo hasta una pos libre
 
                 return new_pos;
             }
@@ -231,7 +252,7 @@ namespace TP_1_Labo2
                     new_pos[0] = rand.Next(1, 6); //en cualquier lugar menos el borde
                     new_pos[1] = rand.Next(1, 6);
 
-                } while (pos_ocupada(new_pos) == true);
+                } while (pos_ocupada(new_pos) == true && !(Pieza_en_pos(new_pos) is Caballo));
                 // que siga probanbdo hasta una pos libre
 
                 return new_pos;
@@ -274,6 +295,36 @@ namespace TP_1_Labo2
             return;
         }
 
-    
+
+        public bool Intercambio(string Alfil_Caballo) // prueba si encuentro solucion intercambiando las piezas puede ser un alfil o un caballo (criterio de poda)
+        {
+            int Caballo_Alfil = -1;
+            int Reina_ = -1;
+
+            int[] pos;
+            for (int j = 0; j < piezas.Count; j++)
+            {
+                if (Alfil_Caballo == "Caballo" && piezas.ElementAt(j) is Caballo)
+                    Caballo_Alfil = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
+                else if (Alfil_Caballo == "Alfil" && piezas.ElementAt(j) is Alfil)
+                    Caballo_Alfil = j;
+                if (piezas.ElementAt(j) is Reina)
+                    Reina_ = j;
+
+
+            }
+
+            pos = piezas.ElementAt(Reina_).Pos;
+            mover(piezas.ElementAt(Reina_), piezas.ElementAt(Caballo_Alfil).Pos);
+            mover(piezas.ElementAt(Caballo_Alfil), pos);
+            if (atacadas_todas() == true)
+                return true;
+
+            else
+
+                return false;
+
+
+        }
     }
 }
