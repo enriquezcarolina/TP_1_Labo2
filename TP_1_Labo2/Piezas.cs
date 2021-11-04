@@ -13,7 +13,21 @@ namespace TP_1_Labo2
     {
         public string nombre;
         public int[] Pos = new int[2];
-   
+        public List<int[]> Pos_Atacadas = new List<int[]>(); //listado de casillas atacadas por la pieza
+
+      /* public virtual List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
+        {
+
+            // pasa por parametro una lista posiciones donde se sabe que hay piezas
+            // para fijarme uee  ninguna se entrometa en el camino del ataque  (en caso de que lo haga es un ataque leve)
+          List<int[]> ataques_fatales[0]=-1;
+            List<int[]> ataques_fatales[1]=-1;
+            
+          
+            
+     
+         }*/
+       
         public virtual void Atacar(Tablero tablero)
         {
 
@@ -52,13 +66,30 @@ namespace TP_1_Labo2
             Pos[0] = pos[0];
             Pos[1] = pos[1];
         }
+      
+     /*   
+        public override List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
+        {
+              
 
+
+            
+            return ataques_fatales;
+         }
+        */
         public override void Atacar(Tablero tablero)
         {
+
+            int[] auxpos = new int[2];
             for (int i = 0; i < constantes.TAM; i++) //ataca toda la fila
             {
                 if (i != Pos[0]) //que no ataque su posicion
-                    tablero.atacadas[i, Pos[1]] = constantes.ATACADA;
+                {    tablero.atacadas[i, Pos[1]] = constantes.ATACADA;
+                    auxpos[0]=i;
+                    auxpos[1]=Pos[1];
+
+                    Pos_Atacadas.Add(auxpos);
+                 }
             }
 
             for (int j = 0; j < constantes.TAM; j++) //ataca toda la columna
@@ -79,17 +110,58 @@ namespace TP_1_Labo2
             Pos[0] = pos[0];
             Pos[1] = pos[1];
         }
+        /*
+           public override List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
+        {
+
+            // pasa por parametro una lista posiciones donde se sabe que hay piezas
+            // para fijarme uee  ninguna se entrometa en el camino del ataque  (en caso de que lo haga es un ataque leve)
+      List<int[]> ataques_fatales=0;
+
+            
+          
+            
+            return ataques_fatales;
+            
+                
+         }*/
         public override void Atacar (Tablero tablero)
         {
+
+            int[] auxpos = new int[2];
             //no se como hacerlo con un for entonces puse que casilleros ataca uno por uno
             tablero.atacadas[Pos[0] + 2, Pos[1] + 1] = constantes.ATACADA;
+            auxpos[0]=Pos[0] + 2;
+            auxpos[1]= Pos[1] + 1;
+            Pos_Atacadas.Add(auxpos);
             tablero.atacadas[Pos[0] + 2, Pos[1] - 1] = constantes.ATACADA;
+            auxpos[0]=Pos[0] + 2;
+            auxpos[1]= Pos[1] - 1;
+            Pos_Atacadas.Add(auxpos);
             tablero.atacadas[Pos[0] - 2, Pos[1] + 1] = constantes.ATACADA;
+            auxpos[0]=Pos[0] - 2;
+            auxpos[1]=  Pos[1] + 1;
+            Pos_Atacadas.Add(auxpos);
             tablero.atacadas[Pos[0] - 2, Pos[1] - 1] = constantes.ATACADA;
+            auxpos[0]=Pos[0] - 2;
+            auxpos[1]= Pos[1] - 1;
+            Pos_Atacadas.Add(auxpos);
             tablero.atacadas[Pos[0] + 1, Pos[1] + 2] = constantes.ATACADA;
+            auxpos[0]=Pos[0] + 1;
+            auxpos[1]=  Pos[1] + 2;
+            Pos_Atacadas.Add(auxpos);
             tablero.atacadas[Pos[0] - 1, Pos[1] + 2] = constantes.ATACADA;
+            auxpos[0]=Pos[0] - 1;
+            auxpos[1]= Pos[1] + 2;
+            Pos_Atacadas.Add(auxpos);
             tablero.atacadas[Pos[0] + 1, Pos[1] - 2] = constantes.ATACADA;
+            auxpos[0]=Pos[0] + 1;
+            auxpos[1]= Pos[1] - 2;
+            Pos_Atacadas.Add(auxpos);
             tablero.atacadas[Pos[0] - 1, Pos[1] - 2] = constantes.ATACADA;
+            auxpos[0]=Pos[0] - 1;
+            auxpos[1]= Pos[1] - 2;
+            Pos_Atacadas.Add(auxpos);
            
         }
     }
@@ -102,23 +174,56 @@ namespace TP_1_Labo2
             Pos[0] = pos[0];
             Pos[1] = pos[1];
         }
+        /* public override List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
+        {
+
+            // pasa por parametro una lista posiciones donde se sabe que hay piezas
+            // para fijarme uee  ninguna se entrometa en el camino del ataque  (en caso de que lo haga es un ataque leve)
+            List<int[]> ataques_fatales[0]=-1;
+            List<int[]> ataques_fatales[1]=-1;
+            
+          
+            
+            return ataques_fatales;
+            
+                
+         }*/
         public override void Atacar(Tablero tablero)
         {
+             int[] auxpos = new int[2];
             for(int i = 1; i < constantes.TAM; i++)//desde 1 porque con 0 atacaria su posicion
             { 
                 //el alfil ataca en diagonal entonces sumo o resto lo mismo a la fila y la columa
 
                 if (Pos[0] + i < constantes.TAM && Pos[1] - i >= 0) //chequeo que no se pase del tablero
-                    tablero.atacadas[Pos[0] + i, Pos[1] - i] = constantes.ATACADA;
+                 {   tablero.atacadas[Pos[0] + i, Pos[1] - i] = constantes.ATACADA;
+                    auxpos[0]=Pos[0] + i;
+                    auxpos[1]= Pos[1] - i;
+                    Pos_Atacadas.Add(auxpos);
+                    }
                
                 if (Pos[0] - i >=0 && Pos[1] + i < constantes.TAM) 
-                    tablero.atacadas[Pos[0] - i, Pos[1] + i] = constantes.ATACADA;
+                 {   tablero.atacadas[Pos[0] - i, Pos[1] + i] = constantes.ATACADA;
+                    auxpos[0]=Pos[0] - i;
+                    auxpos[1]= Pos[1] + i;
+                    Pos_Atacadas.Add(auxpos);
+
+                    }
                
                 if(Pos[0] + i < constantes.TAM && Pos[1] + i < constantes.TAM)
-                    tablero.atacadas[Pos[0] + i, Pos[1] + i] = constantes.ATACADA;
+                   { tablero.atacadas[Pos[0] + i, Pos[1] + i] = constantes.ATACADA;
+                    auxpos[0]=Pos[0] + i;
+                    auxpos[1]=  Pos[1] + i;
+                    Pos_Atacadas.Add(auxpos);
+                
+                }
                
                 if (Pos[0] - i >= 0 && Pos[1] - i >= 0)
-                    tablero.atacadas[Pos[0] - i, Pos[1] - i] = constantes.ATACADA;
+                    {tablero.atacadas[Pos[0] - i, Pos[1] - i] = constantes.ATACADA;
+                    auxpos[0]=Pos[0] - i;
+                    auxpos[1]= Pos[1] - i;
+                    Pos_Atacadas.Add(auxpos);
+                    }
             }
         }
     }
@@ -131,8 +236,23 @@ namespace TP_1_Labo2
             Pos[0] = pos[0];
             Pos[1] = pos[1];
         }
-        public override void Atacar(Tablero tablero)
+        /*
+           public override List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
         {
+
+            // pasa por parametro una lista posiciones donde se sabe que hay piezas
+            // para fijarme uee  ninguna se entrometa en el camino del ataque  (en caso de que lo haga es un ataque leve)
+           List<int[]> ataques_fatales=0;
+
+            
+          
+            
+            return ataques_fatales;
+            
+                
+         }*/
+        public override void Atacar(Tablero tablero)
+        {  int[] auxpos = new int[2];
             for(int i=-1; i<2; i++)
             {
                 for(int j=-1; j<2; j++)
@@ -140,6 +260,9 @@ namespace TP_1_Labo2
                     if(!(i==0 && j==0))//que no ataque su posicion
                     {
                         tablero.atacadas[Pos[0] + i, Pos[1] + j] = constantes.ATACADA;
+                         auxpos[0]=Pos[0] + i;
+                         auxpos[1]= Pos[1] + j;
+                         Pos_Atacadas.Add(auxpos);
                     }
                 }
             }
@@ -154,8 +277,21 @@ namespace TP_1_Labo2
             Pos[0] = pos[0];
             Pos[1] = pos[1];
         }
-        public override void Atacar(Tablero tablero)
+       /*
+        public override List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
         {
+            List<int[]> ataques_fatales=0;
+            
+          
+            
+            return ataques_fatales;
+            
+          
+            
+                
+         }*/
+        public override void Atacar(Tablero tablero)
+        {   int[] auxpos = new int[2];
             //ataque alfil + ataque torre
 
             //ALFIL
@@ -164,29 +300,52 @@ namespace TP_1_Labo2
                 //el alfil ataca en diagonal entonces sumo o resto lo mismo a la fila y la columa
 
                 if (Pos[0] + i < constantes.TAM && Pos[1] - i >= 0) //chequeo que no se pase del tablero
-                    tablero.atacadas[Pos[0] + i, Pos[1] - i] = constantes.ATACADA;
+                 {   tablero.atacadas[Pos[0] + i, Pos[1] - i] = constantes.ATACADA;
+                    auxpos[0]=Pos[0] + i;
+                    auxpos[1]= Pos[1] - i;
+                    Pos_Atacadas.Add(auxpos);
+                    }
+               
+                if (Pos[0] - i >=0 && Pos[1] + i < constantes.TAM) 
+                 {   tablero.atacadas[Pos[0] - i, Pos[1] + i] = constantes.ATACADA;
+                    auxpos[0]=Pos[0] - i;
+                    auxpos[1]= Pos[1] + i;
+                    Pos_Atacadas.Add(auxpos);
 
-                if (Pos[0] - i >= 0 && Pos[1] + i < constantes.TAM)
-                    tablero.atacadas[Pos[0] - i, Pos[1] + i] = constantes.ATACADA;
-
-
-                if (Pos[0] + i < constantes.TAM && Pos[1] + i < constantes.TAM)
-                    tablero.atacadas[Pos[0] + i, Pos[1] + i] = constantes.ATACADA;
-
+                    }
+               
+                if(Pos[0] + i < constantes.TAM && Pos[1] + i < constantes.TAM)
+                   { tablero.atacadas[Pos[0] + i, Pos[1] + i] = constantes.ATACADA;
+                    auxpos[0]=Pos[0] + i;
+                    auxpos[1]=  Pos[1] + i;
+                    Pos_Atacadas.Add(auxpos);
+                
+                }
+               
                 if (Pos[0] - i >= 0 && Pos[1] - i >= 0)
-                    tablero.atacadas[Pos[0] - i, Pos[1] - i] = constantes.ATACADA;
+                    {tablero.atacadas[Pos[0] - i, Pos[1] - i] = constantes.ATACADA;
+                    auxpos[0]=Pos[0] - i;
+                    auxpos[1]= Pos[1] - i;
+                    Pos_Atacadas.Add(auxpos);
+                    }
             }
 
             //TORRE
             for (int i = 0; i < constantes.TAM; i++) //ataca toda la fila
             {
                 if (i != Pos[0]) //que no ataque su posicion
-                    tablero.atacadas[i, Pos[1]] = constantes.ATACADA;
+               {     tablero.atacadas[i, Pos[1]] = constantes.ATACADA;
+                  auxpos[0]=i;
+                    auxpos[1]= Pos[1];
+                    Pos_Atacadas.Add(auxpos); }
             }
             for (int j = 0; j < constantes.TAM; j++) //ataca toda la columna
             {
                 if (j != Pos[1]) //que no ataque su posicion
-                    tablero.atacadas[Pos[0], j] = constantes.ATACADA;
+                   { tablero.atacadas[Pos[0], j] = constantes.ATACADA;
+                    auxpos[0]=Pos[0];
+                    auxpos[1]= j;
+                    Pos_Atacadas.Add(auxpos); }
             }
         }
     }

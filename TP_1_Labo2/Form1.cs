@@ -126,13 +126,13 @@ namespace TP_1_Labo2
              int[] pos;
              for (int j = 0; j < solucion.piezas.Count; j++)
              {
-                 if (solucion.piezas.ElementAt(j) is Torre)
+                 if (solucion.piezas.ElementAt(j) is Torre && torre1==-1)
                      torre1 = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
 
                  if (solucion.piezas.ElementAt(j) is Torre && torre1 != j)
                      torre2 = j; // guardamos la segunda torre
 
-                 if (solucion.piezas.ElementAt(j) is Alfil)
+                 if (solucion.piezas.ElementAt(j) is Alfil && alfil1==-1)
                      alfil1 = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
 
                  if (solucion.piezas.ElementAt(j) is Alfil && alfil1 != j)
