@@ -90,7 +90,7 @@ namespace TP_1_Labo2
             {
                 pos[0] = rand.Next(1, 7); //en cualquier lugar menos el borde
                 pos[1] = rand.Next(1, 7);
-            } while (pos_ocupada(pos));//que pruebe hasta una posicion libre
+            } while (pos_ocupada(pos)==true);//que pruebe hasta una posicion libre
             Pieza rey = new Rey(pos);
             setear_pieza(rey);
 
@@ -98,7 +98,7 @@ namespace TP_1_Labo2
             {
                 pos[0] = rand.Next(0, 8);//en cualquier lugar 
                 pos[1] = rand.Next(0, 8);
-            } while (pos_ocupada(pos));
+            } while (pos_ocupada(pos)==true);
             Pieza alfil = new Alfil(pos);
             setear_pieza(alfil);
 
@@ -107,7 +107,7 @@ namespace TP_1_Labo2
                 pos[0] = rand.Next(0, 8);//en cualquier lugar 
                 pos[1] = rand.Next(0, 8);
 
-            } while (pos_ocupada(pos) && this.color_pos(piezas[4].get_pos()) != this.color_pos(pos));
+            } while (pos_ocupada(pos)==true && this.color_pos(piezas[4].get_pos()) != this.color_pos(pos));
             //que los alfiles esten en casilleros de distinto color
             Pieza alfil2 = new Alfil(pos);
             setear_pieza(alfil2);
@@ -116,7 +116,7 @@ namespace TP_1_Labo2
             {
                 pos[0] = rand.Next(2, 6);//solo en el centro 4x4
                 pos[1] = rand.Next(2, 6);
-            } while (pos_ocupada(pos));
+            } while (pos_ocupada(pos)==true);
             Pieza caballo = new Caballo(pos);
             setear_pieza(caballo);
 
@@ -124,7 +124,7 @@ namespace TP_1_Labo2
             {
                 pos[0] = rand.Next(2, 6);//solo en el centro 4x4
                 pos[1] = rand.Next(2, 6);
-            } while (pos_ocupada(pos));
+            } while (pos_ocupada(pos)==true);
 
             Pieza caballo2 = new Caballo(pos);
             setear_pieza(caballo2);
@@ -258,7 +258,7 @@ namespace TP_1_Labo2
                     if (pos_ocupada(new_pos) == false || Pieza_en_pos(new_pos) is Rey)
                         break;
 
-                } while (true);// que siga probanbdo hasta una pos libre o que la pieza que hay sea un rey
+                } while (pos_ocupada(new_pos) == true);// que siga probanbdo hasta una pos libre o que la pieza que hay sea un rey
 
                 return new_pos;
             }
@@ -271,7 +271,7 @@ namespace TP_1_Labo2
                     new_pos[0] = rand.Next(0, 8);//en cualquier lugar 
                     new_pos[1] = rand.Next(0, 8);
 
-                } while (pos_ocupada(new_pos) == true && color != color_pos(new_pos));
+                } while (pos_ocupada(new_pos) == true && color != color_pos(new_pos) );
                 // que siga probanbdo hasta una pos libre y se respete el color donde tiene que estar el alfil
 
                 return new_pos;
@@ -285,7 +285,7 @@ namespace TP_1_Labo2
                     new_pos[1] = rand.Next(1, 7);
                     if (pos_ocupada(new_pos) == false || Pieza_en_pos(new_pos) is Caballo)
                         break;
-                } while (true);
+                } while (pos_ocupada(new_pos) == true);
                 // que siga probanbdo hasta una pos libre
 
                 return new_pos;
@@ -343,9 +343,9 @@ namespace TP_1_Labo2
             int[] pos_alfil_caballo;
             for (int j = 0; j < piezas.Count; j++)
             {
-                if (Alfil_Caballo == constantes.CABALLO && piezas.ElementAt(j) is Caballo)
+                if (Alfil_Caballo == constantes.CABALLO && piezas.ElementAt(j) is Caballo && Caballo_Alfil == -1)
                     Caballo_Alfil = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
-                if (Alfil_Caballo == constantes.ALFIL && piezas.ElementAt(j) is Alfil)
+                if (Alfil_Caballo == constantes.ALFIL && piezas.ElementAt(j) is Alfil && Caballo_Alfil == -1)
                     Caballo_Alfil = j;
                 if (piezas.ElementAt(j) is Reina)
                     Reina_ = j;

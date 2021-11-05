@@ -118,6 +118,7 @@ namespace TP_1_Labo2
             for (int i = 0; i < constantes.TAM; i++) //ataca toda la fila
             {
                 if (i != Pos[0]) //que no ataque su posicion
+                    
                 {   tablero.atacadas[i, Pos[1]] = constantes.ATACADA;
                     /*auxpos[0]=i;
                     auxpos[1]=Pos[1];
@@ -186,31 +187,38 @@ namespace TP_1_Labo2
             /*auxpos[0]=Pos[0] + 2;
             auxpos[1]= Pos[1] + 1;
             Pos_Atacadas.Add(auxpos);*/
+            if(Pos[0] + 2<8 && Pos[1] - 1 < 8 && Pos[0] + 2 > 0 && Pos[1] - 1>0)
             tablero.atacadas[Pos[0] + 2, Pos[1] - 1] = constantes.ATACADA;
             /*auxpos[0]=Pos[0] + 2;
             auxpos[1]= Pos[1] - 1;
             Pos_Atacadas.Add(auxpos);*/
-            tablero.atacadas[Pos[0] - 2, Pos[1] + 1] = constantes.ATACADA;
+            if (Pos[0] - 2 < 8 && Pos[1] + 1 < 8 && Pos[0] - 2 > 0 && Pos[1] + 1 > 0)
+                tablero.atacadas[Pos[0] - 2, Pos[1] + 1] = constantes.ATACADA;
             /*auxpos[0]=Pos[0] - 2;
             auxpos[1]=  Pos[1] + 1;
             Pos_Atacadas.Add(auxpos);*/
+            if(Pos[0] - 2 < 8 && Pos[1] - 1 < 8 && Pos[0] - 2 > 0 && Pos[1] - 1 > 0)
             tablero.atacadas[Pos[0] - 2, Pos[1] - 1] = constantes.ATACADA;
-           /* auxpos[0]=Pos[0] - 2;
-            auxpos[1]= Pos[1] - 1;
-            Pos_Atacadas.Add(auxpos);*/
-            tablero.atacadas[Pos[0] + 1, Pos[1] + 2] = constantes.ATACADA;
+            /* auxpos[0]=Pos[0] - 2;
+             auxpos[1]= Pos[1] - 1;
+             Pos_Atacadas.Add(auxpos);*/
+            if (Pos[0] + 1 < 8 && Pos[1] + 2 < 8 && Pos[0] + 1 > 0 && Pos[1] + 2 > 0)
+                tablero.atacadas[Pos[0] + 1, Pos[1] + 2] = constantes.ATACADA;
             /*auxpos[0]=Pos[0] + 1;
             auxpos[1]=  Pos[1] + 2;
             Pos_Atacadas.Add(auxpos);*/
-            tablero.atacadas[Pos[0] - 1, Pos[1] + 2] = constantes.ATACADA;
-           /*auxpos[0]=Pos[0] - 1;
-            auxpos[1]= Pos[1] + 2;
-            Pos_Atacadas.Add(auxpos);*/
-            tablero.atacadas[Pos[0] + 1, Pos[1] - 2] = constantes.ATACADA;
+            if (Pos[0] - 1 < 8 && Pos[1] + 2 < 8 && Pos[0] - 1 > 0 && Pos[1] + 2 > 0)
+                tablero.atacadas[Pos[0] - 1, Pos[1] + 2] = constantes.ATACADA;
+            /*auxpos[0]=Pos[0] - 1;
+             auxpos[1]= Pos[1] + 2;
+             Pos_Atacadas.Add(auxpos);*/
+            if (Pos[0] + 1 < 8 && Pos[1] - 2 < 8 && Pos[0] + 1 > 0 && Pos[1] - 2 > 0)
+                tablero.atacadas[Pos[0] + 1, Pos[1] - 2] = constantes.ATACADA;
             /*auxpos[0]=Pos[0] + 1;
             auxpos[1]= Pos[1] - 2;
             Pos_Atacadas.Add(auxpos);*/
-            tablero.atacadas[Pos[0] - 1, Pos[1] - 2] = constantes.ATACADA;
+            if (Pos[0] - 1 < 8 && Pos[1] - 2 < 8 && Pos[0] - 1 > 0 && Pos[1] - 2 > 0)
+                tablero.atacadas[Pos[0] - 1, Pos[1] - 2] = constantes.ATACADA;
             /*auxpos[0]=Pos[0] - 1;
             auxpos[1]= Pos[1] - 2;
             Pos_Atacadas.Add(auxpos);*/
@@ -267,6 +275,7 @@ namespace TP_1_Labo2
 
                 if (Pos[0] + i < constantes.TAM && Pos[1] - i >= 0) //chequeo que no se pase del tablero
                 {   
+                    if(Pos[0] + i < 8 && Pos[1] - i > 0)
                     tablero.atacadas[Pos[0] + i, Pos[1] - i] = constantes.ATACADA;
                     /*auxpos[0]=Pos[0] + i;
                     auxpos[1]= Pos[1] - i;
@@ -275,6 +284,7 @@ namespace TP_1_Labo2
                
                 if (Pos[0] - i >=0 && Pos[1] + i < constantes.TAM) 
                 {   
+                    if(Pos[0] - i>0 && Pos[1] + i < 8)
                     tablero.atacadas[Pos[0] - i, Pos[1] + i] = constantes.ATACADA;
                     /*auxpos[0]=Pos[0] - i;
                     auxpos[1]= Pos[1] + i;
@@ -283,6 +293,7 @@ namespace TP_1_Labo2
                
                 if(Pos[0] + i < constantes.TAM && Pos[1] + i < constantes.TAM)
                 { 
+                    if(Pos[0] + i<8 && Pos[1] + i<8)
                     tablero.atacadas[Pos[0] + i, Pos[1] + i] = constantes.ATACADA;
                    /* auxpos[0]=Pos[0] + i;
                     auxpos[1]=  Pos[1] + i;
@@ -291,6 +302,7 @@ namespace TP_1_Labo2
                
                 if (Pos[0] - i >= 0 && Pos[1] - i >= 0)
                 {
+                    if(Pos[0] - i>0 && Pos[1] - i>0)
                     tablero.atacadas[Pos[0] - i, Pos[1] - i] = constantes.ATACADA;
                    /* auxpos[0]=Pos[0] - i;
                     auxpos[1]= Pos[1] - i;
@@ -347,7 +359,7 @@ namespace TP_1_Labo2
             {
                 for(int j=-1; j<2; j++)
                 {
-                    if(!(i==0 && j==0))//que no ataque su posicion
+                    if(!(i==0 && j==0 && Pos[0]+i<8 && Pos[0]+i>=0 && Pos[1] + j < 8 && Pos[1] + j >= 0))//que no ataque su posicion
                     {
                         tablero.atacadas[Pos[0] + i, Pos[1] + j] = constantes.ATACADA;
                         /* auxpos[0]=Pos[0] + i;

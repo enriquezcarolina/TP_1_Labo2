@@ -37,7 +37,14 @@ namespace TP_1_Labo2
             {
                 Tablero solucion = new Tablero(true);
                 buscar_solucion(solucion); // la funcion que recibe el tablero y hace todo el random para encontrar una solucion
+
+                /*while (misma_pos(solucion) == true)
+                {
+                    buscar_solucion(solucion);
+                } probe para ver si encontraba la solucion*/
                
+          
+
                 if (!soluciones.Contains(solucion) && !Solucion_Ya_Creada(soluciones, solucion))//chequear que no este ya en la lista para que no se repitan
                 {                
                     soluciones.Add(solucion);                   
@@ -65,13 +72,13 @@ namespace TP_1_Labo2
             {
                 pieza_mover = tablero.pieza_rnd(); //elijo una pieza aleatoria
 
-                //do
-                //{
-                    nueva_pos = tablero.posible_mover(pieza_mover); //devuelve una pos random donde podria moverse la pieza
+                do
+                {
+                nueva_pos = tablero.posible_mover(pieza_mover); //devuelve una pos random donde podria moverse la pieza
 
-                //} while (pieza_mover.bool_pos_ya_probada(nueva_pos)); // que siga buscando randoms si esta en la lista de ya probada
-                
-                
+                } while (pieza_mover.bool_pos_ya_probada(nueva_pos)); // que siga buscando randoms si esta en la lista de ya probada
+
+
                 if (cant_atacadas(tablero, pieza_mover, pieza_mover.Pos) > cant_atacadas(tablero, pieza_mover, nueva_pos))
                 { //si en la nueva posicion quedan menos casillas sin atacar cambio la posicion
                     tablero.mover(pieza_mover, nueva_pos);
@@ -79,15 +86,32 @@ namespace TP_1_Labo2
 
                 else
                 {
-                    //pieza_mover.set_pos_ya_probada(nueva_pos);
+                    pieza_mover.set_pos_ya_probada(nueva_pos);
                 }
 
             } while (!tablero.atacadas_todas());
- 
+
+
+
         }
 
-        //Calcula la cantidad de posiciones que ataca una pieza, que no estan siendo atacadas por otras
-        public static int cant_atacadas(Tablero tablero, Pieza pieza, int[] pos)
+        public bool misma_pos(Tablero tablero)
+        {
+            for (int i = 0; i < tablero.piezas.Count; i++)
+            {
+                for (int j = 0; j < tablero.piezas.Count; j++)
+                {
+                    if (tablero.piezas.ElementAt(i).Pos == tablero.piezas.ElementAt(j).Pos && tablero.piezas.ElementAt(i) is Caballo && tablero.piezas.ElementAt(j) is Rey || tablero.piezas.ElementAt(i) is Rey && tablero.piezas.ElementAt(j) is Caballo)
+                    {
+                return true;
+                    }
+
+                }        
+            }
+            return false;
+        }
+//Calcula la cantidad de posiciones que ataca una pieza, que no estan siendo atacadas por otras
+public static int cant_atacadas(Tablero tablero, Pieza pieza, int[] pos)
         {//necesitamos un tablero con todas las piezas menos esta.
             int cont_sin = 0; //contador si la pieza no estuviera
             int cont_con = 0; //contador con la pieza
