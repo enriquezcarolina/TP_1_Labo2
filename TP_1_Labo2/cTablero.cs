@@ -67,10 +67,9 @@ namespace TP_1_Labo2
             Random rand = new Random();
             int[] pos = new int[2];
 
-            pos[0] = rand.Next(0, 1) * 7; //o 0 o 7, que este en una de las puntas
-            pos[1] = rand.Next(0, 1) * 7;
-            Pieza torre = new Torre(pos);
-            setear_pieza(torre);
+            pos[0] = rand.Next(0, 2) * 7; //o 0 o 7, que este en una de las puntas
+            pos[1] = rand.Next(0, 2) * 7;
+            setear_pieza(new Torre(pos));
             // la otra torre tiene que estar en la punta opuesta
             if (pos[0] == 7)
                 pos[0] = 0;
@@ -78,29 +77,25 @@ namespace TP_1_Labo2
             if (pos[1] == 7)
                 pos[1] = 0;
             else pos[1] = 7;
-            Pieza torre2 = new Torre(pos);
-            setear_pieza(torre2);
+           setear_pieza(new Torre(pos));
 
             pos[0] = rand.Next(3, 5);//solo en el centro
             pos[1] = rand.Next(3, 5);
-            Pieza reina = new Reina(pos);
-            setear_pieza(reina);
+            setear_pieza(new Reina(pos));
            
             do
             {
                 pos[0] = rand.Next(1, 7); //en cualquier lugar menos el borde
                 pos[1] = rand.Next(1, 7);
             } while (pos_ocupada(pos)==true);//que pruebe hasta una posicion libre
-            Pieza rey = new Rey(pos);
-            setear_pieza(rey);
+            setear_pieza(new Rey(pos));
 
             do
             {
                 pos[0] = rand.Next(0, 8);//en cualquier lugar 
                 pos[1] = rand.Next(0, 8);
             } while (pos_ocupada(pos)==true);
-            Pieza alfil = new Alfil(pos);
-            setear_pieza(alfil);
+            setear_pieza(new Alfil(pos));
 
             do
             {
@@ -109,25 +104,22 @@ namespace TP_1_Labo2
 
             } while (pos_ocupada(pos)==true && this.color_pos(piezas[4].get_pos()) != this.color_pos(pos));
             //que los alfiles esten en casilleros de distinto color
-            Pieza alfil2 = new Alfil(pos);
-            setear_pieza(alfil2);
+            setear_pieza(new Alfil(pos));
 
             do
             {
                 pos[0] = rand.Next(2, 6);//solo en el centro 4x4
                 pos[1] = rand.Next(2, 6);
             } while (pos_ocupada(pos)==true);
-            Pieza caballo = new Caballo(pos);
-            setear_pieza(caballo);
+            setear_pieza(new Caballo(pos));
 
             do
             {
                 pos[0] = rand.Next(2, 6);//solo en el centro 4x4
                 pos[1] = rand.Next(2, 6);
             } while (pos_ocupada(pos)==true);
+            setear_pieza(new Caballo(pos));
 
-            Pieza caballo2 = new Caballo(pos);
-            setear_pieza(caballo2);
         }
 
         public Tablero(Tablero otro)
@@ -334,34 +326,34 @@ namespace TP_1_Labo2
             return;
         }
 
-        public bool Intercambio(string Alfil_Caballo) // prueba si encuentro solucion intercambiando las piezas puede ser un alfil o un caballo (criterio de poda)
+        public Tablero Intercambio(string Alfil_Caballo) // prueba si encuentro solucion intercambiando las piezas puede ser un alfil o un caballo (criterio de poda)
         {
             int Caballo_Alfil = -1;
             int Reina_ = -1;
+            Tablero t_prueba = new Tablero(this);
 
             int[] pos_reina;
             int[] pos_alfil_caballo;
             for (int j = 0; j < piezas.Count; j++)
             {
-                if (Alfil_Caballo == constantes.CABALLO && piezas.ElementAt(j) is Caballo && Caballo_Alfil == -1)
+                if (Alfil_Caballo == constantes.CABALLO && t_prueba.piezas.ElementAt(j) is Caballo && Caballo_Alfil == -1)
                     Caballo_Alfil = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
-                if (Alfil_Caballo == constantes.ALFIL && piezas.ElementAt(j) is Alfil && Caballo_Alfil == -1)
+                if (Alfil_Caballo == constantes.ALFIL && t_prueba.piezas.ElementAt(j) is Alfil && Caballo_Alfil == -1)
                     Caballo_Alfil = j;
-                if (piezas.ElementAt(j) is Reina)
+                if (t_prueba.piezas.ElementAt(j) is Reina)
                     Reina_ = j;
             }
 
-            pos_reina = piezas.ElementAt(Reina_).Pos;
-            pos_alfil_caballo = piezas.ElementAt(Caballo_Alfil).Pos;
-            mover(piezas.ElementAt(Reina_), pos_alfil_caballo);
-            mover(piezas.ElementAt(Caballo_Alfil), pos_reina);
+            pos_reina = t_prueba.piezas.ElementAt(Reina_).Pos;
+            pos_alfil_caballo = t_prueba.piezas.ElementAt(Caballo_Alfil).Pos;
+            t_prueba.mover(t_prueba.piezas.ElementAt(Reina_), pos_alfil_caballo);
+            t_prueba.mover(t_prueba.piezas.ElementAt(Caballo_Alfil), pos_reina);
             
             if (atacadas_todas() == true)
-                return true;
+                return t_prueba;
 
             else
-
-                return false;
+                return null;
         }
 
        /* public void Ataques_Fatales() // añade en una lista las casillas que poseen ataques letales

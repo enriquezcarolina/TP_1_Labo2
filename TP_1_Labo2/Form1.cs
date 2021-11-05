@@ -32,7 +32,7 @@ namespace TP_1_Labo2
         {
             
             List<Tablero> soluciones = new List<Tablero>();
-            
+
             do
             {
                 Tablero solucion = new Tablero(true);
@@ -42,21 +42,21 @@ namespace TP_1_Labo2
                 {
                     buscar_solucion(solucion);
                 } probe para ver si encontraba la solucion*/
-               
-          
+
+
 
                 if (!soluciones.Contains(solucion) && !Solucion_Ya_Creada(soluciones, solucion))//chequear que no este ya en la lista para que no se repitan
-                {                
-                    soluciones.Add(solucion);                   
-                }
+                {
+                    soluciones.Add(solucion);
+                } 
 
-                Tablero prueba1 = new Tablero(solucion); // dos tableros de prueba pq quiero probar cambiando el alfil y el caballo con la reina pero no quiero alterar cuando hago cada cosa
-                Tablero prueba2 = new Tablero(solucion);
-                if (prueba1.Intercambio("Alfil") == true && !soluciones.Contains(prueba1))
-                    soluciones.Add(prueba1);
-                if (prueba2.Intercambio("Caballo") == true && !soluciones.Contains(prueba2))
-                    soluciones.Add(prueba2);
-                
+                Tablero prueba_Alfil = solucion.Intercambio(constantes.ALFIL);
+                Tablero prueba_Caballo = solucion.Intercambio(constantes.CABALLO);
+                if (prueba_Alfil != null) // dos tableros de prueba pq quiero probar cambiando el alfil y el caballo con la reina pero no quiero alterar cuando hago cada cosa
+                    soluciones.Add(prueba_Alfil);
+                if (prueba_Caballo != null)
+                    soluciones.Add(prueba_Caballo);
+
             } while (soluciones.Count() < cant_solucionesUpDown.Value);
 
              Form form_datagrid = new form_datagrid(soluciones);
@@ -72,11 +72,10 @@ namespace TP_1_Labo2
             {
                 pieza_mover = tablero.pieza_rnd(); //elijo una pieza aleatoria
 
-                do
-                {
-                nueva_pos = tablero.posible_mover(pieza_mover); //devuelve una pos random donde podria moverse la pieza
-
-                } while (pieza_mover.bool_pos_ya_probada(nueva_pos)); // que siga buscando randoms si esta en la lista de ya probada
+               // do
+                //{
+                     nueva_pos = tablero.posible_mover(pieza_mover); //devuelve una pos random donde podria moverse la pieza
+                //} while (pieza_mover.bool_pos_ya_probada(nueva_pos)); // que siga buscando randoms si esta en la lista de ya probada
 
 
                 if (cant_atacadas(tablero, pieza_mover, pieza_mover.Pos) > cant_atacadas(tablero, pieza_mover, nueva_pos))
@@ -151,6 +150,7 @@ public static int cant_atacadas(Tablero tablero, Pieza pieza, int[] pos)
         {
              Tablero solucion_Alfiles_cambiados = new Tablero(solucion); //que no sea la misma solucion cambiando solo las torres 
              Tablero solucion_Torres_Cambiadas = new Tablero(solucion);  // que no sea la misma solucion cambiando solo alfiles
+             Tablero solucion_Torres_Alfiles = new Tablero(solucion);
 
              int torre1 = -1;
              int torre2 = -1;
@@ -162,13 +162,13 @@ public static int cant_atacadas(Tablero tablero, Pieza pieza, int[] pos)
                  if (solucion.piezas.ElementAt(j) is Torre && torre1 ==-1)
                      torre1 = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
 
-                 if (solucion.piezas.ElementAt(j) is Torre && torre1 != -1)
+                 if (solucion.piezas.ElementAt(j) is Torre && torre1 != j)
                      torre2 = j; // guardamos la segunda torre
 
                  if (solucion.piezas.ElementAt(j) is Alfil && alfil1 == -1)
                      alfil1 = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
 
-                 if (solucion.piezas.ElementAt(j) is Alfil && alfil1 != -1)
+                 if (solucion.piezas.ElementAt(j) is Alfil && alfil1 != j)
                      alfil2 = j; // guardamos el segundo alfil que se encuentra en otra posicion
 
              }
@@ -193,13 +193,13 @@ public static int cant_atacadas(Tablero tablero, Pieza pieza, int[] pos)
                 return true; // si la soluccion esta contenida retorna true 
 
             //cambio en la solucion ambos alfiles y ambas torres
-             pos = solucion.piezas.ElementAt(torre1).Pos; // guardo posicion de torre1 
-             solucion.piezas.ElementAt(torre1).set_pos(solucion.piezas.ElementAt(torre2).Pos);
-             solucion.piezas.ElementAt(torre2).set_pos(pos);
+             pos = solucion_Torres_Alfiles.piezas.ElementAt(torre1).Pos; // guardo posicion de torre1 
+             solucion_Torres_Alfiles.piezas.ElementAt(torre1).set_pos(solucion_Torres_Alfiles.piezas.ElementAt(torre2).Pos);
+             solucion_Torres_Alfiles.piezas.ElementAt(torre2).set_pos(pos);
             
-             pos = solucion.piezas.ElementAt(alfil1).Pos; // guardo posicion de torre1 
-             solucion.piezas.ElementAt(alfil1).set_pos(solucion.piezas.ElementAt(alfil2).Pos);
-             solucion.piezas.ElementAt(alfil2).set_pos(pos);
+             pos = solucion_Torres_Alfiles.piezas.ElementAt(alfil1).Pos; // guardo posicion de torre1 
+             solucion_Torres_Alfiles.piezas.ElementAt(alfil1).set_pos(solucion_Torres_Alfiles.piezas.ElementAt(alfil2).Pos);
+             solucion_Torres_Alfiles.piezas.ElementAt(alfil2).set_pos(pos);
 
 
              if (soluciones.Contains(solucion) == true)
