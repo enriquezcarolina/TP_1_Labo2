@@ -39,7 +39,9 @@ namespace TP_1_Labo2
             Pos[0] = otra.Pos[0];
             Pos[1] = otra.Pos[1];
             for (int i = 0; i < otra.Pos_Atacadas.Count(); i++)
+            {
                 this.Pos_Atacadas.Add(otra.Pos_Atacadas.ElementAt(i));
+            }
         }
 
         public Pieza(int[] pos)
@@ -155,11 +157,12 @@ namespace TP_1_Labo2
             contador_atacadas=0;
 
             int[] auxpos = new int[2];
+
             for (int i = 0; i < constantes.TAM; i++) //ataca toda la fila
             {
                 if (i != Pos[0]) //que no ataque su posicion
-                    
-                {   tablero.atacadas[i, Pos[1]] = constantes.ATACADA;
+                {   
+                    tablero.atacadas[i, Pos[1]] = constantes.ATACADA;
                      contador_atacadas= contador_atacadas+1;
                     /*auxpos[0]=i;
                     auxpos[1]=Pos[1];
@@ -194,7 +197,7 @@ namespace TP_1_Labo2
             nombre = constantes.CABALLO;
             Pos[0] = -1;
             Pos[1] = -1;
-             contador_atacadas= 0;
+            contador_atacadas= 0;
         }
 
         public Caballo(Pieza otra)
@@ -226,23 +229,22 @@ namespace TP_1_Labo2
             contador_atacadas=0;
             int[] auxpos = new int[2];
             //no se como hacerlo con un for entonces puse que casilleros ataca uno por uno
-            if(Pos[0] + 2<8 && Pos[1] + 1 < 8 && Pos[0] + 2 > 0 && Pos[1] + 1>0)
+            if(Pos[0] + 2 < constantes.TAM && Pos[1] + 1 < constantes.TAM )
             {
-
-            tablero.atacadas[Pos[0] + 2, Pos[1] + 1] = constantes.ATACADA;
+                tablero.atacadas[Pos[0] + 2, Pos[1] + 1] = constantes.ATACADA;
                 contador_atacadas= contador_atacadas+1;
-                }
+             }
             /*auxpos[0]=Pos[0] + 2;
             auxpos[1]= Pos[1] + 1;
             Pos_Atacadas.Add(auxpos);*/
-            if(Pos[0] + 2<8 && Pos[1] - 1 < 8 && Pos[0] + 2 > 0 && Pos[1] - 1>0)
+            if(Pos[0] + 2<constantes.TAM && Pos[1] - 1 >0 )
             {tablero.atacadas[Pos[0] + 2, Pos[1] - 1] = constantes.ATACADA;
                  contador_atacadas= contador_atacadas+1;
             }
             /*auxpos[0]=Pos[0] + 2;
             auxpos[1]= Pos[1] - 1;
             Pos_Atacadas.Add(auxpos);*/
-            if (Pos[0] - 2 < 8 && Pos[1] + 1 < 8 && Pos[0] - 2 > 0 && Pos[1] + 1 > 0)
+            if (Pos[0] - 2 >0 && Pos[1] + 1 < constantes.TAM)
             {    tablero.atacadas[Pos[0] - 2, Pos[1] + 1] = constantes.ATACADA;
              contador_atacadas= contador_atacadas+1;
             }
@@ -250,32 +252,33 @@ namespace TP_1_Labo2
             /*auxpos[0]=Pos[0] - 2;
             auxpos[1]=  Pos[1] + 1;
             Pos_Atacadas.Add(auxpos);*/
-            if(Pos[0] - 2 < 8 && Pos[1] - 1 < 8 && Pos[0] - 2 > 0 && Pos[1] - 1 > 0)
+            if(Pos[0] - 2 >0 && Pos[1] - 1 >0)
             {tablero.atacadas[Pos[0] - 2, Pos[1] - 1] = constantes.ATACADA;
              contador_atacadas= contador_atacadas+1;
             
             }/* auxpos[0]=Pos[0] - 2;
              auxpos[1]= Pos[1] - 1;
              Pos_Atacadas.Add(auxpos);*/
-            if (Pos[0] + 1 < 8 && Pos[1] + 2 < 8 && Pos[0] + 1 > 0 && Pos[1] + 2 > 0)
+            if (Pos[0] + 1 < constantes.TAM && Pos[1] + 2 < constantes.TAM)
              {   tablero.atacadas[Pos[0] + 1, Pos[1] + 2] = constantes.ATACADA;
              contador_atacadas= contador_atacadas+1;
             }/*auxpos[0]=Pos[0] + 1;
             auxpos[1]=  Pos[1] + 2;
             Pos_Atacadas.Add(auxpos);*/
-            if (Pos[0] - 1 < 8 && Pos[1] + 2 < 8 && Pos[0] - 1 > 0 && Pos[1] + 2 > 0)
+            if (Pos[0] - 1 >0 && Pos[1] + 2 < constantes.TAM )
                 {tablero.atacadas[Pos[0] - 1, Pos[1] + 2] = constantes.ATACADA;
              contador_atacadas= contador_atacadas+1;
             }/*auxpos[0]=Pos[0] - 1;
              auxpos[1]= Pos[1] + 2;
              Pos_Atacadas.Add(auxpos);*/
-            if (Pos[0] + 1 < 8 && Pos[1] - 2 < 8 && Pos[0] + 1 > 0 && Pos[1] - 2 > 0)
-                {tablero.atacadas[Pos[0] + 1, Pos[1] - 2] = constantes.ATACADA;
-             contador_atacadas= contador_atacadas+1;
+            if (Pos[0] + 1 < constantes.TAM && Pos[1] - 2 > 0)
+            {
+                tablero.atacadas[Pos[0] + 1, Pos[1] - 2] = constantes.ATACADA;
+                contador_atacadas= contador_atacadas+1;
             }/*auxpos[0]=Pos[0] + 1;
             auxpos[1]= Pos[1] - 2;
             Pos_Atacadas.Add(auxpos);*/
-            if (Pos[0] - 1 < 8 && Pos[1] - 2 < 8 && Pos[0] - 1 > 0 && Pos[1] - 2 > 0)
+            if (Pos[0] - 1 >0 && Pos[1] - 2 >0 )
                 {tablero.atacadas[Pos[0] - 1, Pos[1] - 2] = constantes.ATACADA;
             contador_atacadas= contador_atacadas+1;
                 }/*auxpos[0]=Pos[0] - 1;

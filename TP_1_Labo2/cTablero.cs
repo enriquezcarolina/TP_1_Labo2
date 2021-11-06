@@ -80,30 +80,35 @@ namespace TP_1_Labo2
             else pos[1] = 7;
            setear_pieza(new Torre(pos));
 
-            pos[0] = rand.Next(3, 5);//solo en el centro
-            pos[1] = rand.Next(3, 5);
+            do
+            {
+                pos[0] = rand.Next(3, 5);//solo en el centro
+                pos[1] = rand.Next(3, 5);
+            } while (pos_ocupada(pos));
             setear_pieza(new Reina(pos));
            
             do
             {
                 pos[0] = rand.Next(1, 7); //en cualquier lugar menos el borde
                 pos[1] = rand.Next(1, 7);
-            } while (pos_ocupada(pos)==true);//que pruebe hasta una posicion libre
+            } while (pos_ocupada(pos));//que pruebe hasta una posicion libre
             setear_pieza(new Rey(pos));
 
             do
             {
                 pos[0] = rand.Next(0, 8);//en cualquier lugar 
                 pos[1] = rand.Next(0, 8);
-            } while (pos_ocupada(pos)==true);
+            } while (pos_ocupada(pos));
             setear_pieza(new Alfil(pos));
 
             do
             {
                 pos[0] = rand.Next(0, 8);//en cualquier lugar 
                 pos[1] = rand.Next(0, 8);
+                if (!pos_ocupada(pos) && color_pos(piezas[4].get_pos()) != color_pos(pos))
+                    break;
 
-            } while (pos_ocupada(pos)==true && this.color_pos(piezas[4].get_pos()) != this.color_pos(pos));
+            } while (true);
             //que los alfiles esten en casilleros de distinto color
             setear_pieza(new Alfil(pos));
 
@@ -111,14 +116,14 @@ namespace TP_1_Labo2
             {
                 pos[0] = rand.Next(2, 6);//solo en el centro 4x4
                 pos[1] = rand.Next(2, 6);
-            } while (pos_ocupada(pos)==true);
+            } while (pos_ocupada(pos));
             setear_pieza(new Caballo(pos));
 
             do
             {
                 pos[0] = rand.Next(2, 6);//solo en el centro 4x4
                 pos[1] = rand.Next(2, 6);
-            } while (pos_ocupada(pos)==true);
+            } while (pos_ocupada(pos));
             setear_pieza(new Caballo(pos));
 
         }
@@ -161,7 +166,7 @@ namespace TP_1_Labo2
 
             for (int i = 0; i < piezas.Count; i++)
             {
-                if (piezas.ElementAt(i).Pos == pos)
+                if (piezas.ElementAt(i).Pos[0] == pos[0] && piezas.ElementAt(i).Pos[1] == pos[1])
                     return piezas.ElementAt(i);
 
             }
@@ -187,7 +192,7 @@ namespace TP_1_Labo2
         {
             for (int i = 0; i < piezas.Count; i++)
             {
-                if (piezas.ElementAt(i).Pos == pos)
+                if (piezas.ElementAt(i).Pos[0] == pos[0] && piezas.ElementAt(i).Pos[1]==pos[1])
                     return true; //esta ocupada
             }
 
@@ -251,7 +256,7 @@ namespace TP_1_Labo2
                     if (pos_ocupada(new_pos) == false || Pieza_en_pos(new_pos) is Rey)
                         break;
 
-                } while (pos_ocupada(new_pos) == true);// que siga probanbdo hasta una pos libre o que la pieza que hay sea un rey
+                } while (true);// que siga probanbdo hasta una pos libre o que la pieza que hay sea un rey
 
                 return new_pos;
             }
@@ -278,7 +283,7 @@ namespace TP_1_Labo2
                     new_pos[1] = rand.Next(1, 7);
                     if (pos_ocupada(new_pos) == false || Pieza_en_pos(new_pos) is Caballo)
                         break;
-                } while (pos_ocupada(new_pos) == true);
+                } while (true);
                 // que siga probanbdo hasta una pos libre
 
                 return new_pos;
@@ -299,7 +304,20 @@ namespace TP_1_Labo2
         public void sacar(Pieza p)
         {    
             Tablero tablero_prueba = new Tablero(); //tablero vacio
-            tablero_prueba.setear_pieza(p);
+
+            Pieza pieza_temp = null;
+            if (p is Torre)
+                pieza_temp = new Torre(p);
+            else if (p is Alfil)
+                pieza_temp = new Alfil(p);
+            else if (p is Caballo)
+                pieza_temp = new Caballo(p);
+            else if (p is Reina)
+                pieza_temp = new Reina(p);
+            else if (p is Rey)
+                pieza_temp = new Rey(p);
+
+            tablero_prueba.setear_pieza(pieza_temp);
             
             for (int i = 0; i < constantes.TAM; i++)
             {
@@ -313,7 +331,7 @@ namespace TP_1_Labo2
 
             for(int i = 0; i < piezas.Count; i++)
             {
-                if (piezas.ElementAt(i) == p)
+                if (piezas.ElementAt(i).nombre == p.nombre && piezas.ElementAt(i).Pos[0] == p.Pos[0] &&piezas.ElementAt(i).Pos[1] == p.Pos[1])
                 {
                     piezas.Remove(piezas.ElementAt(i));
                     break;
@@ -323,11 +341,7 @@ namespace TP_1_Labo2
             for (int i = 0; i < piezas.Count(); i++)
             {
                 piezas.ElementAt(i).Atacar(this); // volver a atacar por si alguna otra pieza atacaba una posicion que dejamos de atacar
-            }
-
-            //int[] pos= {-1,-1};
-            //p.set_pos(pos);
-            
+            }      
 
             return; 
         }
@@ -338,8 +352,8 @@ namespace TP_1_Labo2
             int Reina_ = -1;
             Tablero t_prueba = new Tablero(this);
 
-            int[] pos_reina;
-            int[] pos_alfil_caballo;
+            int[] pos_reina = new int[2];
+            int[] pos_alfil_caballo = new int[2];
             for (int j = 0; j < piezas.Count; j++)
             {
                 if (Alfil_Caballo == constantes.CABALLO && t_prueba.piezas.ElementAt(j) is Caballo && Caballo_Alfil == -1)
@@ -350,8 +364,11 @@ namespace TP_1_Labo2
                     Reina_ = j;
             }
 
-            pos_reina = t_prueba.piezas.ElementAt(Reina_).Pos;
-            pos_alfil_caballo = t_prueba.piezas.ElementAt(Caballo_Alfil).Pos;
+            pos_reina[0] = t_prueba.piezas.ElementAt(Reina_).Pos[0];
+            pos_reina[1] = t_prueba.piezas.ElementAt(Reina_).Pos[1];
+            pos_alfil_caballo[0] = t_prueba.piezas.ElementAt(Caballo_Alfil).Pos[0];
+            pos_alfil_caballo[1] = t_prueba.piezas.ElementAt(Caballo_Alfil).Pos[1];
+
             t_prueba.mover(t_prueba.piezas.ElementAt(Reina_), pos_alfil_caballo);
             t_prueba.mover(t_prueba.piezas.ElementAt(Caballo_Alfil), pos_reina);
             
