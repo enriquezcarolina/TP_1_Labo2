@@ -69,21 +69,23 @@ namespace TP_1_Labo2
             {
                 pieza_mover = tablero.pieza_rnd(); //elijo una pieza aleatoria
 
-               // do
-                //{
+              do
+               {
                      nueva_pos = tablero.posible_mover(pieza_mover); //devuelve una pos random donde podria moverse la pieza
-                //} while (pieza_mover.bool_pos_ya_probada(nueva_pos)); // que siga buscando randoms si esta en la lista de ya probada
+                } while (cant_atacadas(tablero,pieza_mover, pieza_mover.Pos)>cant_atacadas(tablero,pieza_mover, nueva_pos)); // que siga buscando randoms si esta en la lista de ya probada
+                
+                    //pieza_mover.bool_pos_ya_probada(nueva_pos)
 
-
-                if (atacadas_por_ficha(pieza_mover, nueva_pos)== false)
+                if (atacadas_por_ficha(pieza_mover, nueva_pos)== true)
                 { //si en la nueva posicion quedan menos casillas sin atacar cambio la posicion
                     tablero.mover(pieza_mover, nueva_pos);
-                }
-
-                else
-                {
-                    pieza_mover.set_pos_ya_probada(nueva_pos);
-                }
+                  
+               }
+                
+                pieza_mover.set_pos_ya_probada(nueva_pos); 
+              
+                 
+                
 
             } while (!tablero.atacadas_todas());
 

@@ -295,25 +295,25 @@ namespace TP_1_Labo2
             setear_pieza(pieza); //la agrego al tablero con la nueva posicion
         }
 
-        //saca la pieza del tablero 
+        //saca la pieza del tablero y ataca con las restantes  
         public void sacar(Pieza p)
         {    
             Tablero tablero_prueba = new Tablero(); //tablero vacio
             tablero_prueba.setear_pieza(p);
-
+            
             for (int i = 0; i < constantes.TAM; i++)
             {
                 for (int j = 0; j < constantes.TAM; j++)
                 {
                     if (tablero_prueba.atacadas[i, j] == true)
-                        this.atacadas[i, j] = false;
+                        this.atacadas[i, j] = false;  // como el tablero esta creado solamente con la ficha que quiero mover todo lo que ataque es lo q antes atacaaba esta ficha
 
                 }
             }
 
             for(int i = 0; i < piezas.Count; i++)
             {
-                if (piezas.ElementAt(i).nombre == p.nombre)
+                if (piezas.ElementAt(i) == p)
                 {
                     piezas.Remove(piezas.ElementAt(i));
                     break;
@@ -325,7 +325,11 @@ namespace TP_1_Labo2
                 piezas.ElementAt(i).Atacar(this); // volver a atacar por si alguna otra pieza atacaba una posicion que dejamos de atacar
             }
 
-            return;
+            //int[] pos= {-1,-1};
+            //p.set_pos(pos);
+            
+
+            return; 
         }
 
         public Tablero Intercambio(string Alfil_Caballo) // prueba si encuentro solucion intercambiando las piezas puede ser un alfil o un caballo (criterio de poda)
