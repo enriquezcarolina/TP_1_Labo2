@@ -15,6 +15,7 @@ namespace TP_1_Labo2
         public bool[,] atacadas = new bool[8, 8]; //que casilleros estan siendo atacados
         public bool[,] tipo_ataque = new bool[8, 8]; //ataque fuerte o leve
         public List<Pieza> piezas = new List<Pieza>(); //listado de piezas
+       
       //  public List<int[]> Atacadas_Fatalmente = new List<int[]>(); //listado de casillas atacadas fatalmente
 
 
@@ -287,6 +288,7 @@ namespace TP_1_Labo2
 
         public void mover(Pieza pieza, int[] pos)
         {
+        
             sacar(pieza); //saca la pieza del tablero y deja de atacar las posiciones que atacaba antes
 
             pieza.set_pos(pos); //cambio la posicion de la pieza
@@ -295,7 +297,7 @@ namespace TP_1_Labo2
 
         //saca la pieza del tablero 
         public void sacar(Pieza p)
-        {
+        {    
             Tablero tablero_prueba = new Tablero(); //tablero vacio
             tablero_prueba.setear_pieza(p);
 

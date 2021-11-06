@@ -38,10 +38,7 @@ namespace TP_1_Labo2
                 Tablero solucion = new Tablero(true);
                 buscar_solucion(solucion); // la funcion que recibe el tablero y hace todo el random para encontrar una solucion
 
-                /*while (misma_pos(solucion) == true)
-                {
-                    buscar_solucion(solucion);
-                } probe para ver si encontraba la solucion*/
+               
 
 
 
@@ -78,7 +75,7 @@ namespace TP_1_Labo2
                 //} while (pieza_mover.bool_pos_ya_probada(nueva_pos)); // que siga buscando randoms si esta en la lista de ya probada
 
 
-                if (cant_atacadas(tablero, pieza_mover, pieza_mover.Pos) > cant_atacadas(tablero, pieza_mover, nueva_pos))
+                if (atacadas_por_ficha(pieza_mover, nueva_pos)== false)
                 { //si en la nueva posicion quedan menos casillas sin atacar cambio la posicion
                     tablero.mover(pieza_mover, nueva_pos);
                 }
@@ -93,6 +90,54 @@ namespace TP_1_Labo2
 
 
         }
+
+
+        // cantidad de atacadas por ficha compara el contador de atacadas de la ficha y de la ficha en otra posi
+        // devuelve true si ataca mas y false si ataca menos
+
+        public bool atacadas_por_ficha(Pieza pieza, int[] nueva_pos)
+        {
+
+            Tablero tablero_aux=new Tablero(); // tablero con piezas sin seteat
+
+            if (pieza is Caballo)
+            {    Caballo pieza_aux= new Caballo();
+                
+            tablero_aux.setear_pieza(pieza_aux);
+            tablero_aux.mover(pieza_aux, nueva_pos);
+                 if(pieza_aux.contador_atacadas>pieza.contador_atacadas)
+                return true;
+                }
+            if(pieza is Reina )
+            { 
+                Reina pieza_aux= new Reina();
+                 tablero_aux.setear_pieza(pieza_aux);
+            tablero_aux.mover(pieza_aux, nueva_pos);
+                 if(pieza_aux.contador_atacadas>pieza.contador_atacadas)
+                return true;
+            
+            
+            }
+            if(pieza is Alfil)
+               { Alfil pieza_aux= new Alfil();
+            
+             tablero_aux.setear_pieza(pieza_aux);
+            tablero_aux.mover(pieza_aux, nueva_pos);
+                 if(pieza_aux.contador_atacadas>pieza.contador_atacadas)
+                return true;
+            }
+           if(pieza is Rey)
+            {    Rey pieza_aux= new Rey();
+                 tablero_aux.setear_pieza(pieza_aux);
+            tablero_aux.mover(pieza_aux, nueva_pos);
+                 if(pieza_aux.contador_atacadas>pieza.contador_atacadas)
+                return true;
+                }
+           
+
+            return false;
+        }
+
 
         public bool misma_pos(Tablero tablero)
         {
