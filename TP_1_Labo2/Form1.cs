@@ -57,7 +57,7 @@ namespace TP_1_Labo2
                     soluciones.Add(Espejar_y(Espejar_x(solucion)));
                 }
 
-                if (soluciones.Count() < cant_solucionesUpDown.Value)
+                /*if (soluciones.Count() < cant_solucionesUpDown.Value)
                 {
                     Tablero prueba_Alfil = solucion.Intercambio(constantes.ALFIL);
                     if (prueba_Alfil != null) // dos tableros de prueba pq quiero probar cambiando el alfil y el caballo con la reina pero no quiero alterar cuando hago cada cosa
@@ -68,7 +68,7 @@ namespace TP_1_Labo2
                     Tablero prueba_Caballo = solucion.Intercambio(constantes.CABALLO);
                     if (prueba_Caballo != null)
                         soluciones.Add(prueba_Caballo);
-                }
+                }*/
             } while (soluciones.Count() < cant_solucionesUpDown.Value);
 
              Form form_datagrid = new form_datagrid(soluciones);
@@ -224,9 +224,9 @@ namespace TP_1_Labo2
             // cambio solo las torres 
             pos[0] = solucion_Torres_Cambiadas.piezas.ElementAt(torre1).Pos[0]; // guardo posicion de torre1 
             pos[1] = solucion_Torres_Cambiadas.piezas.ElementAt(torre1).Pos[1];
-            // pos2[0] = solucion_Torres_Cambiadas.piezas.ElementAt(torre2).Pos[0]; // guardo posicion de torre1 
-            // pos2[1] = solucion_Torres_Cambiadas.piezas.ElementAt(torre2).Pos[1];
-            solucion_Torres_Cambiadas.mover(solucion_Torres_Cambiadas.piezas.ElementAt(torre1), solucion_Torres_Cambiadas.piezas.ElementAt(torre2).Pos);
+            pos2[0] = solucion_Torres_Cambiadas.piezas.ElementAt(torre2).Pos[0]; // guardo posicion de torre1 
+            pos2[1] = solucion_Torres_Cambiadas.piezas.ElementAt(torre2).Pos[1];
+            solucion_Torres_Cambiadas.mover(solucion_Torres_Cambiadas.piezas.ElementAt(torre1), pos2);
             solucion_Torres_Cambiadas.mover(solucion_Torres_Cambiadas.piezas.ElementAt(torre2), pos);
 
             if (soluciones.Contains(solucion_Torres_Cambiadas))
@@ -235,9 +235,9 @@ namespace TP_1_Labo2
             // cambio solo alfiles
             pos[0] = solucion_Alfiles_cambiados.piezas.ElementAt(alfil1).Pos[0]; // guardo posicion de torre1 
             pos[1] = solucion_Alfiles_cambiados.piezas.ElementAt(alfil1).Pos[1];
-           //pos2[0] = solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).Pos[0]; // guardo posicion de torre1 
-            //pos2[1] = solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).Pos[1];
-            solucion_Alfiles_cambiados.mover(solucion_Alfiles_cambiados.piezas.ElementAt(alfil1), solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).Pos);
+           pos2[0] = solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).Pos[0]; // guardo posicion de torre1 
+            pos2[1] = solucion_Alfiles_cambiados.piezas.ElementAt(alfil2).Pos[1];
+            solucion_Alfiles_cambiados.mover(solucion_Alfiles_cambiados.piezas.ElementAt(alfil1),pos2);
             solucion_Alfiles_cambiados.mover(solucion_Alfiles_cambiados.piezas.ElementAt(alfil2), pos);
 
             if (soluciones.Contains(solucion_Alfiles_cambiados) == true)
