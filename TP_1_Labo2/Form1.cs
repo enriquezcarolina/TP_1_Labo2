@@ -365,6 +365,18 @@ namespace TP_1_Labo2
 
             return espejado;
         }
+
+        private void button_costo_Click(object sender, EventArgs e)
+        {
+            string titulo = "COSTO DEL ALGORITMO";
+            string texto = "Además de depender claramente de  de la cantidad de soluciones que se quieran obtener, el costo del argoritmo depende directamente del orden en que se posicionan las piezas aleatoriamente al comenzar el programa. " +
+                "\n El mejor casos seria que al posicionarse las piezas se encuentren inmediatamente con una solucion y no haga falta hacer ningun movimiento. \n" +
+                "En el peor de los casos seria necesario probar con todas las piezas en todas sus posiciones posibles hasta llegar a una solucion. \n " +
+                "Por otro lado, con los criterios de poda que implementamos si se quieren encontrar 4 soluciones el costo seria muy similar al de encontrar una ya que luego de encontrar la primer solucion las siguientes 3 se encuentran espejando esta con un consto muy bajo que no se compara al de la busqueda de las soluciones.";
+            MessageBox.Show(texto, titulo, MessageBoxButtons.OK);
+
+
+        }
     }
 }
 
