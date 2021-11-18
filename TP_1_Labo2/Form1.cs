@@ -32,8 +32,83 @@ namespace TP_1_Labo2
         {
             
             List<Tablero> soluciones = new List<Tablero>();
+            // seteo la primer solucion ¿mediante una funcion?
 
-            do
+            bool[,] atacadas_= new bool[8, 8];
+               for (int n = 0; n < constantes.TAM; n++)
+            {
+                for (int m = 0; m < constantes.TAM; m++)
+                {
+                    atacadas_[n, m] = constantes.ATACADA;
+             
+                }
+            }
+            List<Pieza> piezas_= new List<Pieza>(); ;
+            int[] Pos = new int[2];
+            Rey rey0= new Rey();
+            Pos[0]=5;
+            Pos[1]=6;
+            rey0.set_pos(Pos);
+            piezas_.Add(rey0);
+             Caballo caballo0= new Caballo();
+            Pos[0]=3;
+            Pos[1]=1;
+            caballo0.set_pos(Pos);
+            piezas_.Add(caballo0);
+            Caballo caballo01= new Caballo();
+            Pos[0]=3;
+            Pos[1]=2;
+            caballo01.set_pos(Pos);
+            piezas_.Add(caballo01);
+             Alfil alfil0= new Alfil();
+            Pos[0]=4;
+            Pos[1]=1;
+            alfil0.set_pos(Pos);
+            piezas_.Add(alfil0);
+            Alfil alfil01= new Alfil();
+            Pos[0]=1;
+            Pos[1]=5;
+            alfil01.set_pos(Pos);
+            piezas_.Add(alfil01);
+            Torre torre0= new Torre();
+            Pos[0]=7;
+            Pos[1]=1;
+           torre0.set_pos(Pos);
+            piezas_.Add(torre0);
+            Torre torre01= new Torre();
+            Pos[0]=0;
+            Pos[1]=4;
+           torre01.set_pos(Pos);
+            piezas_.Add(torre01);
+             Reina reina0= new Reina();
+            Pos[0]=2;
+            Pos[1]=6;
+            reina0.set_pos(Pos);
+            piezas_.Add(reina0);
+
+
+
+            Tablero Solucion_cero = new Tablero(atacadas_, piezas_);
+
+                soluciones.Add(Solucion_cero);
+            if (soluciones.Count() < cant_solucionesUpDown.Value)
+                {
+                    soluciones.Add(Espejar_x(Solucion_cero));
+                }
+                if (soluciones.Count() < cant_solucionesUpDown.Value)
+                {
+                    soluciones.Add(Espejar_y(Solucion_cero));
+                }
+                if (soluciones.Count() < cant_solucionesUpDown.Value)
+                {
+                    soluciones.Add(Espejar_y(Espejar_x(Solucion_cero)));
+                }
+
+               /* Caballo[1,3] primero fila desp columna, Caballo[2,3]
+        alfil[1,4] torre[1,7]
+        torre[4,0], alfil[5,1], reina[6,2]
+        rey[6,5] Tablero(bool[,] atacadas_, List<Pieza> piezas_)*/
+            while (soluciones.Count() < cant_solucionesUpDown.Value)
             {
                 Tablero solucion = new Tablero(true);
                 buscar_solucion(solucion); // la funcion que recibe el tablero y hace todo el random para encontrar una solucion
@@ -69,7 +144,7 @@ namespace TP_1_Labo2
                     if (prueba_Caballo != null)
                         soluciones.Add(prueba_Caballo);
                 }*/
-            } while (soluciones.Count() < cant_solucionesUpDown.Value);
+            } 
 
              Form form_datagrid = new form_datagrid(soluciones);
              form_datagrid.Show();                            

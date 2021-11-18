@@ -15,6 +15,8 @@ namespace TP_1_Labo2
         public bool[,] atacadas = new bool[8, 8]; //que casilleros estan siendo atacados
         public bool[,] tipo_ataque = new bool[8, 8]; //ataque fuerte o leve
         public List<Pieza> piezas = new List<Pieza>(); //listado de piezas
+  
+
        
       //  public List<int[]> Atacadas_Fatalmente = new List<int[]>(); //listado de casillas atacadas fatalmente
 
@@ -41,6 +43,28 @@ namespace TP_1_Labo2
                 }
             }
         }
+
+        // pasando matrices por parametro
+        public Tablero(bool[,] atacadas_, List<Pieza> piezas_)
+        {
+
+              for (int n = 0; n < constantes.TAM; n++)
+            {
+                for (int m = 0; m < constantes.TAM; m++)
+                {
+                    if (n % 2 != 0 && m % 2 != 0 || n % 2 == 0 && m % 2 == 0) // n y m impar o n y m par
+                        colores[n, m] = constantes.BLANCO;
+                    if (n % 2 != 0 && m % 2 == 0 || n % 2 == 0 && m % 2 != 0) //n impar y m par o n par y m impar
+                        colores[n, m] = constantes.NEGRO;
+                }
+            }
+             atacadas=atacadas_;
+             piezas=piezas_;
+
+
+
+        }
+
 
         //constructor que setea las piezas de forma inicial random
         public Tablero(bool setear)
@@ -224,6 +248,8 @@ namespace TP_1_Labo2
             piezas.Add(p); //agrego la pieza a la lista
             p.Atacar(this); //ataca
         }
+
+      
 
         //devuelve una nueva pos random a donde se podria mover la pieza
         public int[] posible_mover(Pieza pieza_mover)
