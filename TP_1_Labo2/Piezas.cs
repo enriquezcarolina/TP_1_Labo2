@@ -20,12 +20,14 @@ namespace TP_1_Labo2
 
         
 
-      /*  public virtual List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
+        /*public virtual void Ataque_Fatal(List<Pieza> Lista_Fichas)
           {
 
-              // pasa por parametro una lista posiciones donde se sabe que hay piezas
+              // pasa por parametro una lista de piezas
               // para fijarme uee  ninguna se entrometa en el camino del ataque  (en caso de que lo haga es un ataque leve)
-        
+             // seteara los ataques fatales ques produce la ficha 
+             // podemos hacer que retorne la lista d elementos que impiden el ataque fatal 
+             // carga la lista ataques fatales de la pieza 
 
         }*/
         public Pieza()
@@ -109,98 +111,106 @@ namespace TP_1_Labo2
                 this.Pos_Atacadas.Add(otra.Pos_Atacadas.ElementAt(i));*/
         }
 
-
+     
           
-          /* public override List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
+         /*  public override void Ataque_Fatal(List<Pieza> Lista_Fichas)
            { 
             
-           
-                  
-            int[] pos_torre= this.Pos;
-            int[] ataque;
-            for(int i =0; i<Pos_Con_Fichas.Count; i++)
+            int[] Pos= this.Pos;
+            int[] Pos_pieza;
+            int[] Pos_ataque_fatal;
+          // primero desde la pos de la torre a la derecha 
+            for (int i = Pos[0]+1; i < 8 ; i++) //ataca toda la fila fijarse si [0] es fila o columna 
             {
-                for (int j = pos_torre[0]; j < 8-pos_torre[0]; j++) //desde la posicion de la torre hasta que encuntre la primer pieza y no se salga del tablero 
-                {// para la derecha
-                    
-                    if(Pos_Con_Fichas.ElementAt(i) == { pos_torre[0], j} )
-                      break;  
-                    ataque[0]= pos_torre[0]; // van a estar en esa filal
-                    ataque[j]= pos_torre[1];
-                    Ataques_Fatales.Add(pos_torre);
-                 }
-                   
+
+                 for (int j=0; j<Lista_Fichas.Count; j++)
+            {
+
+                    Pos_pieza = Lista_Fichas.ElementAt(j).Pos
+                    if(Pos_pieza[0]== i && Pos_pieza[1]=Pos[1])
+                        break;
             }
-               
-          
-             for(int i =0; i<Pos_Con_Fichas.Count; i++)
-            
-                  {
-        
-                for (int j = pos_torre[0]; j >= 0; j--) //desde la posicion de la torre hasta que encuntre la primer pieza y no se salga del tablero 
-                
-                  { // para la izquierda
-                   
-                    if(Pos_Con_Fichas.ElementAt(i) == { pos_torre[0], j} )
-                      break;  
+            }
 
-                    ataque[0]= pos_torre[0]; // van a estar en esa filal
-                    ataque[j]= pos_torre[1];
-                    Ataques_Fatales.Add(pos_torre);
-                    }
+            for(int i= Pos[0]+1;i<Pos_pieza[0];i++)
+            {
+                Pos_ataque_fatal[0]= i;
+                Pos_ataque_fatal[1]= Pos[1];
+                Ataques_Fatales.Add(Pos_ataque_fatal);
+            }
+            // ahora hacemos desde la posicion de la torre a la izquierda
+            for (int i = Pos[0]-1; i > -1 ; i--) //ataca toda la fila fijarse si [0] es fila o columna 
+            {
+
+                 for (int j=0; j<Lista_Fichas.Count; j++)
+            {
+
+                    Pos_pieza = Lista_Fichas.ElementAt(j).Pos
+                    if(Pos_pieza[0]== i && Pos_pieza[1]=Pos[1])
+                        break;
+            }
+            }
+
+            for(int i= Pos[0]-1;i>Pos_pieza[0];i--)
+            {
+                if(i>-1)
+                {
+                    Pos_ataque_fatal[0]= i;
+                    Pos_ataque_fatal[1]= Pos[1];
+                    Ataques_Fatales.Add(Pos_ataque_fatal);
+
                 }
+                
+            }
+            ////////////////////////////////////////////////////////
+            // ahora las columnas
+            for (int i = Pos[1]+1; i < 8 ; i++) //ataca toda la fila fijarse si [0] es fila o columna 
+            {
 
-                 
+                 for (int j=0; j<Lista_Fichas.Count; j++)
+            {
 
-//falta lo mismo para las columnas
-            
+                    Pos_pieza = Lista_Fichas.ElementAt(j).Pos
+                    if(Pos_pieza[1]== i && Pos_pieza[0]=Pos[0])
+                        break;
+            }
+            }
 
-            for(int i =0; i<Pos_Con_Fichas.Count; i++)
-           
-              {  for (int j = pos_torre[1]; j < 8-pos_torre[1]; j++) //desde la posicion de la torre hasta que encuntre la primer pieza y no se salga del tablero 
-    { 
-                    // para la derecha
-                    
-                    if(Pos_Con_Fichas.ElementAt(i) == { pos_torre[1], j} )
-                      break;  
-                    ataque[1]= pos_torre[1]; // van a estar en esa filal
-                    ataque[j]= pos_torre[0];
-                    Ataques_Fatales.Add(pos_torre);
-                } 
-               }
-           
-           
+            for(int i= Pos[1]+1;i<Pos_pieza[1];i++)
+            {
+                Pos_ataque_fatal[1]= i;
+                Pos_ataque_fatal[0]= Pos[0];
+                Ataques_Fatales.Add(Pos_ataque_fatal);
+            }
+            // ahora hacemos desde la posicion de la torre a la izquierda
+            for (int i = Pos[1]-1; i > -1 ; i--) //ataca toda la fila fijarse si [0] es fila o columna 
+            {
 
-          
-             for(int i =0; i<Pos_Con_Fichas.Count; i++)
-{
-       
-                for (int j = pos_torre[0]; j >= 0; j--) //desde la posicion de la torre hasta que encuntre la primer pieza y no se salga del tablero 
-    {
-         // para la izquierda
-                   
-                    if(Pos_Con_Fichas.ElementAt(i) == { pos_torre[0], j} )
-                      break;  
-      ataque[0]= pos_torre[0]; // van a estar en esa filal
-                    ataque[j]= pos_torre[1];
-                   Ataques_Fatales.Add(pos_torre);
+                 for (int j=0; j<Lista_Fichas.Count; j++)
+            {
 
-              
+                    Pos_pieza = Lista_Fichas.ElementAt(j).Pos
+                    if(Pos_pieza[1]== i && Pos_pieza[0]=Pos[0])
+                        break;
+            }
+            }
 
-    }
-                  
+            for(int i= Pos[1]-1;i>Pos_pieza[1];i--)
+            {
+                if(i>-1)
+                {
+                    Pos_ataque_fatal[1]= i;
+                    Pos_ataque_fatal[0]= Pos[0];
+                    Ataques_Fatales.Add(Pos_ataque_fatal);
 
-
-
-}
-               
-                 
-               return ataques_fatales;
-
-        }*/
+                }
+                
+            }
+            // podemos hacer que retorne la lista d elementos que impiden el ataque fatal 
+        }
 
 
-               
+               */
              
 
            
@@ -263,7 +273,7 @@ namespace TP_1_Labo2
         }
 
         
-         /*  public override List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
+         /*  public override List<int[]> Ataque_Fatal(List<int[]> Lista_Fichas)
         {
 
             // pasa por parametro una lista posiciones donde se sabe que hay piezas
@@ -378,7 +388,7 @@ namespace TP_1_Labo2
             contador_atacadas=0;
         }
     /*
-         public override List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
+         public override List<int[]> Ataque_Fatal(List<int[]> Lista_Fichas)
         {
 
             // pasa por parametro una lista posiciones donde se sabe que hay piezas
@@ -479,7 +489,7 @@ namespace TP_1_Labo2
         }
 
         
-        /*   public override List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
+        /*   public override List<int[]> Ataque_Fatal(List<int[]> Lista_Fichas)
         {
 
             // pasa por parametro una lista posiciones donde se sabe que hay piezas
@@ -542,7 +552,7 @@ namespace TP_1_Labo2
         }
 
         /*
-         public override List<int[]> Ataque_Fatal(List<int[]> Pos_Con_Fichas)
+         public override List<int[]> Ataque_Fatal(List<int[]> Lista_Fichas)
          {
              List<int[]> ataques_fatales=0;
 
