@@ -15,7 +15,7 @@ namespace TP_1_Labo2
         public int[] Pos = new int[2];
         public List<int[]> Pos_Atacadas = new List<int[]>(); //listado de casillas atacadas por la pieza
         public List<int[]> Posiciones_Ya_Probadas = new List<int[]>(); // lista con las posiciones que tuvo esta ficha, ya probe y no me funcionaron
-        public List<int[]>  Ataques_Fatales = new List<int[]>();
+        public List<int[]>  Ataques_Fatales = new List<int[]>(64);
         public int contador_atacadas;
 
         
@@ -103,182 +103,68 @@ namespace TP_1_Labo2
 
      
         public override void Ataque_Fatal(List<Pieza> Lista_Fichas)
-        { 
+        {
+            bool piezacsup=false, piezacinf = false, piezafizq = false, piezafder = false;
+            int[] Pos_= new int[2];
             
-            int[] Pos = this.Pos;
-            int[] Pos_pieza = new int[2];
-            Pos_pieza[0]=8;
-            Pos_pieza[1]=8;
-            int[] Pos_ataque_fatal = new int[2];
-            bool hay_pieza = false;
-            // primero desde la pos de la torre a la derecha 
-
-            for (int i = Pos[0]+1; i < 8 ; i++) //ataca toda la fila fijarse si [0] es fila o columna 
+            for(int i = 1; i < constantes.TAM; i++)
             {
-
-                for (int j=0; j<Lista_Fichas.Count; j++)
+               
+                for (int j = 0; j < Lista_Fichas.Count(); j++)
                 {
-                    if (Lista_Fichas.ElementAt(j).Pos[0] == i && Lista_Fichas.ElementAt(j).Pos[1] != Pos[1] && Lista_Fichas.ElementAt(j).Pos[1]<Pos_pieza[1])
+                    if (Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] - i && Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0])
+                        piezacsup = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1])
+                        piezafder = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1])
+                        piezafizq = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] + i && Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0])
+                        piezacinf = true;
+                }
+                if (this.Pos[0] + i < constantes.TAM)
+                {
+                    if (!piezafder)
                     {
-                        Pos_pieza[0] = Lista_Fichas.ElementAt(j).Pos[0];
-                        Pos_pieza[1] = Lista_Fichas.ElementAt(j).Pos[1];
-                        hay_pieza = true;
-                        break;
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0] + i;
+                        Pos_[1] = this.Pos[1];
+                        Ataques_Fatales.Add(Pos_);
                     }
                 }
-            }
-            if (hay_pieza)
-            {
-                for (int i = Pos[0] + 1; i < Pos_pieza[0]; i++)
+                if (this.Pos[0] - i >= 0)
                 {
-                    Pos_ataque_fatal[0] = i;
-                    Pos_ataque_fatal[1] = Pos[1];
-                    Ataques_Fatales.Add(Pos_ataque_fatal);
+                      
+                    if (!piezafizq)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0] - i;
+                        Pos_[1] = this.Pos[1];
+                        Ataques_Fatales.Add(Pos_);
+                    }
                 }
-            }
-            else 
-            {
-                for (int i = Pos[0] + 1; i < 8; i++)
+                if (this.Pos[1] + i < constantes.TAM)
                 {
-                    Pos_ataque_fatal[0] = i;
-                    Pos_ataque_fatal[1] = Pos[1];
-                    Ataques_Fatales.Add(Pos_ataque_fatal);
+                    if (!piezacinf)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0];
+                        Pos_[1] = this.Pos[1] + i;
+                        Ataques_Fatales.Add(Pos_);
+                    }
                 }
-
-            }
-
-            // ahora hacemos desde la posicion de la torre a la izquierda
-            Pos_pieza[0]=-1;
-            Pos_pieza[1]=-1;
-            hay_pieza = false;
-            for (int i = Pos[0]-1; i > -1 ; i--) //ataca toda la fila fijarse si [0] es fila o columna 
-            {
-
-                for (int j=0; j<Lista_Fichas.Count; j++)
+                if (this.Pos[1] - i >= 0)
                 {
-
                     
-                    if (Lista_Fichas.ElementAt(j).Pos[0] == Pos[0] && Lista_Fichas.ElementAt(j).Pos[1] != Pos[1] && Lista_Fichas.ElementAt(j).Pos[1]>Pos_pieza[1])
+                    if (!piezacsup)
                     {
-                        Pos_pieza[0] = Lista_Fichas.ElementAt(j).Pos[0];
-                        Pos_pieza[1] = Lista_Fichas.ElementAt(j).Pos[1];
-                        hay_pieza = true;
-                           break;
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0];
+                        Pos_[1] = this.Pos[1] - i;
+                        Ataques_Fatales.Add(Pos_);
                     }
                 }
-            }
-
-           
-
-            if (hay_pieza)
-            {
-                for (int i = Pos[0] - 1; i > Pos_pieza[0]; i--)
-                {
-                        Pos_ataque_fatal[0] = i;
-                        Pos_ataque_fatal[1] = Pos_pieza[1];
-                        Ataques_Fatales.Add(Pos_ataque_fatal);
-                }
-            }
-            else
-            {
-                for (int i = Pos[0] - 1; i > -1; i--)
-                {
-                        Pos_ataque_fatal[0] = i;
-                        Pos_ataque_fatal[1] = Pos[1];
-                        Ataques_Fatales.Add(Pos_ataque_fatal);
-
-
-                }
 
             }
-
-            ////////////////////////////////////////////////////////
-            // ahora las columnas
-            Pos_pieza[0]=Pos[0];
-            Pos_pieza[1] = Pos[1];
-            hay_pieza = false;
-            for (int i = Pos[1]+1; i < 8 ; i++) //ataca toda la fila fijarse si [0] es fila o columna 
-            {
-
-                 for (int j=0; j<Lista_Fichas.Count; j++)
-                 {
-
-                    
-                    if (Lista_Fichas.ElementAt(j).Pos[0] == Pos[1] && Lista_Fichas.ElementAt(j).Pos[0]<Pos_pieza[0])
-                    {
-                        hay_pieza =true;
-                        Pos_pieza[0] = Lista_Fichas.ElementAt(j).Pos[0];
-                        Pos_pieza[1] = Lista_Fichas.ElementAt(j).Pos[1];
-                        break;
-                    }
-                   }
-            }
-            if (hay_pieza)
-            {
-                for (int i = Pos[1] + 1; i < Pos_pieza[1]; i++)
-                {
-                    Pos_ataque_fatal[1] = i;
-                    Pos_ataque_fatal[0] = Pos[0];
-                    Ataques_Fatales.Add(Pos_ataque_fatal);
-                }
-            }
-            else
-            {
-                for (int i = Pos[1] + 1; i < 8; i++)
-                {
-                    Pos_ataque_fatal[1] = i;
-                    Pos_ataque_fatal[0] = Pos[0];
-                    Ataques_Fatales.Add(Pos_ataque_fatal);
-                }
-            }
-
-            // ahora hacemos desde la posicion de la torre para abajo
-            Pos_pieza[0]=Pos[0];
-            Pos_pieza[1]=Pos[1];
-            hay_pieza = false;
-            for (int i = Pos[1]-1; i > -1 ; i--) //ataca toda la fila fijarse si [0] es fila o columna 
-            {
-
-                 for (int j=0; j<Lista_Fichas.Count; j++)
-                 {
-
-                    Pos_pieza = Lista_Fichas.ElementAt(j).Pos;
-                    if (Pos_pieza[1] == Pos[1])
-                    {
-                        hay_pieza = true;
-                        break;
-                    }
-                 }
-            }
-            if (hay_pieza)
-            {
-                for (int i = Pos[1] - 1; i > Pos_pieza[1]; i--)
-                {
-                    if (i > -1)
-                    {
-                        Pos_ataque_fatal[1] = i;
-                        Pos_ataque_fatal[0] = Pos[0];
-                        Ataques_Fatales.Add(Pos_ataque_fatal);
-
-                    }
-
-                }
-            }
-            else
-            {
-                for (int i = Pos[1] - 1; i >-1; i--)
-                {
-                    if (i > -1)
-                    {
-                        Pos_ataque_fatal[1] = i;
-                        Pos_ataque_fatal[0] = Pos[0];
-                        Ataques_Fatales.Add(Pos_ataque_fatal);
-
-                    }
-
-                }
-            }
-            // podemos hacer que retorne la lista d elementos que impiden el ataque fatal 
         }
            
      
