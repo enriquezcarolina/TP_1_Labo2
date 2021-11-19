@@ -15,12 +15,11 @@ namespace TP_1_Labo2
 
        // private Pieza[,] Solucion = new Pieza[constantes.TAM, constantes.TAM];//matriz de piezas para posicionarlas donde van en la solucion
         private List<Tablero> Soluciones_ = new List<Tablero>(); //se guarda la lista de soluciones
-        private int cont = 1; //contador para ir imprimiendo las soluciones
+        private int cont = 0; //contador para ir imprimiendo las soluciones
 
         public form_datagrid(List<Tablero> soluciones)
         {
             Soluciones_ = soluciones;
-
             InitializeComponent();
             DataGridView.RowCount = constantes.TAM; //grid del tamaño del tablero (8x8)
             DataGridView.ColumnCount = constantes.TAM;
@@ -52,17 +51,19 @@ namespace TP_1_Labo2
         
         private void buttonNext_Click_1(object sender, EventArgs e)
         {
-            if (cont > Soluciones_.Count()) //ver si ya llego a la ultima
+            if (cont+1 >= Soluciones_.Count()) //ver si ya llego a la ultima
             {
                 this.Close();
                 return;
             }
+            cont++;
             next(); //imprimo la solucion             
         }
 
         public void next()
         {
-            textBox1.Text = "Solucion : " + cont ; //que numero de solucion va
+            
+            textBox1.Text = "Solucion : " + (cont+1) ; //que numero de solucion va
           
             for (int i = 0; i < constantes.TAM; i++)
             {
@@ -75,14 +76,53 @@ namespace TP_1_Labo2
             int[] pos;
             for (int i = 0; i < constantes.CANT_PIEZAS; i++)
             {    //voy pieza por pieza(i) en la solucion que estoy(cont-1) y las posiciono en la datagrid
-                pos = Soluciones_[cont-1].piezas[i].Pos;
+                pos = Soluciones_[cont].piezas[i].Pos;
                 if (DataGridView[pos[0], pos[1]].Value != null)
-                    DataGridView[pos[0], pos[1]].Value = DataGridView[pos[0], pos[1]].Value + "/"+ Soluciones_[cont - 1].piezas.ElementAt(i).nombre;
-                else DataGridView[pos[0], pos[1]].Value = Soluciones_[cont - 1].piezas.ElementAt(i).nombre;
+                    DataGridView[pos[0], pos[1]].Value = DataGridView[pos[0], pos[1]].Value + "/"+ Soluciones_[cont].piezas.ElementAt(i).nombre;
+                else DataGridView[pos[0], pos[1]].Value = Soluciones_[cont].piezas.ElementAt(i).nombre;
             }
-            cont++; //paso a la siguiente
+            
         }
 
+        private void Anterior_btn_Click(object sender, EventArgs e)
+        {
+            if(cont-1 < 0) //ver si ya llego a la ultima
+            {
+                return;
+            }
+            cont--;
+            anterior();
+        }
+
+        private void anterior()
+        {
+            textBox1.Text = "Solucion : " + (cont+1); //que numero de solucion va
+
+            for (int i = 0; i < constantes.TAM; i++)
+            {
+                for (int j = 0; j < constantes.TAM; j++)
+                { //reseteo a null para posicionar las de la solucion que quiero mostrar
+                    DataGridView[i, j].Value = null;
+                }
+            }
+
+            int[] pos;
+            for (int i = 0; i < constantes.CANT_PIEZAS; i++)
+            {    //voy pieza por pieza(i) en la solucion que estoy(cont-1) y las posiciono en la datagrid
+                pos = Soluciones_[cont].piezas[i].Pos;
+                if (DataGridView[pos[0], pos[1]].Value != null)
+                    DataGridView[pos[0], pos[1]].Value = DataGridView[pos[0], pos[1]].Value + "/" + Soluciones_[cont].piezas.ElementAt(i).nombre;
+                else DataGridView[pos[0], pos[1]].Value = Soluciones_[cont].piezas.ElementAt(i).nombre;
+            }
+
+        }
+
+        private void Ataques_btn_Click(object sender, EventArgs e)
+        {
+            Form form_ataques = new Ataques_fatales(this, Soluciones_[cont]);
+            form_ataques.Show();
+            this.Hide();
+        }
 
         // IGNORAR
 
@@ -105,5 +145,7 @@ namespace TP_1_Labo2
         private void form_datagrid_FormClosing(object sender, FormClosingEventArgs e)
         {
         }
+
+       
     }
 }

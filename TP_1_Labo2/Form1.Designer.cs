@@ -33,6 +33,7 @@ namespace TP_1_Labo2
             this.cant_solucionesUpDown = new System.Windows.Forms.NumericUpDown();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button_costo = new System.Windows.Forms.Button();
+            this.poda_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cant_solucionesUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +54,7 @@ namespace TP_1_Labo2
             // 
             this.cant_solucionesUpDown.Location = new System.Drawing.Point(377, 135);
             this.cant_solucionesUpDown.Maximum = new decimal(new int[] {
-            10,
+            20,
             0,
             0,
             0});
@@ -76,13 +77,14 @@ namespace TP_1_Labo2
             // 
             this.textBox1.Location = new System.Drawing.Point(125, 135);
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(306, 20);
             this.textBox1.TabIndex = 2;
             this.textBox1.Text = "Cantidad de soluciones:";
             // 
             // button_costo
             // 
-            this.button_costo.Location = new System.Drawing.Point(488, 320);
+            this.button_costo.Location = new System.Drawing.Point(501, 275);
             this.button_costo.Name = "button_costo";
             this.button_costo.Size = new System.Drawing.Size(87, 34);
             this.button_costo.TabIndex = 3;
@@ -90,11 +92,22 @@ namespace TP_1_Labo2
             this.button_costo.UseVisualStyleBackColor = true;
             this.button_costo.Click += new System.EventHandler(this.button_costo_Click);
             // 
+            // poda_btn
+            // 
+            this.poda_btn.Location = new System.Drawing.Point(464, 315);
+            this.poda_btn.Name = "poda_btn";
+            this.poda_btn.Size = new System.Drawing.Size(124, 39);
+            this.poda_btn.TabIndex = 4;
+            this.poda_btn.Text = "Criterios de poda";
+            this.poda_btn.UseVisualStyleBackColor = true;
+            this.poda_btn.Click += new System.EventHandler(this.poda_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.poda_btn);
             this.Controls.Add(this.button_costo);
             this.Controls.Add(this.cant_solucionesUpDown);
             this.Controls.Add(this.button1);
@@ -114,6 +127,7 @@ namespace TP_1_Labo2
         public System.Windows.Forms.NumericUpDown cant_solucionesUpDown;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button_costo;
+        private System.Windows.Forms.Button poda_btn;
     }
 }
 

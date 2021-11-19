@@ -35,7 +35,7 @@ namespace TP_1_Labo2
             // seteo la primer solucion ¿mediante una funcion?
 
             bool[,] atacadas_= new bool[8, 8];
-               for (int n = 0; n < constantes.TAM; n++)
+            for (int n = 0; n < constantes.TAM; n++)
             {
                 for (int m = 0; m < constantes.TAM; m++)
                 {
@@ -50,7 +50,7 @@ namespace TP_1_Labo2
             Pos[1]=6;
             rey0.set_pos(Pos);
             piezas_.Add(rey0);
-             Caballo caballo0= new Caballo();
+            Caballo caballo0= new Caballo();
             Pos[0]=3;
             Pos[1]=1;
             caballo0.set_pos(Pos);
@@ -60,7 +60,7 @@ namespace TP_1_Labo2
             Pos[1]=2;
             caballo01.set_pos(Pos);
             piezas_.Add(caballo01);
-             Alfil alfil0= new Alfil();
+            Alfil alfil0= new Alfil();
             Pos[0]=4;
             Pos[1]=1;
             alfil0.set_pos(Pos);
@@ -73,81 +73,81 @@ namespace TP_1_Labo2
             Torre torre0= new Torre();
             Pos[0]=7;
             Pos[1]=1;
-           torre0.set_pos(Pos);
+            torre0.set_pos(Pos);
             piezas_.Add(torre0);
             Torre torre01= new Torre();
             Pos[0]=0;
             Pos[1]=4;
-           torre01.set_pos(Pos);
+            torre01.set_pos(Pos);
             piezas_.Add(torre01);
-             Reina reina0= new Reina();
+            Reina reina0= new Reina();
             Pos[0]=2;
             Pos[1]=6;
             reina0.set_pos(Pos);
             piezas_.Add(reina0);
 
-
-
             Tablero Solucion_cero = new Tablero(atacadas_, piezas_);
 
-                soluciones.Add(Solucion_cero);
+            soluciones.Add(Solucion_cero);
             if (soluciones.Count() < cant_solucionesUpDown.Value)
-                {
+            {
                     soluciones.Add(Espejar_x(Solucion_cero));
-                }
-                if (soluciones.Count() < cant_solucionesUpDown.Value)
-                {
+            }
+            if (soluciones.Count() < cant_solucionesUpDown.Value)
+            {
                     soluciones.Add(Espejar_y(Solucion_cero));
-                }
-                if (soluciones.Count() < cant_solucionesUpDown.Value)
-                {
+            }
+            if (soluciones.Count() < cant_solucionesUpDown.Value)
+            {
                     soluciones.Add(Espejar_y(Espejar_x(Solucion_cero)));
-                }
+            }
+            if (soluciones.Count() < cant_solucionesUpDown.Value)
+            {
+                soluciones.Add(Espejar_diagonal1(Solucion_cero));
+            }
+            
+            if (soluciones.Count() < cant_solucionesUpDown.Value)
+            {
+                soluciones.Add(Espejar_diagonal2(Solucion_cero));
+            }
 
-               /* Caballo[1,3] primero fila desp columna, Caballo[2,3]
-        alfil[1,4] torre[1,7]
-        torre[4,0], alfil[5,1], reina[6,2]
-        rey[6,5] Tablero(bool[,] atacadas_, List<Pieza> piezas_)*/
             while (soluciones.Count() < cant_solucionesUpDown.Value)
             {
                 Tablero solucion = new Tablero(true);
                 buscar_solucion(solucion); // la funcion que recibe el tablero y hace todo el random para encontrar una solucion
-
+                
                 if (!soluciones.Contains(solucion) && !Solucion_Ya_Creada(soluciones, solucion))//chequear que no este ya en la lista para que no se repitan
                 {
                     soluciones.Add(solucion);
-                }
+                    
+                    //si encuentra una solucion que agregue la solucion espejada para reducir el tiempo
+                    if (soluciones.Count() < cant_solucionesUpDown.Value)
+                    {
+                        soluciones.Add(Espejar_x(solucion));
+                    }
+                    if (soluciones.Count() < cant_solucionesUpDown.Value)
+                    {
+                        soluciones.Add(Espejar_y(solucion));
+                    }
+                    if (soluciones.Count() < cant_solucionesUpDown.Value)
+                    {
+                        soluciones.Add(Espejar_y(Espejar_x(solucion)));
+                    }
+                    if (soluciones.Count() < cant_solucionesUpDown.Value)
+                    {
+                        soluciones.Add(Espejar_diagonal1(solucion));
+                    }
+                    if (soluciones.Count() < cant_solucionesUpDown.Value)
+                    {
+                        soluciones.Add(Espejar_diagonal2(solucion));
+                    }
 
-                //si encuentra una solucion que agregue la solucion espejada para reducir el tiempo
-                if (soluciones.Count() < cant_solucionesUpDown.Value)
-                {
-                    soluciones.Add(Espejar_x(solucion));
-                }
-                if (soluciones.Count() < cant_solucionesUpDown.Value)
-                {
-                    soluciones.Add(Espejar_y(solucion));
-                }
-                if (soluciones.Count() < cant_solucionesUpDown.Value)
-                {
-                    soluciones.Add(Espejar_y(Espejar_x(solucion)));
-                }
+                }           
 
-                /*if (soluciones.Count() < cant_solucionesUpDown.Value)
-                {
-                    Tablero prueba_Alfil = solucion.Intercambio(constantes.ALFIL);
-                    if (prueba_Alfil != null) // dos tableros de prueba pq quiero probar cambiando el alfil y el caballo con la reina pero no quiero alterar cuando hago cada cosa
-                        soluciones.Add(prueba_Alfil);
-                }
-                if (soluciones.Count() < cant_solucionesUpDown.Value)
-                {
-                    Tablero prueba_Caballo = solucion.Intercambio(constantes.CABALLO);
-                    if (prueba_Caballo != null)
-                        soluciones.Add(prueba_Caballo);
-                }*/
-            } 
-
-             Form form_datagrid = new form_datagrid(soluciones);
-             form_datagrid.Show();                            
+            }
+            
+            Form form_datagrid = new form_datagrid(soluciones);
+            form_datagrid.Show();                            
             
         }
 
@@ -158,24 +158,14 @@ namespace TP_1_Labo2
             do
             {
                 pieza_mover = tablero.pieza_rnd(); //elijo una pieza aleatoria
-
-                
-                
-                   nueva_pos = tablero.posible_mover(pieza_mover); //devuelve una pos random donde podria moverse la pieza
-                 // que siga buscando randoms si esta en la lista de ya probada
-
-                //pieza_mover.bool_pos_ya_probada(nueva_pos)
-                // atacadas_por_ficha(pieza_mover, nueva_pos)== true
-               
+                nueva_pos = tablero.posible_mover(pieza_mover); //devuelve una pos random donde podria moverse la pieza
+                       
                 if (cant_atacadas(tablero, pieza_mover, pieza_mover.Pos) <= cant_atacadas(tablero, pieza_mover, nueva_pos))
                 { //si en la nueva posicion quedan menos casillas sin atacar cambio la posicion
                     tablero.mover(pieza_mover, nueva_pos);                 
-                }
-                
-                pieza_mover.set_pos_ya_probada(nueva_pos);                
+                }                
 
             } while (!tablero.atacadas_todas());
-
 
 
         }
@@ -366,16 +356,58 @@ namespace TP_1_Labo2
             return espejado;
         }
 
+        public Tablero Espejar_diagonal1(Tablero original)
+        {
+            Tablero espejado = new Tablero(original);
+            for (int i = 0; i < espejado.piezas.Count; i++)
+            {
+                int temp = 0;
+                temp = espejado.piezas.ElementAt(i).Pos[0];
+                espejado.piezas.ElementAt(i).Pos[0] = espejado.piezas.ElementAt(i).Pos[1];
+                espejado.piezas.ElementAt(i).Pos[1] = temp;
+
+            }
+
+            return espejado;
+        }
+
+        public Tablero Espejar_diagonal2(Tablero original)
+        {
+            Tablero espejado = new Tablero(original);
+            for (int i = 0; i < espejado.piezas.Count; i++)
+            {
+                int temp0 = espejado.piezas.ElementAt(i).Pos[0];
+                int temp1 = espejado.piezas.ElementAt(i).Pos[1];
+                 espejado.piezas.ElementAt(i).Pos[0] = 7-temp1;
+                espejado.piezas.ElementAt(i).Pos[1] = 7 - temp0;
+
+            }
+
+            return espejado;
+        }
+
         private void button_costo_Click(object sender, EventArgs e)
         {
             string titulo = "COSTO DEL ALGORITMO";
-            string texto = "Además de depender claramente de  de la cantidad de soluciones que se quieran obtener, el costo del argoritmo depende directamente del orden en que se posicionan las piezas aleatoriamente al comenzar el programa. " +
-                "\n El mejor casos seria que al posicionarse las piezas se encuentren inmediatamente con una solucion y no haga falta hacer ningun movimiento. \n" +
+            string texto = "Además de depender claramente de  de la cantidad de soluciones que se quieran obtener, el tamaño de la entrada, el costo del argoritmo depende directamente del orden en que se posicionan las piezas aleatoriamente al comenzar el programa. " +
+                "\n El mejor caso seria que al posicionarse las piezas se encuentre inmediatamente con una solucion y no haga falta hacer ningun movimiento. \n" +
+                "\n En ese caso la cota inferior seria una función constante ya que siempre se van a ejecutar la misma cantidad de instrucciones T(n) = c.1\n"+
                 "En el peor de los casos seria necesario probar con todas las piezas en todas sus posiciones posibles hasta llegar a una solucion. \n " +
                 "Por otro lado, con los criterios de poda que implementamos si se quieren encontrar 4 soluciones el costo seria muy similar al de encontrar una ya que luego de encontrar la primer solucion las siguientes 3 se encuentran espejando esta con un consto muy bajo que no se compara al de la busqueda de las soluciones.";
             MessageBox.Show(texto, titulo, MessageBoxButtons.OK);
 
 
+        }
+
+        private void poda_btn_Click(object sender, EventArgs e)
+        {
+            string titulo = "CRITERIOS DE PODA";
+            string texto = "Los criterios de poda que aplicamos son los siguientes: \n" +
+                "- Mantener algunas piezas en areas determinadas del tablero donde es mas posible que generen una solucion.\n" +
+                "- Limitamos a las torres a puntas opuestas para que cubran todo el borde externo del tablero.\n" +
+                "- Pusimos en una lista las posiciones mas \n " +
+                "- ";
+            MessageBox.Show(texto, titulo, MessageBoxButtons.OK);
         }
     }
 }

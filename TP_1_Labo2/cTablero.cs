@@ -370,67 +370,15 @@ namespace TP_1_Labo2
             }      
 
             return; 
-        }
+        }  
 
-        public Tablero Intercambio(string Alfil_Caballo) // prueba si encuentro solucion intercambiando las piezas puede ser un alfil o un caballo (criterio de poda)
-        {
-            int Caballo_Alfil = -1;
-            int Reina_ = -1;
-            Tablero t_prueba = new Tablero(this);
-
-            int[] pos_reina = new int[2];
-            int[] pos_alfil_caballo = new int[2];
-            for (int j = 0; j < piezas.Count; j++)
-            {
-                if (Alfil_Caballo == constantes.CABALLO && t_prueba.piezas.ElementAt(j) is Caballo && Caballo_Alfil == -1)
-                    Caballo_Alfil = j; // guardamos el indice de la pieza que buscamos y que se encuentra en la lista
-                if (Alfil_Caballo == constantes.ALFIL && t_prueba.piezas.ElementAt(j) is Alfil && Caballo_Alfil == -1)
-                    Caballo_Alfil = j;
-                if (t_prueba.piezas.ElementAt(j) is Reina)
-                    Reina_ = j;
-            }
-
-            pos_reina[0] = t_prueba.piezas.ElementAt(Reina_).Pos[0];
-            pos_reina[1] = t_prueba.piezas.ElementAt(Reina_).Pos[1];
-            pos_alfil_caballo[0] = t_prueba.piezas.ElementAt(Caballo_Alfil).Pos[0];
-            pos_alfil_caballo[1] = t_prueba.piezas.ElementAt(Caballo_Alfil).Pos[1];
-
-            t_prueba.mover(t_prueba.piezas.ElementAt(Reina_), pos_alfil_caballo);
-            t_prueba.mover(t_prueba.piezas.ElementAt(Caballo_Alfil), pos_reina);
-            
-            if (atacadas_todas() == true)
-                return t_prueba;
-
-            else
-                return null;
-        }
-
-       /* public void Ataques_Fatales() // añade en una lista las casillas que poseen ataques letales
+       public void Ataques_Fatales() // añade en una lista las casillas que poseen ataques letales
         {
 
-           List<int[]> Pos_Con_Fichas = new List<int[]>(); // guardare las posiciones en donde se con seguridad que hay una ficha
-           for (int i=0; i<piezas.Count;i++)
-           {
-                Pos_Con_Fichas.Add(piezas.ElementAt(i).Pos);
-           }
-
-           for (int i=0; i<piezas.Count;i++)
-           {
-             //  Atacadas_Fatalmente.Add (piezas.ElementAt(i).Ataque_Fatal(Pos_Con_Fichas));//s agrego a la lista de ataadas fatalemte
-           }          
-
-          // verificar que me elimine los repetidos
-           for(int j=0; j<Atacadas_Fatalmente.Count;j++)
+            for (int i = 0; i < piezas.Count(); i++)
             {
-                for(int i=0; i<Atacadas_Fatalmente.Count;i++)
-                {
-
-                    if(Atacadas_Fatalmente.ElementAt(i)==Atacadas_Fatalmente.ElementAt(j))
-                        Atacadas_Fatalmente.RemoveAt(j);
-                }
-
-
+                piezas.ElementAt(i).Ataque_Fatal(piezas);
             }
-        }*/
+        }
     }
 }
