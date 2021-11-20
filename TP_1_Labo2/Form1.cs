@@ -32,84 +32,9 @@ namespace TP_1_Labo2
         {
             
             List<Tablero> soluciones = new List<Tablero>();
-            // seteo la primer solucion ¿mediante una funcion?
-
-            bool[,] atacadas_= new bool[8, 8];
-            for (int n = 0; n < constantes.TAM; n++)
-            {
-                for (int m = 0; m < constantes.TAM; m++)
-                {
-                    atacadas_[n, m] = constantes.ATACADA;
-             
-                }
-            }
-            List<Pieza> piezas_= new List<Pieza>(); ;
-            int[] Pos = new int[2];
-            Rey rey0= new Rey();
-            Pos[0]=5;
-            Pos[1]=6;
-            rey0.set_pos(Pos);
-            piezas_.Add(rey0);
-            Caballo caballo0= new Caballo();
-            Pos[0]=3;
-            Pos[1]=1;
-            caballo0.set_pos(Pos);
-            piezas_.Add(caballo0);
-            Caballo caballo01= new Caballo();
-            Pos[0]=3;
-            Pos[1]=2;
-            caballo01.set_pos(Pos);
-            piezas_.Add(caballo01);
-            Alfil alfil0= new Alfil();
-            Pos[0]=4;
-            Pos[1]=1;
-            alfil0.set_pos(Pos);
-            piezas_.Add(alfil0);
-            Alfil alfil01= new Alfil();
-            Pos[0]=1;
-            Pos[1]=5;
-            alfil01.set_pos(Pos);
-            piezas_.Add(alfil01);
-            Torre torre0= new Torre();
-            Pos[0]=7;
-            Pos[1]=1;
-            torre0.set_pos(Pos);
-            piezas_.Add(torre0);
-            Torre torre01= new Torre();
-            Pos[0]=0;
-            Pos[1]=4;
-            torre01.set_pos(Pos);
-            piezas_.Add(torre01);
-            Reina reina0= new Reina();
-            Pos[0]=2;
-            Pos[1]=6;
-            reina0.set_pos(Pos);
-            piezas_.Add(reina0);
-
-            Tablero Solucion_cero = new Tablero(atacadas_, piezas_);
-
-            soluciones.Add(Solucion_cero);
-            if (soluciones.Count() < cant_solucionesUpDown.Value)
-            {
-                    soluciones.Add(Espejar_x(Solucion_cero));
-            }
-            if (soluciones.Count() < cant_solucionesUpDown.Value)
-            {
-                    soluciones.Add(Espejar_y(Solucion_cero));
-            }
-            if (soluciones.Count() < cant_solucionesUpDown.Value)
-            {
-                    soluciones.Add(Espejar_y(Espejar_x(Solucion_cero)));
-            }
-            if (soluciones.Count() < cant_solucionesUpDown.Value)
-            {
-                soluciones.Add(Espejar_diagonal1(Solucion_cero));
-            }
             
-            if (soluciones.Count() < cant_solucionesUpDown.Value)
-            {
-                soluciones.Add(Espejar_diagonal2(Solucion_cero));
-            }
+            solucion_inicial(soluciones); // seteo la primer solucion
+
 
             while (soluciones.Count() < cant_solucionesUpDown.Value)
             {
@@ -386,6 +311,87 @@ namespace TP_1_Labo2
             return espejado;
         }
 
+        private void solucion_inicial(List<Tablero> soluciones)
+        {
+
+            bool[,] atacadas_ = new bool[8, 8];
+            for (int n = 0; n < constantes.TAM; n++)
+            {
+                for (int m = 0; m < constantes.TAM; m++)
+                {
+                    atacadas_[n, m] = constantes.ATACADA;
+
+                }
+            }
+            List<Pieza> piezas_ = new List<Pieza>(); ;
+            int[] Pos = new int[2];
+            Rey rey0 = new Rey();
+            Pos[0] = 5;
+            Pos[1] = 6;
+            rey0.set_pos(Pos);
+            piezas_.Add(rey0);
+            Caballo caballo0 = new Caballo();
+            Pos[0] = 3;
+            Pos[1] = 1;
+            caballo0.set_pos(Pos);
+            piezas_.Add(caballo0);
+            Caballo caballo01 = new Caballo();
+            Pos[0] = 3;
+            Pos[1] = 2;
+            caballo01.set_pos(Pos);
+            piezas_.Add(caballo01);
+            Alfil alfil0 = new Alfil();
+            Pos[0] = 4;
+            Pos[1] = 1;
+            alfil0.set_pos(Pos);
+            piezas_.Add(alfil0);
+            Alfil alfil01 = new Alfil();
+            Pos[0] = 1;
+            Pos[1] = 5;
+            alfil01.set_pos(Pos);
+            piezas_.Add(alfil01);
+            Torre torre0 = new Torre();
+            Pos[0] = 7;
+            Pos[1] = 1;
+            torre0.set_pos(Pos);
+            piezas_.Add(torre0);
+            Torre torre01 = new Torre();
+            Pos[0] = 0;
+            Pos[1] = 4;
+            torre01.set_pos(Pos);
+            piezas_.Add(torre01);
+            Reina reina0 = new Reina();
+            Pos[0] = 2;
+            Pos[1] = 6;
+            reina0.set_pos(Pos);
+            piezas_.Add(reina0);
+
+            Tablero Solucion_cero = new Tablero(atacadas_, piezas_);
+
+            soluciones.Add(Solucion_cero);
+
+            if (soluciones.Count() < cant_solucionesUpDown.Value)
+            {
+                soluciones.Add(Espejar_x(Solucion_cero));
+            }
+            if (soluciones.Count() < cant_solucionesUpDown.Value)
+            {
+                soluciones.Add(Espejar_y(Solucion_cero));
+            }
+            if (soluciones.Count() < cant_solucionesUpDown.Value)
+            {
+                soluciones.Add(Espejar_y(Espejar_x(Solucion_cero)));
+            }
+            if (soluciones.Count() < cant_solucionesUpDown.Value)
+            {
+                soluciones.Add(Espejar_diagonal1(Solucion_cero));
+            }
+            if (soluciones.Count() < cant_solucionesUpDown.Value)
+            {
+                soluciones.Add(Espejar_diagonal2(Solucion_cero));
+            }
+        }
+
         private void button_costo_Click(object sender, EventArgs e)
         {
             string titulo = "COSTO DEL ALGORITMO";
@@ -405,6 +411,7 @@ namespace TP_1_Labo2
             string texto = "Los criterios de poda que aplicamos son los siguientes: \n" +
                 "\n- Mantener algunas piezas en areas determinadas del tablero donde es mas posible que generen una solucion.\n" +
                 "\n- Limitamos a las torres a puntas opuestas para que cubran todo el borde externo del tablero.\n" +
+                "\n- Implementamos que el programa inicie con una solución conocida.\n" +
                 "\n- Utilizando la sumetría del tablero, una vez que encuentra una solucion con el método de intercambio se refleja el tablero encontrado en varias direcciones, que se hace muy rapido, para reducir el tiempo del programa.\n " +
                 "\n- Los ataques fatales se calculan y se muestran solo si se quiere, apretando el boton 'ataques fatales', una vez encontradas todas las soluciones para no agregarle tiempo en el momento que busca las soluciones";
             MessageBox.Show(texto, titulo, MessageBoxButtons.OK);
