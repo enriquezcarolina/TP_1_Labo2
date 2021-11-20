@@ -389,11 +389,11 @@ namespace TP_1_Labo2
         private void button_costo_Click(object sender, EventArgs e)
         {
             string titulo = "COSTO DEL ALGORITMO";
-            string texto = "Además de depender claramente de  de la cantidad de soluciones que se quieran obtener, el tamaño de la entrada, el costo del argoritmo depende directamente del orden en que se posicionan las piezas aleatoriamente al comenzar el programa. " +
+            string texto = "Además de depender claramente de  de la cantidad de soluciones que se quieran obtener, el tamaño de la entrada, el costo del argoritmo depende directamente del orden en que se posicionan las piezas aleatoriamente al comenzar el programa." +
                 "\n El mejor caso seria que al posicionarse las piezas se encuentre inmediatamente con una solucion y no haga falta hacer ningun movimiento. \n" +
-                "\n En ese caso la cota inferior seria una función constante ya que siempre se van a ejecutar la misma cantidad de instrucciones T(n) = c.1\n"+
+                "En ese caso la cota inferior seria una función constante ya que siempre se van a ejecutar la misma cantidad de instrucciones T(n) = c.1\n"+
                 "En el peor de los casos seria necesario probar con todas las piezas en todas sus posiciones posibles hasta llegar a una solucion. \n " +
-                "Por otro lado, con los criterios de poda que implementamos si se quieren encontrar 4 soluciones el costo seria muy similar al de encontrar una ya que luego de encontrar la primer solucion las siguientes 3 se encuentran espejando esta con un consto muy bajo que no se compara al de la busqueda de las soluciones.";
+                "\nPor otro lado, con los criterios de poda que implementamos si se quieren encontrar 4 soluciones el costo seria muy similar al de encontrar una ya que luego de encontrar la primer solucion las siguientes 3 se encuentran espejando esta con un consto muy bajo que no se compara al de la busqueda de las soluciones.";
             MessageBox.Show(texto, titulo, MessageBoxButtons.OK);
 
 
@@ -403,10 +403,10 @@ namespace TP_1_Labo2
         {
             string titulo = "CRITERIOS DE PODA";
             string texto = "Los criterios de poda que aplicamos son los siguientes: \n" +
-                "- Mantener algunas piezas en areas determinadas del tablero donde es mas posible que generen una solucion.\n" +
-                "- Limitamos a las torres a puntas opuestas para que cubran todo el borde externo del tablero.\n" +
-                "- Pusimos en una lista las posiciones mas \n " +
-                "- ";
+                "\n- Mantener algunas piezas en areas determinadas del tablero donde es mas posible que generen una solucion.\n" +
+                "\n- Limitamos a las torres a puntas opuestas para que cubran todo el borde externo del tablero.\n" +
+                "\n- Utilizando la sumetría del tablero, una vez que encuentra una solucion con el método de intercambio se refleja el tablero encontrado en varias direcciones, que se hace muy rapido, para reducir el tiempo del programa.\n " +
+                "\n- Los ataques fatales se calculan y se muestran solo si se quiere, apretando el boton 'ataques fatales', una vez encontradas todas las soluciones para no agregarle tiempo en el momento que busca las soluciones";
             MessageBox.Show(texto, titulo, MessageBoxButtons.OK);
         }
 
