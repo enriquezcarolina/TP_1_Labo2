@@ -60,7 +60,6 @@ namespace TP_1_Labo2
                     pos[0] = tablero.piezas.ElementAt(i).Ataques_Fatales.ElementAt(j)[0];
                     pos[1] = tablero.piezas.ElementAt(i).Ataques_Fatales.ElementAt(j)[1];
                     DataGrid_Ataques[pos[0], pos[1]].Style.BackColor = Color.Orange;
-                    DataGrid_Ataques[pos[0], pos[1]].Value = "f";
 
                 }
                 

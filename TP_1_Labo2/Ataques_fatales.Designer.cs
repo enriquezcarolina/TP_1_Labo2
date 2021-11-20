@@ -29,8 +29,8 @@ namespace TP_1_Labo2
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGrid_Ataques = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -43,9 +43,9 @@ namespace TP_1_Labo2
             this.DataGrid_Ataques.AllowUserToDeleteRows = false;
             this.DataGrid_Ataques.AllowUserToResizeColumns = false;
             this.DataGrid_Ataques.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGrid_Ataques.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGrid_Ataques.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DataGrid_Ataques.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGrid_Ataques.ColumnHeadersVisible = false;
             this.DataGrid_Ataques.Enabled = false;
@@ -54,14 +54,14 @@ namespace TP_1_Labo2
             this.DataGrid_Ataques.MultiSelect = false;
             this.DataGrid_Ataques.Name = "DataGrid_Ataques";
             this.DataGrid_Ataques.ReadOnly = true;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DataGrid_Ataques.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DataGrid_Ataques.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DataGrid_Ataques.RowHeadersVisible = false;
             this.DataGrid_Ataques.RowTemplate.Height = 50;
             this.DataGrid_Ataques.RowTemplate.ReadOnly = true;
@@ -82,13 +82,13 @@ namespace TP_1_Labo2
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(457, 87);
+            this.textBox1.Location = new System.Drawing.Point(457, 85);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(119, 42);
+            this.textBox1.Size = new System.Drawing.Size(119, 48);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "En naranja se muestran los ataques fatales";
+            this.textBox1.Text = "En naranja se muestran las posiciones atacadas fatalmente";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Ataques_fatales

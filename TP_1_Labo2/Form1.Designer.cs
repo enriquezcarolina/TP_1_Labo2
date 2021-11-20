@@ -34,6 +34,9 @@ namespace TP_1_Labo2
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button_costo = new System.Windows.Forms.Button();
             this.poda_btn = new System.Windows.Forms.Button();
+            this.btn_10 = new System.Windows.Forms.Button();
+            this.btn_5 = new System.Windows.Forms.Button();
+            this.btn_1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.cant_solucionesUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,7 +44,7 @@ namespace TP_1_Labo2
             // 
             this.button1.AccessibleName = "";
             this.button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.button1.Location = new System.Drawing.Point(210, 228);
+            this.button1.Location = new System.Drawing.Point(210, 211);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(174, 49);
@@ -52,9 +55,9 @@ namespace TP_1_Labo2
             // 
             // cant_solucionesUpDown
             // 
-            this.cant_solucionesUpDown.Location = new System.Drawing.Point(377, 135);
+            this.cant_solucionesUpDown.Location = new System.Drawing.Point(399, 91);
             this.cant_solucionesUpDown.Maximum = new decimal(new int[] {
-            20,
+            10,
             0,
             0,
             0});
@@ -75,7 +78,7 @@ namespace TP_1_Labo2
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(125, 135);
+            this.textBox1.Location = new System.Drawing.Point(147, 91);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(306, 20);
@@ -102,11 +105,44 @@ namespace TP_1_Labo2
             this.poda_btn.UseVisualStyleBackColor = true;
             this.poda_btn.Click += new System.EventHandler(this.poda_btn_Click);
             // 
+            // btn_10
+            // 
+            this.btn_10.Location = new System.Drawing.Point(210, 148);
+            this.btn_10.Name = "btn_10";
+            this.btn_10.Size = new System.Drawing.Size(38, 23);
+            this.btn_10.TabIndex = 5;
+            this.btn_10.Text = "10";
+            this.btn_10.UseVisualStyleBackColor = true;
+            this.btn_10.Click += new System.EventHandler(this.btn_10_Click);
+            // 
+            // btn_5
+            // 
+            this.btn_5.Location = new System.Drawing.Point(277, 149);
+            this.btn_5.Name = "btn_5";
+            this.btn_5.Size = new System.Drawing.Size(39, 24);
+            this.btn_5.TabIndex = 6;
+            this.btn_5.Text = "5";
+            this.btn_5.UseVisualStyleBackColor = true;
+            this.btn_5.Click += new System.EventHandler(this.btn_5_Click);
+            // 
+            // btn_1
+            // 
+            this.btn_1.Location = new System.Drawing.Point(345, 149);
+            this.btn_1.Name = "btn_1";
+            this.btn_1.Size = new System.Drawing.Size(39, 23);
+            this.btn_1.TabIndex = 7;
+            this.btn_1.Text = "1";
+            this.btn_1.UseVisualStyleBackColor = true;
+            this.btn_1.Click += new System.EventHandler(this.btn_1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 366);
+            this.Controls.Add(this.btn_1);
+            this.Controls.Add(this.btn_5);
+            this.Controls.Add(this.btn_10);
             this.Controls.Add(this.poda_btn);
             this.Controls.Add(this.button_costo);
             this.Controls.Add(this.cant_solucionesUpDown);
@@ -128,6 +164,9 @@ namespace TP_1_Labo2
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button_costo;
         private System.Windows.Forms.Button poda_btn;
+        private System.Windows.Forms.Button btn_10;
+        private System.Windows.Forms.Button btn_5;
+        private System.Windows.Forms.Button btn_1;
     }
 }
 

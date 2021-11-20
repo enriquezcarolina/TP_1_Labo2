@@ -409,6 +409,21 @@ namespace TP_1_Labo2
                 "- ";
             MessageBox.Show(texto, titulo, MessageBoxButtons.OK);
         }
+
+        private void btn_1_Click(object sender, EventArgs e)
+        {
+            cant_solucionesUpDown.Value = 1;
+        }
+
+        private void btn_5_Click(object sender, EventArgs e)
+        {
+            cant_solucionesUpDown.Value = 5;
+        }
+
+        private void btn_10_Click(object sender, EventArgs e)
+        {
+            cant_solucionesUpDown.Value = 10;
+        }
     }
 }
 

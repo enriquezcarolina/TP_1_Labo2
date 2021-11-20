@@ -235,49 +235,53 @@ namespace TP_1_Labo2
                 Ataques_Fatales.Add(auxpos);
             }
 
-            if (Pos[0] + 2 < constantes.TAM && Pos[1] - 1 > 0)
+            if (Pos[0] + 2 < constantes.TAM && Pos[1] - 1 >= 0)
             {
-               
+                auxpos = new int[2];
                 auxpos[0] = Pos[0] + 2;
                 auxpos[1] = Pos[1] - 1;
                 Ataques_Fatales.Add(auxpos);
             }
 
-            if (Pos[0] - 2 > 0 && Pos[1] + 1 < constantes.TAM)
+            if (Pos[0] - 2 >= 0 && Pos[1] + 1 < constantes.TAM)
             {
-  
+                auxpos = new int[2];
                 auxpos[0] = Pos[0] - 2;
                 auxpos[1] = Pos[1] + 1;
                 Ataques_Fatales.Add(auxpos);
             }
 
-            if (Pos[0] - 2 > 0 && Pos[1] - 1 > 0)
+            if (Pos[0] - 2 >= 0 && Pos[1] - 1 > 0)
             {
+                auxpos = new int[2];
                 auxpos[0] = Pos[0] - 2;
                 auxpos[1] = Pos[1] - 1;
                 Ataques_Fatales.Add(auxpos);
             }
             if (Pos[0] + 1 < constantes.TAM && Pos[1] + 2 < constantes.TAM)
             {
+                auxpos = new int[2];
                 auxpos[0] = Pos[0] + 1;
                 auxpos[1] = Pos[1] + 2;
                 Ataques_Fatales.Add(auxpos);
             }
-            if (Pos[0] - 1 > 0 && Pos[1] + 2 < constantes.TAM)
+            if (Pos[0] - 1 >= 0 && Pos[1] + 2 < constantes.TAM)
             {
+                auxpos = new int[2];
                 auxpos[0] = Pos[0] - 1;
                 auxpos[1] = Pos[1] + 2;
                 Ataques_Fatales.Add(auxpos);
             }
-            if (Pos[0] + 1 < constantes.TAM && Pos[1] - 2 > 0)
+            if (Pos[0] + 1 < constantes.TAM && Pos[1] - 2 >= 0)
             {
-             
+                auxpos = new int[2];
                 auxpos[0] = Pos[0] + 1;
                 auxpos[1] = Pos[1] - 2;
                 Ataques_Fatales.Add(auxpos);
             }
-            if (Pos[0] - 1 > 0 && Pos[1] - 2 > 0)
+            if (Pos[0] - 1 >= 0 && Pos[1] - 2 >= 0)
             {
+                auxpos = new int[2];
                 auxpos[0] = Pos[0] - 1;
                 auxpos[1] = Pos[1] - 2;
                 Ataques_Fatales.Add(auxpos);
@@ -289,74 +293,44 @@ namespace TP_1_Labo2
          }
         public override void Atacar (Tablero tablero)
         {
-            contador_atacadas=0;
             int[] auxpos = new int[2];
   
             if(Pos[0] + 2 < constantes.TAM && Pos[1] + 1 < constantes.TAM )
             {
                 tablero.atacadas[Pos[0] + 2, Pos[1] + 1] = constantes.ATACADA;
-                contador_atacadas= contador_atacadas+1;
-                auxpos[0]=Pos[0] + 2;
-                auxpos[1]=Pos[1] + 1;
-                Ataques_Fatales.Add(auxpos);
-             }
+            }
 
             if (Pos[0] + 2 < constantes.TAM && Pos[1] - 1 > 0)
             { 
                 tablero.atacadas[Pos[0] + 2, Pos[1] - 1] = constantes.ATACADA;
-                contador_atacadas= contador_atacadas+1;
-                auxpos[0]=Pos[0] + 2;
-                auxpos[1]=Pos[1] - 1;
-                Ataques_Fatales.Add(auxpos);
+
             }
             
             if (Pos[0] - 2 >0 && Pos[1] + 1 < constantes.TAM)
-            {    tablero.atacadas[Pos[0] - 2, Pos[1] + 1] = constantes.ATACADA;
-                contador_atacadas= contador_atacadas+1;
-                auxpos[0]=Pos[0] - 2;
-                auxpos[1]=Pos[1] + 1;
-                Ataques_Fatales.Add(auxpos);
+            {    
+                tablero.atacadas[Pos[0] - 2, Pos[1] + 1] = constantes.ATACADA;
+
             }            
            
             if(Pos[0] - 2 >0 && Pos[1] - 1 >0)
             {
                 tablero.atacadas[Pos[0] - 2, Pos[1] - 1] = constantes.ATACADA;
-                contador_atacadas= contador_atacadas+1;
-                auxpos[0]=Pos[0] - 2;
-                auxpos[1]=Pos[1] - 1;
-                Ataques_Fatales.Add(auxpos);
             }
             if (Pos[0] + 1 < constantes.TAM && Pos[1] + 2 < constantes.TAM)
             {   
                 tablero.atacadas[Pos[0] + 1, Pos[1] + 2] = constantes.ATACADA;
-                contador_atacadas= contador_atacadas+1;
-                auxpos[0]=Pos[0] + 1;
-                auxpos[1]=Pos[1] + 2;
-                Ataques_Fatales.Add(auxpos);
             }
             if (Pos[0] - 1 >0 && Pos[1] + 2 < constantes.TAM )
             {
                 tablero.atacadas[Pos[0] - 1, Pos[1] + 2] = constantes.ATACADA;
-                contador_atacadas= contador_atacadas+1;
-                auxpos[0]=Pos[0] -1 ;
-                auxpos[1]=Pos[1] + 2;
-                Ataques_Fatales.Add(auxpos);
             }
             if (Pos[0] + 1 < constantes.TAM && Pos[1] - 2 > 0)
             {
                 tablero.atacadas[Pos[0] + 1, Pos[1] - 2] = constantes.ATACADA;
-                contador_atacadas= contador_atacadas+1;
-                auxpos[0]=Pos[0] + 1;
-                auxpos[1]=Pos[1] -2;
-                Ataques_Fatales.Add(auxpos);
             }
             if (Pos[0] - 1 >0 && Pos[1] - 2 >0 )
             {
                 tablero.atacadas[Pos[0] - 1, Pos[1] - 2] = constantes.ATACADA;
-                contador_atacadas= contador_atacadas+1;
-                auxpos[0]=Pos[0] - 1;
-                auxpos[1]=Pos[1] -2;
-                Ataques_Fatales.Add(auxpos);
             }
            
         }
@@ -391,68 +365,102 @@ namespace TP_1_Labo2
             contador_atacadas=0;
         }
         public override void Ataque_Fatal(List<Pieza> Lista_Fichas)
-        { 
-        }
-    /*
-         public override List<int[]> Ataque_Fatal(List<int[]> Lista_Fichas)
         {
+           bool piezaDerAb = false, piezaDerAr= false, piezaIzqAb = false, piezaIzqAr = false;
+            int[] Pos_;
+            
+            for (int i = 1; i < constantes.TAM; i++)//desde 1 porque con 0 atacaria su posicion
+            {
+                for (int j = 0; j < Lista_Fichas.Count(); j++)
+                {
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] + i)
+                        piezaDerAb = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] -i)
+                        piezaDerAr = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] -i)
+                        piezaIzqAr = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] +i)
+                        piezaIzqAb = true;
+                }
+                //el alfil ataca en diagonal entonces sumo o resto lo mismo a la fila y la columa
 
-            // pasa por parametro una lista posiciones donde se sabe que hay piezas
-            // para fijarme uee  ninguna se entrometa en el camino del ataque  (en caso de que lo haga es un ataque leve)
-            int[] pos_Alfil = this.Pos;
-            int[] ataque;
-            int[]  auxpos;
-           
-               return ataques_fatales;
-        
-            }*/
+                if (this.Pos[0] + i < constantes.TAM && this.Pos[1] - i >= 0) //chequeo que no se pase del tablero
+                {
+                    if (!piezaDerAr)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0]  + i;
+                        Pos_[1] = this.Pos[1] - i;
+                        Ataques_Fatales.Add(Pos_);
 
+                    }                       
+               
+                }
+               
+                if (Pos[0] - i >=0 && Pos[1] + i < constantes.TAM) 
+                {
+                    if (!piezaIzqAb)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0] - i;
+                        Pos_[1] = this.Pos[1] + i;
+                        Ataques_Fatales.Add(Pos_);
+
+                    }
+                }
+               
+                if(Pos[0] + i < constantes.TAM && Pos[1] + i < constantes.TAM)
+                {
+                    if (!piezaDerAb)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0] + i;
+                        Pos_[1] = this.Pos[1] + i;
+                        Ataques_Fatales.Add(Pos_);
+
+                    }
+                }
+               
+                if (Pos[0] - i >= 0 && Pos[1] - i >= 0)
+                {
+                    if (!piezaIzqAr)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0] - i;
+                        Pos_[1] = this.Pos[1] - i;
+                        Ataques_Fatales.Add(Pos_);
+
+                    }
+                }
+            }
+        }
 
         public override void Atacar(Tablero tablero)
-        {    contador_atacadas=0;
-             int[] auxpos = new int[2];
+        { 
+            int[] auxpos = new int[2];
             for(int i = 1; i < constantes.TAM; i++)//desde 1 porque con 0 atacaria su posicion
             { 
                 //el alfil ataca en diagonal entonces sumo o resto lo mismo a la fila y la columa
 
                 if (Pos[0] + i < constantes.TAM && Pos[1] - i >= 0) //chequeo que no se pase del tablero
-                {   
-                    if(Pos[0] + i < 8 && Pos[1] - i > 0)
-                   { tablero.atacadas[Pos[0] + i, Pos[1] - i] = constantes.ATACADA;
-                    contador_atacadas= contador_atacadas+1;
-                        }/*auxpos[0]=Pos[0] + i;
-                    auxpos[1]= Pos[1] - i;
-                    Pos_Atacadas.Add(auxpos);*/
+                {                     
+                   tablero.atacadas[Pos[0] + i, Pos[1] - i] = constantes.ATACADA;
+                   
                 }
                
                 if (Pos[0] - i >=0 && Pos[1] + i < constantes.TAM) 
-                {   
-                    if(Pos[0] - i>0 && Pos[1] + i < 8)
-                    { tablero.atacadas[Pos[0] - i, Pos[1] + i] = constantes.ATACADA;
-                     contador_atacadas= contador_atacadas+1;
-                    }/*auxpos[0]=Pos[0] - i;
-                    auxpos[1]= Pos[1] + i;
-                    Pos_Atacadas.Add(auxpos);*/
+                { 
+                        tablero.atacadas[Pos[0] - i, Pos[1] + i] = constantes.ATACADA;
                 }
                
                 if(Pos[0] + i < constantes.TAM && Pos[1] + i < constantes.TAM)
                 { 
-                    if(Pos[0] + i<8 && Pos[1] + i<8)
-                   { tablero.atacadas[Pos[0] + i, Pos[1] + i] = constantes.ATACADA;
-                    contador_atacadas= contador_atacadas+1;
-                    }/* auxpos[0]=Pos[0] + i;
-                    auxpos[1]=  Pos[1] + i;
-                    Pos_Atacadas.Add(auxpos);      */         
+                        tablero.atacadas[Pos[0] + i, Pos[1] + i] = constantes.ATACADA;      
                 }
                
                 if (Pos[0] - i >= 0 && Pos[1] - i >= 0)
                 {
-                    if(Pos[0] - i>0 && Pos[1] - i>0)
-                    {tablero.atacadas[Pos[0] - i, Pos[1] - i] = constantes.ATACADA;
-                   contador_atacadas= contador_atacadas+1;
-                        }/* auxpos[0]=Pos[0] - i;
-                    auxpos[1]= Pos[1] - i;
-                    Pos_Atacadas.Add(auxpos);*/
+                        tablero.atacadas[Pos[0] - i, Pos[1] - i] = constantes.ATACADA;
                 }
             }
         }
@@ -490,21 +498,35 @@ namespace TP_1_Labo2
 
         public override void Ataque_Fatal(List<Pieza> Lista_Fichas)
         {
+            int[] auxpos;
+            bool hay_pieza = false;
+           
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+                    if (!(i == 0 && j == 0) && Pos[0] + i < 8 && Pos[0] + i >= 0 && Pos[1] + j < 8 && Pos[1] + j >= 0)//que no ataque su posicion
+                    {
+                        for (int p = 0; p < Lista_Fichas.Count; p++)
+                        {
+                            if (Lista_Fichas.ElementAt(p).Pos[0] == Pos[0] + i && Lista_Fichas.ElementAt(p).Pos[1] == Pos[1] + j)
+                            {
+                                hay_pieza = true;
+                                break;
+                            }
+                        }
+                        if (!hay_pieza)
+                        {
+                            auxpos = new int[2];
+                            auxpos[0] = Pos[0] + i;
+                            auxpos[1] = Pos[1] + j;
+                            Ataques_Fatales.Add(auxpos);
+                        }
+                    }
+                }
+            }
         }
-        /*   public override List<int[]> Ataque_Fatal(List<int[]> Lista_Fichas)
-        {
-
-            // pasa por parametro una lista posiciones donde se sabe que hay piezas
-            // para fijarme uee  ninguna se entrometa en el camino del ataque  (en caso de que lo haga es un ataque leve)
-            // todos los ataques del rey son fatales
-
-            
-          
-            
-            return ataques_fatales;
-            
-                
-         }*/
+       
         public override void Atacar(Tablero tablero)
         {  int[] auxpos = new int[2];
             for(int i=-1; i<2; i++)
@@ -515,10 +537,7 @@ namespace TP_1_Labo2
                     {
                         tablero.atacadas[Pos[0] + i, Pos[1] + j] = constantes.ATACADA;
                         contador_atacadas=contador_atacadas+1;
-                      /*   auxpos[0]=Pos[0] + i;
-                         auxpos[1]= Pos[1] + j;
-                         
-                         Ataques_Fatales.Add(auxpos);                   */
+
                     }
                 }
             }
@@ -553,67 +572,167 @@ namespace TP_1_Labo2
             contador_atacadas=0;
         }
         public override void Ataque_Fatal(List<Pieza> Lista_Fichas)
-        { 
+        {
+            // ATAQUE COMO TORRE
+            bool piezacsup = false, piezacinf = false, piezafizq = false, piezafder = false;
+            int[] Pos_;
+
+            for (int i = 1; i < constantes.TAM; i++)
+            {
+
+                for (int j = 0; j < Lista_Fichas.Count(); j++)
+                {
+                    if (Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] - i && Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0])
+                        piezacsup = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1])
+                        piezafder = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1])
+                        piezafizq = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] + i && Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0])
+                        piezacinf = true;
+                }
+                if (this.Pos[0] + i < constantes.TAM)
+                {
+                    if (!piezafder)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0] + i;
+                        Pos_[1] = this.Pos[1];
+                        Ataques_Fatales.Add(Pos_);
+                    }
+                }
+                if (this.Pos[0] - i >= 0)
+                {
+
+                    if (!piezafizq)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0] - i;
+                        Pos_[1] = this.Pos[1];
+                        Ataques_Fatales.Add(Pos_);
+                    }
+                }
+                if (this.Pos[1] + i < constantes.TAM)
+                {
+                    if (!piezacinf)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0];
+                        Pos_[1] = this.Pos[1] + i;
+                        Ataques_Fatales.Add(Pos_);
+                    }
+                }
+                if (this.Pos[1] - i >= 0)
+                {
+
+                    if (!piezacsup)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0];
+                        Pos_[1] = this.Pos[1] - i;
+                        Ataques_Fatales.Add(Pos_);
+                    }
+                }
+
+            }
+
+            // ATAQUE COMO ALFIL
+            bool piezaDerAb = false, piezaDerAr = false, piezaIzqAb = false, piezaIzqAr = false;
+
+            for (int i = 1; i < constantes.TAM; i++)//desde 1 porque con 0 atacaria su posicion
+            {
+                for (int j = 0; j < Lista_Fichas.Count(); j++)
+                {
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] + i)
+                        piezaDerAb = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] - i)
+                        piezaDerAr = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] - i)
+                        piezaIzqAr = true;
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] + i)
+                        piezaIzqAb = true;
+                }
+                //el alfil ataca en diagonal entonces sumo o resto lo mismo a la fila y la columa
+
+                if (this.Pos[0] + i < constantes.TAM && this.Pos[1] - i >= 0) //chequeo que no se pase del tablero
+                {
+                    if (!piezaDerAr)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0] + i;
+                        Pos_[1] = this.Pos[1] - i;
+                        Ataques_Fatales.Add(Pos_);
+
+                    }
+
+                }
+
+                if (Pos[0] - i >= 0 && Pos[1] + i < constantes.TAM)
+                {
+                    if (!piezaIzqAb)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0] - i;
+                        Pos_[1] = this.Pos[1] + i;
+                        Ataques_Fatales.Add(Pos_);
+
+                    }
+                }
+
+                if (Pos[0] + i < constantes.TAM && Pos[1] + i < constantes.TAM)
+                {
+                    if (!piezaDerAb)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0] + i;
+                        Pos_[1] = this.Pos[1] + i;
+                        Ataques_Fatales.Add(Pos_);
+
+                    }
+                }
+
+                if (Pos[0] - i >= 0 && Pos[1] - i >= 0)
+                {
+                    if (!piezaIzqAr)
+                    {
+                        Pos_ = new int[2];
+                        Pos_[0] = this.Pos[0] - i;
+                        Pos_[1] = this.Pos[1] - i;
+                        Ataques_Fatales.Add(Pos_);
+
+                    }
+                }
+            }
         }
-        /*
-         public override List<int[]> Ataque_Fatal(List<int[]> Lista_Fichas)
-         {
-             List<int[]> ataques_fatales=0;
-
-
-
-             return ataques_fatales;
-
-
-
-
-          }*/
+      
         public override void Atacar(Tablero tablero)
-        {   int[] auxpos = new int[2];
+        {
             //ataque alfil + ataque torre
-            contador_atacadas=0;
             //ALFIL
             for (int i = 1; i < constantes.TAM; i++)//desde 1 porque con 0 atacaria su posicion
             {
                 //el alfil ataca en diagonal entonces sumo o resto lo mismo a la fila y la columa
 
                 if (Pos[0] + i < constantes.TAM && Pos[1] - i >= 0) //chequeo que no se pase del tablero
-                {   tablero.atacadas[Pos[0] + i, Pos[1] - i] = constantes.ATACADA;
-                    contador_atacadas=contador_atacadas+1;
-                    /*auxpos[0]=Pos[0] + i;
-                    auxpos[1]= Pos[1] - i;
-                    Pos_Atacadas.Add(auxpos);*/
+                {
+                    tablero.atacadas[Pos[0] + i, Pos[1] - i] = constantes.ATACADA;
                 }
-               
-                if (Pos[0] - i >=0 && Pos[1] + i < constantes.TAM) 
-                {   
+
+                if (Pos[0] - i >= 0 && Pos[1] + i < constantes.TAM)
+                {
                     tablero.atacadas[Pos[0] - i, Pos[1] + i] = constantes.ATACADA;
-                    contador_atacadas= contador_atacadas+1;
-                    /*auxpos[0]=Pos[0] - i;
-                    auxpos[1]= Pos[1] + i;
-                    Pos_Atacadas.Add(auxpos);*/
-
                 }
-               
-                if(Pos[0] + i < constantes.TAM && Pos[1] + i < constantes.TAM)
-                   { 
+
+                if (Pos[0] + i < constantes.TAM && Pos[1] + i < constantes.TAM)
+                {
                     tablero.atacadas[Pos[0] + i, Pos[1] + i] = constantes.ATACADA;
-                    contador_atacadas= contador_atacadas+1;
-                    /*auxpos[0]=Pos[0] + i;
-                    auxpos[1]=  Pos[1] + i;
-                    Pos_Atacadas.Add(auxpos);*/
-                
                 }
-               
-                if (Pos[0] - i >= 0 && Pos[1] - i >= 0)
-                    {tablero.atacadas[Pos[0] - i, Pos[1] - i] = constantes.ATACADA;
-                    contador_atacadas= contador_atacadas+1;
-                    /*auxpos[0]=Pos[0] - i;
-                    auxpos[1]= Pos[1] - i;
-                    Pos_Atacadas.Add(auxpos);*/
-                    }
-            }
 
+                if (Pos[0] - i >= 0 && Pos[1] - i >= 0)
+                {
+                    tablero.atacadas[Pos[0] - i, Pos[1] - i] = constantes.ATACADA;
+                }
+            }
             //TORRE
             for (int i = 0; i < constantes.TAM; i++) //ataca toda la fila
             {
