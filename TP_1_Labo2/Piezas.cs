@@ -16,6 +16,7 @@ namespace TP_1_Labo2
         public List<int[]> Pos_Atacadas = new List<int[]>(); //listado de casillas atacadas por la pieza
         public List<int[]> Posiciones_Ya_Probadas = new List<int[]>(); // lista con las posiciones que tuvo esta ficha, ya probe y no me funcionaron
         public List<int[]>  Ataques_Fatales = new List<int[]>(64);
+        public List<string> Bloqueo_Fatal = new List<string>(); // añade nombre de la pieza que produce el bloqueo fatal 
         public int contador_atacadas;
 
         
@@ -113,13 +114,28 @@ namespace TP_1_Labo2
                 for (int j = 0; j < Lista_Fichas.Count(); j++)
                 {
                     if (Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] - i && Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0])
+                    {
                         piezacsup = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
+
                     if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1])
+                    {
                         piezafder = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                     if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1])
+                    {
                         piezafizq = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                     if (Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] + i && Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0])
+                    {
                         piezacinf = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
+
+
                 }
                 if (this.Pos[0] + i < constantes.TAM)
                 {
@@ -374,13 +390,24 @@ namespace TP_1_Labo2
                 for (int j = 0; j < Lista_Fichas.Count(); j++)
                 {
                     if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] + i)
+                    {
                         piezaDerAb = true;
-                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] -i)
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] - i)
+                    {
                         piezaDerAr = true;
-                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] -i)
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
+                    if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] - i)
+                    {
                         piezaIzqAr = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                     if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] +i)
-                        piezaIzqAb = true;
+                    {   piezaIzqAb = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                 }
                 //el alfil ataca en diagonal entonces sumo o resto lo mismo a la fila y la columa
 
@@ -583,13 +610,25 @@ namespace TP_1_Labo2
                 for (int j = 0; j < Lista_Fichas.Count(); j++)
                 {
                     if (Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] - i && Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0])
+                    {
                         piezacsup = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                     if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1])
+                    {
                         piezafder = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                     if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1])
+                    {
                         piezafizq = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                     if (Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] + i && Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0])
+                    {
                         piezacinf = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                 }
                 if (this.Pos[0] + i < constantes.TAM)
                 {
@@ -644,13 +683,25 @@ namespace TP_1_Labo2
                 for (int j = 0; j < Lista_Fichas.Count(); j++)
                 {
                     if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] + i)
+                    {
                         piezaDerAb = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                     if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] + i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] - i)
+                    {
                         piezaDerAr = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                     if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] - i)
+                    {
                         piezaIzqAr = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                     if (Lista_Fichas.ElementAt(j).Pos[0] == this.Pos[0] - i && Lista_Fichas.ElementAt(j).Pos[1] == this.Pos[1] + i)
+                    {
                         piezaIzqAb = true;
+                        Bloqueo_Fatal.Add(Lista_Fichas.ElementAt(j).nombre);
+                    }
                 }
                 //el alfil ataca en diagonal entonces sumo o resto lo mismo a la fila y la columa
 

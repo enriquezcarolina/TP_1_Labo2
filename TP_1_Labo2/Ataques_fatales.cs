@@ -85,5 +85,53 @@ namespace TP_1_Labo2
         {
             
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string titulo = "PIEZAS QUE PRODUCEN EL BLOQUEO";
+            string texto="";
+            int cont_caballo = 0;
+            int cont_alfil = 0;
+            int cont_rey = 0;
+            int cont_reina = 0;
+            int cont_torre = 0;
+            for (int i=0;i<tablero.piezas.Count;i++)
+            {
+               
+                for (int j = 0; j < tablero.piezas.ElementAt(i).Bloqueo_Fatal.Count; j++)
+                { 
+                    if(tablero.piezas.ElementAt(i).Bloqueo_Fatal.ElementAt(j)== "Reina" && cont_reina<1)
+                    {
+                        texto = texto + "-" + tablero.piezas.ElementAt(i).Bloqueo_Fatal.ElementAt(j) + "\n";
+                        cont_reina++;
+                    }
+                    if (tablero.piezas.ElementAt(i).Bloqueo_Fatal.ElementAt(j) == "Alfil" && cont_alfil < 2)
+                    {
+                        texto = texto + "-" + tablero.piezas.ElementAt(i).Bloqueo_Fatal.ElementAt(j) + "\n";
+                        cont_alfil++;
+                    }
+                    if (tablero.piezas.ElementAt(i).Bloqueo_Fatal.ElementAt(j) == "Caballo" && cont_caballo < 2)
+                    {
+                        texto = texto + "-" + tablero.piezas.ElementAt(i).Bloqueo_Fatal.ElementAt(j) + "\n";
+                        cont_caballo++;
+                    }
+
+                    if (tablero.piezas.ElementAt(i).Bloqueo_Fatal.ElementAt(j) == "Rey" && cont_rey < 1)
+                    {
+                        texto = texto + "-" + tablero.piezas.ElementAt(i).Bloqueo_Fatal.ElementAt(j) + "\n";
+                        cont_rey++;
+                    }
+                    if (tablero.piezas.ElementAt(i).Bloqueo_Fatal.ElementAt(j) == "Torre" && cont_torre < 2)
+                    {
+                        texto = texto + "-" + tablero.piezas.ElementAt(i).Bloqueo_Fatal.ElementAt(j) + "\n";
+                        cont_torre++;
+                    }
+
+                }
+
+            }
+           
+            MessageBox.Show(texto, titulo, MessageBoxButtons.OK);
+        }
     }
 }
